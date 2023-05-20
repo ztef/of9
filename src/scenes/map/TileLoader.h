@@ -7,6 +7,7 @@
 #include "FeatureCollectionNode.h"
 #include "JsonLoader.h"
 #include "Poco/Condition.h"
+#include "Projection.hpp"
 
  
 class Map;
@@ -16,6 +17,10 @@ class TileLoader: public ofThread{
   public:
 
     TileLoader();
+    
+    void setProjection(Projection* _p){
+        projection = _p;
+    }
     
     void start();
     
@@ -37,6 +42,8 @@ class TileLoader: public ofThread{
     
     ofMutex mutex;
     Map* map;
+    
+    Projection* projection;
        
 };
 

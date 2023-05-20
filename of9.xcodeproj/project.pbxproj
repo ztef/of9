@@ -30,6 +30,10 @@
 		5B7BF0472A15CF520014050B /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF03E2A15CF510014050B /* Map.cpp */; };
 		5B7BF04A2A16C6EB0014050B /* MercatorTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF0482A16C6EB0014050B /* MercatorTile.cpp */; };
 		5B7BF0502A17C95D0014050B /* Projection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF04E2A17C95D0014050B /* Projection.cpp */; };
+		5B7BF10F2A17EDDA0014050B /* Ray2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF1082A17EDDA0014050B /* Ray2D.cpp */; };
+		5B7BF1102A17EDDA0014050B /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10A2A17EDDA0014050B /* Ray.cpp */; };
+		5B7BF1112A17EDDA0014050B /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10D2A17EDDA0014050B /* Plane.cpp */; };
+		5B7BF1122A17EDDA0014050B /* Mousepicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10E2A17EDDA0014050B /* Mousepicker.cpp */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
 		63B57AC5BF4EF088491E0317 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50DF87D612C5AAE17AAFA6C0 /* ofxXmlSettings.cpp */; };
 		837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C6477A769C03A56D1401 /* ofxSlider.cpp */; };
@@ -142,6 +146,15 @@
 		5B7BF0492A16C6EB0014050B /* MercatorTile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MercatorTile.hpp; sourceTree = "<group>"; };
 		5B7BF04E2A17C95D0014050B /* Projection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Projection.cpp; sourceTree = "<group>"; };
 		5B7BF04F2A17C95D0014050B /* Projection.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Projection.hpp; sourceTree = "<group>"; };
+		5B7BF1062A17EDDA0014050B /* Ray2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ray2D.h; sourceTree = "<group>"; };
+		5B7BF1072A17EDDA0014050B /* ofxRaycaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRaycaster.h; sourceTree = "<group>"; };
+		5B7BF1082A17EDDA0014050B /* Ray2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ray2D.cpp; sourceTree = "<group>"; };
+		5B7BF1092A17EDDA0014050B /* Mousepicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mousepicker.h; sourceTree = "<group>"; };
+		5B7BF10A2A17EDDA0014050B /* Ray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ray.cpp; sourceTree = "<group>"; };
+		5B7BF10B2A17EDDA0014050B /* Plane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plane.h; sourceTree = "<group>"; };
+		5B7BF10C2A17EDDA0014050B /* Ray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
+		5B7BF10D2A17EDDA0014050B /* Plane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plane.cpp; sourceTree = "<group>"; };
+		5B7BF10E2A17EDDA0014050B /* Mousepicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mousepicker.cpp; sourceTree = "<group>"; };
 		5CAABABC5D465FF3E4FDBAA0 /* ssl2.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ssl2.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/ssl2.h; sourceTree = SOURCE_ROOT; };
 		5D05C2B0CBAFC3F9F2F693AF /* tls1.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = tls1.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/tls1.h; sourceTree = SOURCE_ROOT; };
 		61313493CDB52744E22A604D /* json-forwards.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = "json-forwards.h"; path = "../../../addons/ofxJSON/libs/jsoncpp/include/json/json-forwards.h"; sourceTree = SOURCE_ROOT; };
@@ -567,6 +580,23 @@
 			path = map;
 			sourceTree = "<group>";
 		};
+		5B7BF1052A17EDDA0014050B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5B7BF1062A17EDDA0014050B /* Ray2D.h */,
+				5B7BF1072A17EDDA0014050B /* ofxRaycaster.h */,
+				5B7BF1082A17EDDA0014050B /* Ray2D.cpp */,
+				5B7BF1092A17EDDA0014050B /* Mousepicker.h */,
+				5B7BF10A2A17EDDA0014050B /* Ray.cpp */,
+				5B7BF10B2A17EDDA0014050B /* Plane.h */,
+				5B7BF10C2A17EDDA0014050B /* Ray.h */,
+				5B7BF10D2A17EDDA0014050B /* Plane.cpp */,
+				5B7BF10E2A17EDDA0014050B /* Mousepicker.cpp */,
+			);
+			name = src;
+			path = ../../../addons/ofxRaycaster/src;
+			sourceTree = "<group>";
+		};
 		6948EE371B920CB800B5AC1A /* local_addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -732,6 +762,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				5B7BF1052A17EDDA0014050B /* src */,
 				480A780D8D0308AE4A368801 /* ofxGui */,
 				2865DAEF86B1907A704CA70B /* ofxJSON */,
 				0117D94CE0C695E5E5482BEC /* ofxPoco */,
@@ -1179,10 +1210,13 @@
 				5B7BF0222A15CF410014050B /* ButtonManager.cpp in Sources */,
 				B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */,
 				5B7BF02A2A15CF410014050B /* SimpleButton.cpp in Sources */,
+				5B7BF1112A17EDDA0014050B /* Plane.cpp in Sources */,
 				5B7BF0432A15CF510014050B /* FeatureCollectionNode.cpp in Sources */,
 				852E0891794923EE7583C621 /* ofxInputField.cpp in Sources */,
+				5B7BF1102A17EDDA0014050B /* Ray.cpp in Sources */,
 				5B7BF0252A15CF410014050B /* SelectionItem.cpp in Sources */,
 				5B7BF0412A15CF510014050B /* Plane_xz.cpp in Sources */,
+				5B7BF10F2A17EDDA0014050B /* Ray2D.cpp in Sources */,
 				5B7BF0292A15CF410014050B /* ToggleItem.cpp in Sources */,
 				5B7BF0242A15CF410014050B /* ColorPickerItem.cpp in Sources */,
 				5B7BF0282A15CF410014050B /* ButtonPanel.cpp in Sources */,
@@ -1193,6 +1227,7 @@
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,
+				5B7BF1122A17EDDA0014050B /* Mousepicker.cpp in Sources */,
 				5B7BF0502A17C95D0014050B /* Projection.cpp in Sources */,
 				1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */,
 				5B7BF0402A15CF510014050B /* Circle_xy.cpp in Sources */,
@@ -1250,6 +1285,7 @@
 					../../../addons/ofxPoco/libs/openssl/include,
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
+					../../../addons/ofxRaycaster/src,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
@@ -1345,6 +1381,7 @@
 					../../../addons/ofxPoco/libs/openssl/include,
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
+					../../../addons/ofxRaycaster/src,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1390,6 +1427,7 @@
 					../../../addons/ofxPoco/libs/openssl/include,
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
+					../../../addons/ofxRaycaster/src,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CODE_SIGN_FLAGS = "--deep";

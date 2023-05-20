@@ -16,6 +16,9 @@
 #include "ofxJSONElement.h"
 #include "FeatureCollectionNode.h"
 #include "FeatureLeafNode.h"
+#include "MercatorTile.hpp"
+#include "Projection.hpp"
+
 
 #endif /* defined(__vectorTileExperiment__JsonLoader__) */
 
@@ -26,7 +29,7 @@ public:
     
     JsonLoader();
     JsonLoader(std::string fileName);
-    FeatureNode* loadTile(std::string fileName);
+    FeatureNode* loadTile(std::string fileName, Projection* _p);
     
     FeatureNode* loadNodeGraph();
     FeatureCollectionNode* getCollection();
@@ -40,15 +43,20 @@ public:
     vector<ofDefaultVec3> parsePointArrayInProjectedCoords(ofxJSONElement pointArrayJson);
     
     double y2lat(double y) { return ofRadToDeg(2 * atan(exp(ofDegToRad(y))) - PI / 2); }
-    double x2lon(double x) { return ofRadToDeg(x / R_EARTH); }
-    double lat2y(double lat) { return R_EARTH * log(tan(PI / 4 + ofDegToRad(lat) / 2)); }
-    double lon2x(double lon) { return ofDegToRad(lon) * R_EARTH; }
+    double x2lon(double x) { return ofRadToDeg(x / R_EARTH) / 0.00001; }
+    double lat2y(double lat) { return R_EARTH * log(tan(PI / 4 + ofDegToRad(lat) / 2)) * 0.00001; }
+    double lon2x(double lon) { return ofDegToRad(lon) * R_EARTH  * 0.00001; }
+    
+    Projection* projection;
    
     double getXX(double lon, int width)
     {
         // width is map width
-        double x = fmod((width*(180+lon)/360), (width +(width/2)));
-
+        //double x = fmod((width*(180+lon)/360), (width +(width/2)));
+        //double x = fmod(lon2x(lon), (width +(width/2)));
+        double x = lon2x(lon);
+        double back = x2lon(x);
+        
         return x;
     }
 
@@ -56,12 +64,17 @@ public:
     {
         // height and width are map height and width
         
-        double latRad = lat*PI/180;
+        //double latRad = lat*PI/180;
 
         // get y value
-        double mercN = log(tan((PI/4)+(latRad/2)));
-        double y     = (height/2)-(width*mercN/(2*PI));
-        y = height -y;
+        //double mercN = log(tan((PI/4)+(latRad/2)));
+        //double y     = (height/2)-(width*mercN/(2*PI));
+        //y = height -y;
+        //double y     = (height/2)-(lat2y(lat));
+        //y = height -y;
+        double y = lat2y(lat);
+        double back = y2lat(y);
+        
         return y;
     }
     
@@ -74,6 +87,7 @@ private:
     ofColor layerColor;
     
     ofVec3f getCentroidFromPoints(vector<glm::vec3> pts);
+    
     void parseLineGeometry(ofxJSONElement lineJson, ofxJSONElement propsJson, ofMesh* meshToFill, glm::vec3* anchor);
     void parsePolygonGeometry(ofxJSONElement polygonJson, ofxJSONElement propsJson, ofMesh* meshToFill, glm::vec3* anchor, bool move);
     void movePoints(vector<glm::vec3> *pts, glm::vec3 offset);

@@ -16,7 +16,10 @@ JsonLoader::JsonLoader() {
     cout << "jsonLoader Creado";
 }
 
-FeatureNode* JsonLoader::loadTile(std::string fileName) {
+FeatureNode* JsonLoader::loadTile(std::string fileName, Projection* _p) {
+    
+    projection = _p;
+    
     if (jsonRoot.open(fileName)) {
         ofLog(OF_LOG_VERBOSE, "Json parsed successfully");
     } else {
@@ -201,15 +204,18 @@ FeatureNode* JsonLoader::parseFeatureNode(ofxJSONElement featureJson) {
         
     } else if (type.compare("Polygon") == 0) {
         
+        newMesh.setMode(OF_PRIMITIVE_TRIANGLES);
         parsePolygonGeometry(coords, props, &newMesh, &anchor, false);
         
         ofLog(OF_LOG_VERBOSE, "Polygon mesh with vertices: " + ofToString(newMesh.getVertices()));
         
     } else if (type.compare("MultiPolygon") == 0) {
         
+        newMesh.setMode(OF_PRIMITIVE_TRIANGLES);
         int cs = coords.size();
         for (int i = 0; i < cs; i++) {
             ofMesh subMesh = ofMesh();
+            subMesh.setMode(OF_PRIMITIVE_TRIANGLES);
             parsePolygonGeometry(coords[i], props, &subMesh, &anchor, true);
             newMesh.append(subMesh);
         }
@@ -252,10 +258,30 @@ glm::vec3 JsonLoader::parsePointInProjectedCoords(ofxJSONElement pointJson) {
     //double x = lon2x(pointJson[0].asFloat());
     //double y = lat2y(pointJson[1].asFloat());
     
-    double x = getXX(pointJson[0].asFloat(),1024);
-    double y = getYY(pointJson[1].asFloat(),2024, 1024);
+    //double x = getXX(pointJson[0].asFloat(),1024);
+    //double y = getYY(pointJson[1].asFloat(),768, 1024);
     
-    return glm::vec3(x, y, 0);
+    mercatortile::XY rxy = mercatortile::xy(pointJson[0].asDouble(), pointJson[1].asDouble());
+    
+    double x = rxy.x * 0.0001;
+    double y = rxy.y * 0.0001;
+    
+    double a = -115.0;
+    double b = 61.97;
+    mercatortile::XY m = mercatortile::xy(b,a);
+    
+    Coordinate coord;
+    
+    coord.longitude = pointJson[0].asDouble();
+    coord.latitude = pointJson[1].asDouble();
+    
+    
+    ofPoint p  = projection->getProjection(coord);
+    
+    
+   // cout << "X " << m.x << ", Y " << m.y << " " << endl;
+    
+    return glm::vec3(p);
     
 }
 
@@ -400,3 +426,5 @@ ofVec3f JsonLoader::getCentroidFromPoints(vector<glm::vec3> pts) {
     
     return centroid;
 }
+
+

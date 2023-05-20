@@ -15,83 +15,25 @@ void ofApp::setup(){
     buttons.setup(); // this sets up the events etc..
     escena_zy.setup();
     escena_circulo.setup();
-    mapa.setup();
+    mapa.setup(1024,768);
    
 
 
-   // ofSetDataPathRoot("/home/esteban/of/apps/myApps/of8/bin/data/");
+   
 
     shader.load("myshader.vert", "myshader.frag"); 
 
 
     m.rotate(90,0,0,1);
 
-   //JsonLoader jsonLoader = JsonLoader("mx_states.geojson");
-    //JsonLoader jsonLoader = JsonLoader("24642.json");
+   
     
     
-    /*
-    ofURLFileLoader fl = ofURLFileLoader();
-    string url = "https://tile.nextzen.org/tilezen/vector/v1/all/16/19293/24642.json?api_key=HjxoLw7IQJWSTo4lgErmIQ";
-    
-    string url1 = "https://forum.openframeworks.cc/uploads/default/original/2X/7/75b52b04984d6a0a060f48bc8523e9e6deef1618.svg";
-    
-    ofHttpRequest request(url,url);
-    
-    //request.contentType = "application/json";
-
-    
-    
-    ofHttpResponse resp;
-    resp = fl.handleRequest(request);
-    
-    
-    cout << resp.status << endl;
-    cout << resp.error << endl;
-    cout << resp.data.getText() << endl;
-    
-    //JsonLoader jsonLoader = JsonLoader();
-
-   // JsonLoader jsonLoader = JsonLoader("https://tile.nextzen.org/tilezen/vector/v1/all/0/0/0.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-   // JsonLoader jsonLoader1 = JsonLoader("https://tile.nextzen.org/tilezen/vector/v1/all/1/0/0.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-  
-    //JsonLoader jsonLoader = JsonLoader("https://tile.nextzen.org/tilezen/vector/v1/all/16/19293/24642.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-    
-   // rootNode = jsonLoader.loadNodeGraph();
-   // rootNode = jsonLoader.loadTile("https://tile.nextzen.org/tilezen/vector/v1/all/0/0/0.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-
-   // rootNode->setPosition(0,0, 0);
-   // rootNode->shader = shader;
-   // rootNode->printPosition("");
-
-   // rootNode1 = jsonLoader1.loadNodeGraph();
-   //   rootNode1 = jsonLoader.loadTile("https://tile.nextzen.org/tilezen/vector/v1/all/3/3/3.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-
-   //rootNode1->setPosition(0,0, 200);
-    //rootNode1->shader = shader;
-   // rootNode1->printPosition("");
-
-*/
     mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/0/0/0.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-    mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/3/3/3.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-   //pois = (FeatureCollectionNode*) jsonLoader.getCollection()->children.at(0);
+    mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/0/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
+    mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/1/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
+   
     
-   // cout << "Hijos :";
-   // int hijos =  pois->children.size();
-   // cout << hijos;
-    
-   // building0 = (FeatureLeafNode*) pois->children.at(0);
-    
-    
-    
-    //for (int i = 0; i < buildings->children.size(); i++) {
-         
-    //}
-    
-    //[-100.2971238,25.6519369]
-   // x = jsonLoader.getXX(-100.2971238,1024);
-    //y = jsonLoader.getYY(25.6519369,2024,1024);
-    //pos.set(x,y);
     
     
     // General graphics setup
@@ -100,18 +42,10 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     ofEnableDepthTest();
     
-    //camera.removeAllInteractions();
-    //camera.addInteraction(ofEasyCam::TRANSFORM_TRANSLATE_XY, OF_MOUSE_BUTTON_LEFT);
-    //camera.addInteraction(ofEasyCam::TRANSFORM_TRANSLATE_Z, OF_MOUSE_BUTTON_RIGHT);
-    //camera.enableOrtho();
-    //camera.setNearClip(-1000000);
-    //camera.setFarClip(1000000);
-    //camera.setVFlip(true);
     
-   // camera.setPosition(rootNode->getGlobalPosition());
     camera.setNearClip(0.001);
-    camera.setFarClip(1000000);
-    camera.move(0, 0, 300);
+    camera.setFarClip(100000);
+    camera.move(0, 0, 100);
    
    // camera.setTarget(rootNode->getGlobalPosition());
     
@@ -120,7 +54,7 @@ void ofApp::setup(){
     // Lighting setup
     mainLight = ofLight();
     mainLight.setup();
-    mainLight.setPosition(-100, 200,0);
+    mainLight.setPosition(-100, 200,100);
    
     mainLight.setPointLight();
     mainLight.setGlobalPosition(-100, 0, 500);
@@ -150,9 +84,12 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 
+    
+    zoom = camera.getZ();
+    
     escena_zy.update();
     escena_circulo.update();
-    mapa.update();
+    mapa.update(zoom);
 
 
 }
@@ -162,40 +99,8 @@ void ofApp::draw(){
 
     ofSetColor(255);
     
-   // ofEnableLighting();
+   
     
-    
-    
-    zoom = camera.getZ();
-    
-    //cout << zoom;
-    //cout << "/";
-    if (zoom < 3.0 ){
-        //camera.move(camera.getX(), camera.getY(), zoom);
-        //camera.lookAt();
-       
-        //camera.setPosition(buildings->getGlobalPosition());
-        
-        if(not once){
-            
-            once = true;
-            //camera.move(buildings->getX(),buildings->getY(),zoom);
-            //camera.lookAt( buildings->getGlobalPosition());
-       
-            //camera.setPosition(buildings->getGlobalPosition());
-            //camera.move(0, 0, zoom);
-            //camera.setTarget(pois->getGlobalPosition());
-            
-            //camera.setDrag(0.99);
-           // camera.setRotationSensitivity(0.1,0.1, 0.1);
-            //camera.setTranslationSensitivity(0.1,0.1, 0.1);
-        }
-    } else {
-        //camera.setDrag(0);
-       // camera.setRotationSensitivity(1,1, 1);
-        //camera.setTranslationSensitivity(1,1,1);
-        
-    }
     
     camera.begin();
     
@@ -212,14 +117,62 @@ void ofApp::draw(){
          escena_circulo.draw();
     }
     if(sceneSelect == ESCENA_MAPA_VECTORIAL){
-       // rootNode->draw();
-        //rootNode1->draw();
-        //rootNode1->setScale(1000);
+       
         mapa.draw();
+        
+        // INTERSECTOR
+         float distanceToClosestIntersection = numeric_limits<float>::max();
+        
+        
+           if(mapa.tiles.size()>0){
+             
+             bool found=false;
+             glm::vec2 baricentricCoordinates;
+             float distance;
+             glm::vec3 surfaceNormal;
+             unsigned int indexIntersectedPrimitive = 0;
+             
+            
+             
+             FeatureCollectionNode* currentWorld = (FeatureCollectionNode*) mapa.tiles[0];
+             FeatureCollectionNode* layer = (FeatureCollectionNode*) currentWorld->children.at(0);
+             vector<FeatureNode *> elements = layer->children;
+             //cout << layer->layerName << endl;
+             for(int i = 0; i < elements.size(); i++) {
+                 FeatureLeafNode* elementx = (FeatureLeafNode*) elements[i];
+                 if(elementx->geometry.getMode() == OF_PRIMITIVE_TRIANGLES){
+                        //currentWorld->getGlobalTransformMatrix(),
+                        bool intersects = mousepicker.getRay().intersectsMesh(elementx->geometry, baricentricCoordinates, distance, surfaceNormal);
+                        if (intersects && (distance < distanceToClosestIntersection)) {
+                            found = true;
+                            distanceToClosestIntersection = distance;
+                            indexIntersectedPrimitive = i;
+                        }
+                 }
+             }
+             
+             
+             if (found) {
+                 ofPushStyle();
+                 ofSetColor(255);
+                 auto intersection = mousepicker.getRay().getOrigin() +
+                                     mousepicker.getRay().getDirection() *
+                                     distanceToClosestIntersection;
+                 ofDrawSphere(intersection, 0.01);
+                 FeatureLeafNode* elementx = (FeatureLeafNode*) elements[indexIntersectedPrimitive];
+                 //elementx->geometry.
+                 ofPopStyle();
+             }
+             ofSetColor(255);
+             //mousepicker.draw(5);
+             mousepicker.getRay().draw();
+             
+         }
+            
+         // END INTERSECTOR
       
     }
-
-
+    
 
     
  //   mainLight.disable();
@@ -228,75 +181,103 @@ void ofApp::draw(){
     
     if(sceneSelect == ESCENA_MAPA_VECTORIAL){
         
+        // INTERSECTOR2
         /*
-         int nn = buildings->children.size();
-                  for(int i = 0; i < nn; i++) {
-                      glm::vec3 cur = buildings->children.at(i)->getGlobalPosition();
-                      ofSetColor(ofColor::cyan);//TOP
-                      ofDrawCylinder(cur,0.001,  0.01);
-                  }
-        */
-        
-      //  ofPushMatrix();
-      //     ofMultMatrix(rootNode->getLocalTransformMatrix());
-           
          
-           
-         //  building0->transformGL();
+         float nearestDistance = numeric_limits<float>::max();
         
-        
-        //for (int i = 0; i < buildings->children.size(); i++) {
+           if(mapa.tiles.size()>0){
              
-        //}
+             bool found=false;
+             glm::vec2 baricentricCoordinates;
+             float distance;
+             glm::vec3 surfaceNormal;
+             unsigned int indexIntersectedPrimitive = 0;
+             
+             glm::vec2 nearestVertex;
+             int nearestIndex;
+             
+              glm::vec3 mouse(ofGetMouseX(), ofGetMouseY(),0);
+               
+             
+             FeatureCollectionNode* currentWorld = (FeatureCollectionNode*) mapa.tiles[0];
+             FeatureCollectionNode* layer = (FeatureCollectionNode*) currentWorld->children.at(0);
+             vector<FeatureNode *> elements = layer->children;
+             //cout << layer->layerName << endl;
+             for(int i = 0; i < elements.size(); i++) {
+                 FeatureLeafNode* elementx = (FeatureLeafNode*) elements[i];
+                 
+                     glm::vec3 cur = camera.worldToScreen(elementx->anchor);
+                     //glm::vec3 cur = elementx->anchor ;
+                 
+                 
+                     float distance = glm::distance (cur,mouse);
+                     if(distance < nearestDistance) {
+                         nearestDistance = distance;
+                         nearestVertex = cur;
+                         nearestIndex = i;
+                     }
+             }
+             
+             // Muestra linea al mas cercano
+             
+               ofSetColor(ofColor::gray);
+               ofDrawLine(nearestVertex.x,nearestVertex.y , mouse.x, mouse.y);
+                 
+             
+                 ofNoFill();
+                 ofSetColor(ofColor::yellow);
+                 ofSetLineWidth(2);
+                 ofDrawCircle(nearestVertex, 4);
+                 ofSetLineWidth(1);
+             
+                 glm::vec2 offset(0, 0);
+                 ofDrawBitmapStringHighlight(ofToString(nearestIndex), mouse + offset);
+             
+             
+         }
+          
+         */
+         // END INTERSECTOR 2
+   
+
+     
         
-        
-        //int n = building0->geometry.getNumVertices();
-        
-        /*
-        int n = pois->children.size();
-        float nearestDistance = 0;
-        glm::vec2 nearestVertex;
-        int nearestIndex = 0;
-        glm::vec3 mouse(mouseX, mouseY,0);
-        for(int i = 0; i < n; i++) {
-           //  glm::vec3 cur = camera.worldToScreen(pois->children.at(i)->getGlobalPosition());
-            glm::vec3 cur = camera.worldToScreen(pois->children.at(i)->anchor - pois->anchor) ;
-            ofSetColor(ofColor::red);
-            //ofDrawCylinder(cur.x,cur.y,0,0.5,  10);
-            //glm::vec3 cur = building0->geometry.getVertex(i);
-            //glm::vec3 cur = building0->getPosition();
-            float distance = glm::distance(cur, mouse);
-            if(i == 0 || distance < nearestDistance) {
-                nearestDistance = distance;
-                nearestVertex = cur;
-                nearestIndex = i;
-            }
-        }
-         
-        
-       
-        
-            ofSetColor(ofColor::gray);
-            ofDrawLine(nearestVertex, mouse);
-        
-            ofNoFill();
-            ofSetColor(ofColor::yellow);
-            ofSetLineWidth(2);
-            ofDrawCircle(nearestVertex, 4);
-            ofSetLineWidth(1);
-        
-            glm::vec2 offset(0, 0);
-            ofDrawBitmapStringHighlight(ofToString(nearestIndex), mouse + offset);
-       */
-        //building0->restoreTransformGL();
-        
-       // ofPopMatrix();
     }
     
     
     
     
   // ofDisableLighting();
+    
+    ofSetColor(255);
+    ofDrawBitmapString("ZOOM: " + ofToString(zoom), 20,80);
+    ofDrawBitmapString("TILE ZOOM: " + ofToString(mapa.tile_zoom), 20,95);
+    
+    
+    //glm::vec3 worldXYZ = camera.screenToWorld(glm::vec3(ofGetMouseX(),ofGetMouseY(),0));
+    
+    //ofDrawBitmapString("WORLD XYZ: " + ofToString(worldXYZ), 20,110);
+    
+    
+    //mercatortile::LngLat rlnglat = mercatortile::lnglat(worldXYZ.x ,worldXYZ.y);
+    
+    ofDrawBitmapString("MOUSE X: " + ofToString(ofGetMouseX()), 20,110);
+    ofDrawBitmapString("MOUSE Y: " + ofToString(ofGetMouseY()), 20,125);
+    
+    
+    
+    /*
+     ofSetColor(255);
+    ofSetLineWidth(2);
+    glm::vec3 screenMouse (ofGetMouseX(),ofGetMouseY(),0);
+    auto worldMouse = camera.screenToWorld(screenMouse);
+    auto worldMouseEnd = camera.screenToWorld(glm::vec3(screenMouse.x, screenMouse.y, 1.0f));
+    
+    auto worldMouseTransmissionVector = worldMouseEnd - worldMouse;
+    //ofDrawLine(worldMouse,worldMouseEnd);
+    ofDrawLine(worldMouse,worldMouseEnd);
+     */
     
 }
 
@@ -313,7 +294,11 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+     if(sceneSelect == ESCENA_MAPA_VECTORIAL){
+           // mousepicker.setFromCamera(glm::vec2(x,y), camera);
+         
+         mousepicker.getRay().setup(camera.screenToWorld(glm::vec3(x,y,0)), mapa.tiles[0]->getZAxis() * -1);
+     }
 }
 
 //--------------------------------------------------------------

@@ -9,6 +9,7 @@
 #include "Map.h"
 
 
+
 enum {
 ESCENA_XYZ,
 ESCENA_CIRCULO,
@@ -63,4 +64,7 @@ public:
     ofShader shader;
     
     ofMatrix4x4 m;
+    
+    //ofxraycaster::Ray ray;
+    ofxraycaster::Mousepicker mousepicker;
 };

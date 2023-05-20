@@ -8,6 +8,7 @@
     }
 
 
+
     void TileLoader::setCallBack(Map* mapx){
         map = mapx;
     }
@@ -37,8 +38,8 @@
             queueUrls.pop();
             mutex.unlock();
 
-            tile = jsonLoader.loadTile(url);
-            tile->setPosition(0, 0, 0);
+            tile = jsonLoader.loadTile(url, projection);
+            //tile->setPosition(0, 0, 0);
             map->tileReady(tile);
             
             
