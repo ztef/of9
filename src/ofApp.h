@@ -67,4 +67,5 @@ public:
     
     //ofxraycaster::Ray ray;
     ofxraycaster::Mousepicker mousepicker;
+    ofVec3f mouse_picker_pos;
 };

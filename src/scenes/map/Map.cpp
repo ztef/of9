@@ -11,6 +11,7 @@ Map::~Map(){
 void Map::setup(double _width, double _height){
     
     projection.setMode(PROJ_MERCATOR);
+    //projection.setMode(PROJ_SPHERICAL);
     projection.setScale(1);
     projection.setTranslate(0, 0);
     

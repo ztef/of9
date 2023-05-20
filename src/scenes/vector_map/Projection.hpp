@@ -32,7 +32,12 @@ public:
     
     Projection();
     ofPoint getProjection(Coordinate _coordinate);
+    Coordinate getCoordinate(ofPoint projected_point);
+    
     ofPoint mercator(Coordinate _coordinate);
+    Coordinate mercator_inverse(ofPoint projected_point);
+    
+
     ofPoint equirectangular(Coordinate _coordinate);
     ofPoint azimuthal(Coordinate _coordinate);
     ofPoint spherical(Coordinate _coordinate);
@@ -47,6 +52,7 @@ private:
     float translateX;
     float translateY;
     float pvRadians(float degrees);
+    float pvDegrees(float _rad);
 
 };
 #endif /* Projection_hpp */

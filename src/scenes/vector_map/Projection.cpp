@@ -38,6 +38,27 @@ ofPoint Projection::getProjection (Coordinate _coordinate) {
   return position;
 }
 
+Coordinate Projection::getCoordinate(ofPoint projected_point){
+    Coordinate coordinate;
+    switch (mode) {
+      case PROJ_EQUIRECTANGULAR:
+             
+      case PROJ_MERCATOR:
+            coordinate = this->mercator_inverse(projected_point);
+            break;
+      case PROJ_STEREOGRAPHIC:
+      case PROJ_AZIMUTHAL_EQUALAREA:
+            
+      case PROJ_SPHERICAL:
+             
+      default:
+        break;
+    }
+    return coordinate;
+}
+
+
+
 ofPoint Projection::mercator(Coordinate _coordinate) {
     ofPoint position;
     position.x = (_coordinate.longitude / 180.0) * scale + translateX;
@@ -45,6 +66,18 @@ ofPoint Projection::mercator(Coordinate _coordinate) {
     : */ ( log(tan(PI / 4.0 + this->pvRadians(_coordinate.latitude) / 2.0)) / PI ) * scale - translateY;
     return position;
 };
+
+Coordinate Projection::mercator_inverse(ofPoint position) {
+    Coordinate coordinate;
+     
+    coordinate.longitude = ((position.x - translateX ) / scale ) * 180.0;
+    coordinate.latitude = pvDegrees((atan(exp(PI * (position.y + translateY ) / scale)) - PI/4) * 2);
+    
+    
+    return coordinate;
+};
+
+
 
 ofPoint Projection::equirectangular(Coordinate _coordinate) {
     ofPoint position;
@@ -95,6 +128,11 @@ float Projection::pvRadians(float _degrees) {
     float radians = PI / 180.0;
     return radians * _degrees;
 };
+
+float Projection::pvDegrees(float _rad){
+    float degrees = 180.0 / PI;
+    return _rad * degrees;
+}
 
 void Projection::setScale(float _scale) {
     scale = _scale;

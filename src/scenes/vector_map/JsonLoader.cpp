@@ -261,14 +261,14 @@ glm::vec3 JsonLoader::parsePointInProjectedCoords(ofxJSONElement pointJson) {
     //double x = getXX(pointJson[0].asFloat(),1024);
     //double y = getYY(pointJson[1].asFloat(),768, 1024);
     
-    mercatortile::XY rxy = mercatortile::xy(pointJson[0].asDouble(), pointJson[1].asDouble());
+    //mercatortile::XY rxy = mercatortile::xy(pointJson[0].asDouble(), pointJson[1].asDouble());
     
-    double x = rxy.x * 0.0001;
-    double y = rxy.y * 0.0001;
+    //double x = rxy.x * 0.0001;
+    //double y = rxy.y * 0.0001;
     
-    double a = -115.0;
-    double b = 61.97;
-    mercatortile::XY m = mercatortile::xy(b,a);
+    //double a = -115.0;
+    //double b = 61.97;
+    //mercatortile::XY m = mercatortile::xy(b,a);
     
     Coordinate coord;
     
@@ -277,6 +277,8 @@ glm::vec3 JsonLoader::parsePointInProjectedCoords(ofxJSONElement pointJson) {
     
     
     ofPoint p  = projection->getProjection(coord);
+    //Coordinate d = projection->getCoordinate(p);
+    
     
     
    // cout << "X " << m.x << ", Y " << m.y << " " << endl;

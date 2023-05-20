@@ -158,14 +158,16 @@ void ofApp::draw(){
                  auto intersection = mousepicker.getRay().getOrigin() +
                                      mousepicker.getRay().getDirection() *
                                      distanceToClosestIntersection;
-                 ofDrawSphere(intersection, 0.01);
+                 ofDrawSphere(intersection, 0.01 * zoom);
                  FeatureLeafNode* elementx = (FeatureLeafNode*) elements[indexIntersectedPrimitive];
                  //elementx->geometry.
                  ofPopStyle();
+                 mouse_picker_pos = intersection;
+               
              }
-             ofSetColor(255);
+             //ofSetColor(255);
              //mousepicker.draw(5);
-             mousepicker.getRay().draw();
+             //mousepicker.getRay().draw();
              
          }
             
@@ -265,7 +267,10 @@ void ofApp::draw(){
     ofDrawBitmapString("MOUSE X: " + ofToString(ofGetMouseX()), 20,110);
     ofDrawBitmapString("MOUSE Y: " + ofToString(ofGetMouseY()), 20,125);
     
+    Coordinate c = mapa.projection.getCoordinate(mouse_picker_pos);
     
+    ofDrawBitmapString("GEOPOS LONG: " + ofToString(c.longitude), 20,140);
+    ofDrawBitmapString("GEOPOS LAT: " + ofToString(c.latitude), 20,155);
     
     /*
      ofSetColor(255);
@@ -295,9 +300,10 @@ void ofApp::keyReleased(int key){
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
      if(sceneSelect == ESCENA_MAPA_VECTORIAL){
-           // mousepicker.setFromCamera(glm::vec2(x,y), camera);
-         
-         mousepicker.getRay().setup(camera.screenToWorld(glm::vec3(x,y,0)), mapa.tiles[0]->getZAxis() * -1);
+            
+         ofVec3f screenToWorld = camera.screenToWorld(ofVec3f(ofGetMouseX(),ofGetMouseY(),0.0));
+          
+         mousepicker.getRay().setup(camera.getPosition(),screenToWorld - camera.getPosition());
      }
 }
 
