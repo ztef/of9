@@ -81,10 +81,10 @@ void Map::update(float _zoom){
 }
 
 int Map::calcTileZoom(float z){
-    if(z > 0.01){
+    if(z > 0.45){
         return 0;
     }
-    if(z <= 0.01){
+    if(z <= 0.45){
         return 1;
     }
     return 0;

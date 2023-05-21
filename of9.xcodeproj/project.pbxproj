@@ -34,6 +34,7 @@
 		5B7BF1102A17EDDA0014050B /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10A2A17EDDA0014050B /* Ray.cpp */; };
 		5B7BF1112A17EDDA0014050B /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10D2A17EDDA0014050B /* Plane.cpp */; };
 		5B7BF1122A17EDDA0014050B /* Mousepicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10E2A17EDDA0014050B /* Mousepicker.cpp */; };
+		5B7BF1172A1983960014050B /* Intersector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF1152A1983960014050B /* Intersector.cpp */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
 		63B57AC5BF4EF088491E0317 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50DF87D612C5AAE17AAFA6C0 /* ofxXmlSettings.cpp */; };
 		837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C6477A769C03A56D1401 /* ofxSlider.cpp */; };
@@ -155,6 +156,8 @@
 		5B7BF10C2A17EDDA0014050B /* Ray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
 		5B7BF10D2A17EDDA0014050B /* Plane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plane.cpp; sourceTree = "<group>"; };
 		5B7BF10E2A17EDDA0014050B /* Mousepicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mousepicker.cpp; sourceTree = "<group>"; };
+		5B7BF1152A1983960014050B /* Intersector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Intersector.cpp; sourceTree = "<group>"; };
+		5B7BF1162A1983960014050B /* Intersector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Intersector.hpp; sourceTree = "<group>"; };
 		5CAABABC5D465FF3E4FDBAA0 /* ssl2.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ssl2.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/ssl2.h; sourceTree = SOURCE_ROOT; };
 		5D05C2B0CBAFC3F9F2F693AF /* tls1.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = tls1.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/tls1.h; sourceTree = SOURCE_ROOT; };
 		61313493CDB52744E22A604D /* json-forwards.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = "json-forwards.h"; path = "../../../addons/ofxJSON/libs/jsoncpp/include/json/json-forwards.h"; sourceTree = SOURCE_ROOT; };
@@ -524,6 +527,7 @@
 		5B7BF02B2A15CF510014050B /* scenes */ = {
 			isa = PBXGroup;
 			children = (
+				5B7BF1142A19836D0014050B /* intersectors */,
 				5B7BF02C2A15CF510014050B /* circle_xy */,
 				5B7BF02F2A15CF510014050B /* plane_xz */,
 				5B7BF0322A15CF510014050B /* vector_map */,
@@ -595,6 +599,15 @@
 			);
 			name = src;
 			path = ../../../addons/ofxRaycaster/src;
+			sourceTree = "<group>";
+		};
+		5B7BF1142A19836D0014050B /* intersectors */ = {
+			isa = PBXGroup;
+			children = (
+				5B7BF1152A1983960014050B /* Intersector.cpp */,
+				5B7BF1162A1983960014050B /* Intersector.hpp */,
+			);
+			path = intersectors;
 			sourceTree = "<group>";
 		};
 		6948EE371B920CB800B5AC1A /* local_addons */ = {
@@ -1223,6 +1236,7 @@
 				5B7BF0232A15CF410014050B /* ListItem.cpp in Sources */,
 				5B7BF0272A15CF410014050B /* SliderItem.cpp in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
+				5B7BF1172A1983960014050B /* Intersector.cpp in Sources */,
 				5B7BF0422A15CF510014050B /* JsonLoader.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,

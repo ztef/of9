@@ -7,6 +7,7 @@
 #include "FeatureLeafNode.h"
 #include "FeatureCollectionNode.h"
 #include "Map.h"
+#include "Intersector.hpp"
 
 
 
@@ -66,6 +67,9 @@ public:
     ofMatrix4x4 m;
     
     //ofxraycaster::Ray ray;
-    ofxraycaster::Mousepicker mousepicker;
+    //ofxraycaster::Mousepicker mousepicker;
     ofVec3f mouse_picker_pos;
+    
+    Intersector intersector;
+    
 };

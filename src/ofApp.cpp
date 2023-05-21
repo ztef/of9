@@ -120,7 +120,24 @@ void ofApp::draw(){
        
         mapa.draw();
         
+        FeatureCollectionNode* currentWorld = (FeatureCollectionNode*) mapa.tiles[0];
+        FeatureCollectionNode* layer = (FeatureCollectionNode*) currentWorld->children.at(0);
+        vector<FeatureNode *> elements = layer->children;
+        
+        unsigned int pos;
+        glm::vec3 intersection;
+        FeatureLeafNode* intersectedElement;
+        
+        if (intersector.intersect(&elements, pos, intersection, intersectedElement) ){
+            ofPushStyle();
+            ofSetColor(255);
+            ofDrawSphere(intersection, 0.01 * zoom);
+            ofPopStyle();
+            mouse_picker_pos = intersection;
+        }
+        
         // INTERSECTOR
+        /*
          float distanceToClosestIntersection = numeric_limits<float>::max();
         
         
@@ -141,7 +158,7 @@ void ofApp::draw(){
              for(int i = 0; i < elements.size(); i++) {
                  FeatureLeafNode* elementx = (FeatureLeafNode*) elements[i];
                  if(elementx->geometry.getMode() == OF_PRIMITIVE_TRIANGLES){
-                        //currentWorld->getGlobalTransformMatrix(),
+                        
                         bool intersects = mousepicker.getRay().intersectsMesh(elementx->geometry, baricentricCoordinates, distance, surfaceNormal);
                         if (intersects && (distance < distanceToClosestIntersection)) {
                             found = true;
@@ -170,7 +187,7 @@ void ofApp::draw(){
              //mousepicker.getRay().draw();
              
          }
-            
+          */
          // END INTERSECTOR
       
     }
@@ -301,9 +318,11 @@ void ofApp::keyReleased(int key){
 void ofApp::mouseMoved(int x, int y ){
      if(sceneSelect == ESCENA_MAPA_VECTORIAL){
             
-         ofVec3f screenToWorld = camera.screenToWorld(ofVec3f(ofGetMouseX(),ofGetMouseY(),0.0));
+         
+         intersector.mouseMoved(&camera, x, y);
+        // ofVec3f screenToWorld = camera.screenToWorld(ofVec3f(ofGetMouseX(),ofGetMouseY(),0.0));
           
-         mousepicker.getRay().setup(camera.getPosition(),screenToWorld - camera.getPosition());
+        // mousepicker.getRay().setup(camera.getPosition(),screenToWorld - camera.getPosition());
      }
 }
 
