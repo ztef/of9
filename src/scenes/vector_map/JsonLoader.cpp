@@ -36,7 +36,7 @@ JsonLoader::JsonLoader(std::string fileName) {
         ofLog(OF_LOG_VERBOSE, "Json could not be parsed!");
     }
     
-    tessellator = ofTessellator();
+    //tessellator = ofTessellator();
     
 }
 
@@ -60,18 +60,18 @@ FeatureNode* JsonLoader::loadNodeGraph() {
         
         ofFloatColor::lawnGreen,
         ofFloatColor::deepSkyBlue,
-        ofFloatColor::maroon,
-        ofFloatColor::darkGrey,
-        ofFloatColor::white,
+        ofFloatColor::red,
+        ofFloatColor::red,
+        ofFloatColor::red,
     };
     
     float layerHeights[5] = {
         
         0.0f,
         0.00001f,
-        0.0f,
-        0.0f,
-        0.000f
+        0.1f,
+        0.1f,
+        0.1f
     };
     
     for (int i = 0; i < 5; i++) {
@@ -214,10 +214,12 @@ FeatureNode* JsonLoader::parseFeatureNode(ofxJSONElement featureJson) {
         newMesh.setMode(OF_PRIMITIVE_TRIANGLES);
         int cs = coords.size();
         for (int i = 0; i < cs; i++) {
-            ofMesh subMesh = ofMesh();
-            subMesh.setMode(OF_PRIMITIVE_TRIANGLES);
-            parsePolygonGeometry(coords[i], props, &subMesh, &anchor, true);
-            newMesh.append(subMesh);
+            if(coords[i].size() > 0){  // PROTECCION
+             ofMesh subMesh = ofMesh();
+             subMesh.setMode(OF_PRIMITIVE_TRIANGLES);
+             parsePolygonGeometry(coords[i], props, &subMesh, &anchor, true);
+             newMesh.append(subMesh);
+            }
         }
         anchor = newMesh.getCentroid();
 
@@ -370,11 +372,12 @@ void JsonLoader::parsePolygonGeometry(ofxJSONElement polygonJson, ofxJSONElement
     
         
         polyLines.push_back(verts);
-        
+       
     }
     
-     
-        tessellator.tessellateToMesh(polyLines, OF_POLY_WINDING_ODD, *meshToFill, false);
+        
+       
+      tessellator.tessellateToMesh(polyLines, OF_POLY_WINDING_ODD, *meshToFill, false);
       
     
     // Add normals for the top surface

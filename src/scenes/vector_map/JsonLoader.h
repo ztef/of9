@@ -16,7 +16,7 @@
 #include "ofxJSONElement.h"
 #include "FeatureCollectionNode.h"
 #include "FeatureLeafNode.h"
-#include "MercatorTile.hpp"
+#include "TileFunctions.hpp"
 #include "Projection.hpp"
 
 

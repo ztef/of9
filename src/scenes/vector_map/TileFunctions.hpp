@@ -5,15 +5,16 @@
 //  Created by Esteban on 18/05/23.
 //
 
-#ifndef MercatorTile_hpp
-#define MercatorTile_hpp
+#ifndef TileFunctions_hpp
+#define TileFunctions_hpp
 
 #include <stdio.h>
 #include <vector>
 #include <string>
 #include <deque>
 
-namespace mercatortile
+
+namespace tilefunctions
 {
 
 // An XYZ web mercator tile
@@ -94,8 +95,8 @@ std::string quadkey(const Tile &tile);
 Tile quadkey_to_tile(const std::string &qk);
 
 
-} //namespace mercatortile
+} //namespace tilefunctions
 
 
 
-#endif /* MercatorTile_hpp */
+#endif /* TileFunctions_hpp */

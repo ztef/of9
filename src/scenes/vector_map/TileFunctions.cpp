@@ -5,7 +5,7 @@
 //  Created by Esteban on 18/05/23.
 //
 
-#include "MercatorTile.hpp"
+#include "TileFunctions.hpp"
 #include <math.h>
 #include <stdlib.h>
 #include <algorithm>
@@ -16,7 +16,7 @@
 #include <numeric>
 
 using namespace std;
-namespace mercatortile
+namespace tilefunctions
 {
 
 void truncate_lonlat(double *lng, double *lat)
@@ -142,19 +142,19 @@ Tile parent(const Tile &tile)
     Tile return_tile;
     if (tile.x % 2 == 0 && tile.y % 2 == 0)
     {
-        return_tile = Tile{tile.x / 2, tile.y / 2, tile.z - 1};
+      //  return_tile = Tile{tile.x / 2, tile.y / 2, tile.z - 1};
     }
     else if (tile.x % 2 == 0)
     {
-        return_tile = Tile{tile.x / 2, (tile.y - 1) / 2, tile.z - 1};
+      //  return_tile = Tile{tile.x / 2, (tile.y - 1) / 2, tile.z - 1};
     }
     else if (!(tile.x % 2 == 0) && (tile.y % 2 == 0))
     {
-        return_tile = Tile{(tile.x - 1) / 2, tile.y / 2, tile.z - 1};
+      //  return_tile = Tile{(tile.x - 1) / 2, tile.y / 2, tile.z - 1};
     }
     else
     {
-        return_tile = Tile{(tile.x - 1) / 2, (tile.y - 1) / 2, tile.z - 1};
+      //  return_tile = Tile{(tile.x - 1) / 2, (tile.y - 1) / 2, tile.z - 1};
     }
 
     return return_tile;
@@ -166,24 +166,24 @@ Tile parent(const Tile &tile, const int &zoom)
     {
         throw "zoom should be less than tile zoom level.";
     }
-    Tile return_tile = tile;
+    Tile return_tile;
     while (return_tile.z > zoom)
     {
         if (return_tile.x % 2 == 0 && return_tile.y % 2 == 0)
         {
-            return_tile = Tile{return_tile.x / 2, return_tile.y / 2, return_tile.z - 1};
+          //  return_tile = Tile(return_tile.x / 2, return_tile.y / 2, return_tile.z - 1);
         }
         else if (return_tile.x % 2 == 0)
         {
-            return_tile = Tile{return_tile.x / 2, (return_tile.y - 1) / 2, return_tile.z - 1};
+           // return_tile = Tile(return_tile.x / 2, (return_tile.y - 1) / 2, return_tile.z - 1);
         }
         else if (!(return_tile.x % 2 == 0) && (return_tile.y % 2 == 0))
         {
-            return_tile = Tile{(return_tile.x - 1) / 2, return_tile.y / 2, return_tile.z - 1};
+          //  return_tile = Tile{(return_tile.x - 1) / 2, return_tile.y / 2, return_tile.z - 1};
         }
         else
         {
-            return_tile = Tile{(return_tile.x - 1) / 2, (return_tile.y - 1) / 2, return_tile.z - 1};
+          //  return_tile = Tile{(return_tile.x - 1) / 2, (return_tile.y - 1) / 2, return_tile.z - 1};
         }
     }
 
@@ -330,4 +330,4 @@ Tile quadkey_to_tile(const std::string &qk)
     return Tile{xtile, ytile, zoom};
 }
 
-} // namespace mercatortile
+} // namespace tilefunctions

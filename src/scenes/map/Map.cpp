@@ -58,13 +58,26 @@ void Map::tileReady(FeatureNode* tile){
     mutex.unlock();
 }
 
-
+void Map::setmarker(glm::vec3 _c){
+    cursor = _c;
+}
 
 void Map::update(float _zoom){
     
     
     zoom = _zoom;
     tile_zoom = calcTileZoom(zoom);
+    
+    
+    Coordinate c = projection.getCoordinate(cursor);
+    target_tile = tilefunctions::tile(c.longitude, c.latitude, tile_zoom);
+    
+    
+    
+    if(tile_zoom == 1){
+    //    Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/0/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
+    //    Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/1/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
+    }
     /*for(int i=0;i<tileLoaders.size();i++){
         if(tileLoaders[i]->loaded){
             if(tiles.size()<=i) tiles.resize(i+1);
@@ -81,11 +94,17 @@ void Map::update(float _zoom){
 }
 
 int Map::calcTileZoom(float z){
-    if(z > 0.45){
+    if(z > 0.63){
         return 0;
     }
-    if(z <= 0.45){
+    if(z > 0.28){
         return 1;
+    }
+    if(z > 0.1){
+        return 2;
+    }
+    if(z > 0.05){
+        return 3;
     }
     return 0;
 }
@@ -93,12 +112,12 @@ int Map::calcTileZoom(float z){
 
 void Map::draw(){
     for(int i=0;i<tiles.size();i++){
-        bool visible=true;
-        visible = (tile_zoom == 0 && i==0);
-        visible = visible || (tile_zoom == 1 && i> 0);
-        if(visible){
+        //bool visible=true;
+        //visible = (tile_zoom == 0 && i==0);
+        //visible = visible || (tile_zoom == 1 && i> 0);
+        //if(visible){
             tiles[i]->draw();
-        }
+        //}
     }
     
     

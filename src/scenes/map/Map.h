@@ -6,6 +6,8 @@
 #include "FeatureNode.h"
 #include "Projection.hpp"
 #include "ofxRaycaster.h"
+#include "TileFunctions.hpp"
+#include "Tilec.hpp"
 
 #define TILE_SIZE 256.0
 
@@ -20,6 +22,8 @@ public:
     void tileReady(FeatureNode* tile);
 
     virtual void draw();
+    
+    void setmarker(glm::vec3 cursor);
 
     void update(float zoom);
     int calcTileZoom(float z);
@@ -32,6 +36,9 @@ public:
     double tx, ty, sc;
     
     double zoom;
+    
+   
+    
     int    tile_zoom;
     
     double width, height;
@@ -43,7 +50,10 @@ public:
     ofMutex mutex;
     bool newTile;
     
+     glm::vec3 cursor;
     
+    
+    tilefunctions::Tile target_tile;
      
     
     

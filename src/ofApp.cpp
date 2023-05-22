@@ -3,9 +3,11 @@
 #include "JsonLoader.h"
 #include "Plane_xz.hpp"
 #include "Circle_xy.hpp"
+#include "Sphere.hpp"
 
 Plane_xz escena_zy;
 Circle_xy escena_circulo;
+Sphere escena_esfera;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -15,11 +17,12 @@ void ofApp::setup(){
     buttons.setup(); // this sets up the events etc..
     escena_zy.setup();
     escena_circulo.setup();
+    escena_esfera.setup();
     mapa.setup(1024,768);
    
 
 
-   
+   ofSetDataPathRoot("/Users/esteban/of/apps/myApps/of9/bin/data/");
 
     shader.load("myshader.vert", "myshader.frag"); 
 
@@ -27,11 +30,13 @@ void ofApp::setup(){
     m.rotate(90,0,0,1);
 
    
+   
     
+   mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/0/0/0.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
+   //mapa.Load("s.json");
     
-    mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/0/0/0.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-    mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/0/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-    mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/1/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
+   // mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/0/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
+   // mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/1/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
    
     
     
@@ -47,7 +52,6 @@ void ofApp::setup(){
     camera.setFarClip(100000);
     camera.move(0, 0, 100);
    
-   // camera.setTarget(rootNode->getGlobalPosition());
     
     once = false;
     
@@ -67,6 +71,7 @@ void ofApp::setup(){
     panel->addListItem("Select a color:");
     panel->addSelectionItem("Plano XYZ", sceneSelect, ESCENA_XYZ);
     panel->addSelectionItem("Circulo Angulo-Altura", sceneSelect, ESCENA_CIRCULO);
+    panel->addSelectionItem("Esfera 3D", sceneSelect, ESCENA_ESFERA);
     panel->addSelectionItem("Mapa Vectorial", sceneSelect, ESCENA_MAPA_VECTORIAL);
     panel->addListItem("Dimensions");
     panel->addSliderItem("scale", 1, 5, fScale);
@@ -106,7 +111,7 @@ void ofApp::draw(){
     
     
     
-    //mainLight.enable();
+ //   mainLight.enable();
     
 
         
@@ -116,6 +121,9 @@ void ofApp::draw(){
     if(ESCENA_CIRCULO == sceneSelect){
          escena_circulo.draw();
     }
+    if(ESCENA_ESFERA == sceneSelect){
+            escena_esfera.draw();
+       }
     if(sceneSelect == ESCENA_MAPA_VECTORIAL){
        
         mapa.draw();
@@ -134,67 +142,17 @@ void ofApp::draw(){
             ofDrawSphere(intersection, 0.01 * zoom);
             ofPopStyle();
             mouse_picker_pos = intersection;
+            
+            mapa.setmarker(intersection);
         }
         
-        // INTERSECTOR
-        /*
-         float distanceToClosestIntersection = numeric_limits<float>::max();
         
-        
-           if(mapa.tiles.size()>0){
-             
-             bool found=false;
-             glm::vec2 baricentricCoordinates;
-             float distance;
-             glm::vec3 surfaceNormal;
-             unsigned int indexIntersectedPrimitive = 0;
-             
-            
-             
-             FeatureCollectionNode* currentWorld = (FeatureCollectionNode*) mapa.tiles[0];
-             FeatureCollectionNode* layer = (FeatureCollectionNode*) currentWorld->children.at(0);
-             vector<FeatureNode *> elements = layer->children;
-             //cout << layer->layerName << endl;
-             for(int i = 0; i < elements.size(); i++) {
-                 FeatureLeafNode* elementx = (FeatureLeafNode*) elements[i];
-                 if(elementx->geometry.getMode() == OF_PRIMITIVE_TRIANGLES){
-                        
-                        bool intersects = mousepicker.getRay().intersectsMesh(elementx->geometry, baricentricCoordinates, distance, surfaceNormal);
-                        if (intersects && (distance < distanceToClosestIntersection)) {
-                            found = true;
-                            distanceToClosestIntersection = distance;
-                            indexIntersectedPrimitive = i;
-                        }
-                 }
-             }
-             
-             
-             if (found) {
-                 ofPushStyle();
-                 ofSetColor(255);
-                 auto intersection = mousepicker.getRay().getOrigin() +
-                                     mousepicker.getRay().getDirection() *
-                                     distanceToClosestIntersection;
-                 ofDrawSphere(intersection, 0.01 * zoom);
-                 FeatureLeafNode* elementx = (FeatureLeafNode*) elements[indexIntersectedPrimitive];
-                 //elementx->geometry.
-                 ofPopStyle();
-                 mouse_picker_pos = intersection;
-               
-             }
-             //ofSetColor(255);
-             //mousepicker.draw(5);
-             //mousepicker.getRay().draw();
-             
-         }
-          */
-         // END INTERSECTOR
       
     }
     
 
     
- //   mainLight.disable();
+    mainLight.disable();
     
    camera.end();
     
@@ -288,6 +246,8 @@ void ofApp::draw(){
     
     ofDrawBitmapString("GEOPOS LONG: " + ofToString(c.longitude), 20,140);
     ofDrawBitmapString("GEOPOS LAT: " + ofToString(c.latitude), 20,155);
+    
+    ofDrawBitmapString("TARGET TILE : " + ofToString(mapa.target_tile.x)+"/"+ofToString(mapa.target_tile.y)+"/"+ofToString(mapa.target_tile.z), 20,170);
     
     /*
      ofSetColor(255);
@@ -503,4 +463,59 @@ void ofApp::gotMessage(ofMessage msg){
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
+ 
+ // INTERSECTOR
+ 
+  float distanceToClosestIntersection = numeric_limits<float>::max();
+ 
+ 
+    if(mapa.tiles.size()>0){
+      
+      bool found=false;
+      glm::vec2 baricentricCoordinates;
+      float distance;
+      glm::vec3 surfaceNormal;
+      unsigned int indexIntersectedPrimitive = 0;
+      
+     
+      
+      FeatureCollectionNode* currentWorld = (FeatureCollectionNode*) mapa.tiles[0];
+      FeatureCollectionNode* layer = (FeatureCollectionNode*) currentWorld->children.at(0);
+      vector<FeatureNode *> elements = layer->children;
+      //cout << layer->layerName << endl;
+      for(int i = 0; i < elements.size(); i++) {
+          FeatureLeafNode* elementx = (FeatureLeafNode*) elements[i];
+          if(elementx->geometry.getMode() == OF_PRIMITIVE_TRIANGLES){
+                 
+                 bool intersects = mousepicker.getRay().intersectsMesh(elementx->geometry, baricentricCoordinates, distance, surfaceNormal);
+                 if (intersects && (distance < distanceToClosestIntersection)) {
+                     found = true;
+                     distanceToClosestIntersection = distance;
+                     indexIntersectedPrimitive = i;
+                 }
+          }
+      }
+      
+      
+      if (found) {
+          ofPushStyle();
+          ofSetColor(255);
+          auto intersection = mousepicker.getRay().getOrigin() +
+                              mousepicker.getRay().getDirection() *
+                              distanceToClosestIntersection;
+          ofDrawSphere(intersection, 0.01 * zoom);
+          FeatureLeafNode* elementx = (FeatureLeafNode*) elements[indexIntersectedPrimitive];
+          //elementx->geometry.
+          ofPopStyle();
+          mouse_picker_pos = intersection;
+        
+      }
+      //ofSetColor(255);
+      //mousepicker.draw(5);
+      //mousepicker.getRay().draw();
+      
+  }
+   
+  // END INTERSECTOR
+ 
 */
