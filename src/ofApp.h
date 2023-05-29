@@ -8,6 +8,11 @@
 #include "FeatureCollectionNode.h"
 #include "Map.h"
 #include "Intersector.hpp"
+#include "MVTLoader.hpp"
+
+#include <fstream>
+#include <stdexcept>
+#include <iostream>
 
 
 
@@ -72,5 +77,7 @@ public:
     ofVec3f mouse_picker_pos;
     
     Intersector intersector;
+    
+    
     
 };

@@ -24,6 +24,7 @@ enum projection_mode {
     PROJ_AZIMUTHAL_EQUALAREA,
     PROJ_STEREOGRAPHIC,
     PROJ_SPHERICAL,
+    PROJ_SCREEN,
 };
 
 
@@ -35,6 +36,7 @@ public:
     Coordinate getCoordinate(ofPoint projected_point);
     
     ofPoint mercator(Coordinate _coordinate);
+    ofPoint screen(Coordinate _coordinate);
     Coordinate mercator_inverse(ofPoint projected_point);
     
 

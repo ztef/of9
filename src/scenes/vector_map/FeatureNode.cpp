@@ -17,12 +17,12 @@ void FeatureNode::customDraw() {
 }
 
 void FeatureNode::draw() {
-    ofPushMatrix();
-    ofMultMatrix(getLocalTransformMatrix());
+   // ofPushMatrix();
+   // ofMultMatrix(getLocalTransformMatrix());
     
     customDraw();
     
-   ofPopMatrix();
+   //ofPopMatrix();
 }
 
 void FeatureNode::printPosition(const string &prefix) {

@@ -19,6 +19,9 @@ void Projection::setMode(projection_mode _mode) {
 ofPoint Projection::getProjection (Coordinate _coordinate) {
   ofPoint position;
   switch (mode) {
+    case PROJ_SCREEN:
+          position = this->screen(_coordinate);
+          break;
     case PROJ_EQUIRECTANGULAR:
           position = this->equirectangular(_coordinate);
           break;
@@ -64,6 +67,15 @@ ofPoint Projection::mercator(Coordinate _coordinate) {
     position.x = (_coordinate.longitude / 180.0) * scale + translateX;
     position.y = /*_coordinate.latitude > 85 ? 1 : _coordinate.latitude < -85 ? -1 //<- we should consider about polar regions converting..
     : */ ( log(tan(PI / 4.0 + this->pvRadians(_coordinate.latitude) / 2.0)) / PI ) * scale - translateY;
+    return position;
+};
+
+
+ofPoint Projection::screen(Coordinate _coordinate) {
+    ofPoint position;
+    position.x = _coordinate.longitude * scale + translateX;
+    position.y = _coordinate.latitude * scale - translateY;
+    position.z = 0;
     return position;
 };
 

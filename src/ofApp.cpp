@@ -29,12 +29,12 @@ void ofApp::setup(){
 
     m.rotate(90,0,0,1);
 
-   
-   
     
-   mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/0/0/0.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-   //mapa.Load("s.json");
+     
     
+   //mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/0/0/0.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
+   // mapa.Load("arcgis0.json");
+   // mapa.Load("mtx.json");
    // mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/0/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
    // mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/1/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
    
@@ -106,9 +106,7 @@ void ofApp::draw(){
     
    
     
-    
     camera.begin();
-    
     
     
  //   mainLight.enable();
@@ -128,6 +126,7 @@ void ofApp::draw(){
        
         mapa.draw();
         
+        // SELECTOR BEGIN
         FeatureCollectionNode* currentWorld = (FeatureCollectionNode*) mapa.tiles[0];
         FeatureCollectionNode* layer = (FeatureCollectionNode*) currentWorld->children.at(0);
         vector<FeatureNode *> elements = layer->children;
@@ -146,6 +145,7 @@ void ofApp::draw(){
             mapa.setmarker(intersection);
         }
         
+         //SELECTOR END
         
       
     }
@@ -247,8 +247,12 @@ void ofApp::draw(){
     ofDrawBitmapString("GEOPOS LONG: " + ofToString(c.longitude), 20,140);
     ofDrawBitmapString("GEOPOS LAT: " + ofToString(c.latitude), 20,155);
     
-    ofDrawBitmapString("TARGET TILE : " + ofToString(mapa.target_tile.x)+"/"+ofToString(mapa.target_tile.y)+"/"+ofToString(mapa.target_tile.z), 20,170);
+    ofDrawBitmapString("CURRENT TILE : " + ofToString(mapa.current_tile.x)+"/"+ofToString(mapa.current_tile.y)+"/"+ofToString(mapa.current_tile.z), 20,170);
+   
+    ofDrawBitmapString("TARGET TILE : " + ofToString(mapa.target_tile.x)+"/"+ofToString(mapa.target_tile.y)+"/"+ofToString(mapa.target_tile.z), 20,185);
     
+    ofDrawBitmapString("TILES LOADED : " + ofToString(mapa.loadedtiles.size()), 20,200);
+  
     /*
      ofSetColor(255);
     ofSetLineWidth(2);

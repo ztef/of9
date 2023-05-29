@@ -38,15 +38,20 @@ void FeatureLeafNode::customDraw() {
     
    // material.begin();
     if(type == "Point"){
-      //ofDrawBox(0.0001, 0.0001, 0.01);
+      ofDrawBox(0.1, 0.1, 0.1);
         ofPushMatrix();
+        ofColor(255,0,0);
+              ofTranslate(anchor);
               ofRotateXDeg(90);
-              ofTranslate(glm::vec3(0,0.00005,0));
-              ofDrawCylinder(0.000003, 0.0001);
+              ofDrawCylinder(10, 2000);
         ofPopMatrix();
     }
     
-    geometry.draw();
+    if(type == "Line"){
+        dolly(200);
+    }
+        geometry.draw();
+     
   //  material.end();
 
 }

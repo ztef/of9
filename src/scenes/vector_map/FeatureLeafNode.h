@@ -24,6 +24,8 @@ public:
     ofMesh geometry;
     string idString;
     string type;
+    int level;
+    string name;
    
     
     FeatureLeafNode(ofMesh newGeometry, string nodetype);

@@ -8,6 +8,7 @@
 #include "ofxRaycaster.h"
 #include "TileFunctions.hpp"
 #include "Tilec.hpp"
+#include "MVTLoader.hpp"
 
 #define TILE_SIZE 256.0
 
@@ -20,6 +21,8 @@ public:
     void Load(string url);
     
     void tileReady(FeatureNode* tile);
+    
+    FeatureNode* testTile;
 
     virtual void draw();
     
@@ -53,9 +56,13 @@ public:
      glm::vec3 cursor;
     
     
+    tilefunctions::Tile current_tile;
     tilefunctions::Tile target_tile;
-     
     
+    map<tilefunctions::Tile, FeatureNode*> loadedtiles;
+     
+    string target_url;
+    MVTLoader mvtLoader;
     
 };
 

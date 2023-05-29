@@ -4,7 +4,6 @@
 
     TileLoader::TileLoader(){
         loading = false;
-        //jsonLoader = JsonLoader();
     }
 
 

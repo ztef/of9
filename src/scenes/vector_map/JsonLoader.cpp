@@ -46,35 +46,49 @@ FeatureNode* JsonLoader::loadNodeGraph() {
     
     ofLog(OF_LOG_VERBOSE, "Loading Layers:");
     
-    std::string layerNames[5] = {
+    std::string layerNames[9] = {
          
+        //"administrative",
         "earth",
         "water",
+        "boundaries",
+        "landuse",
+        "places",
         "roads",
-        "buildings",
-        "pois"
+        "transit",
+        "pois",
+        "buildings"
+         
     };
     
-    ofColor layerColors[5] = {
+    ofColor layerColors[9] = {
         
         
         ofFloatColor::lawnGreen,
         ofFloatColor::deepSkyBlue,
+        ofFloatColor::black,
+        ofFloatColor::maroon,
+        ofFloatColor::red,
+        ofFloatColor::violet,
         ofFloatColor::red,
         ofFloatColor::red,
-        ofFloatColor::red,
+        ofFloatColor::grey
     };
     
-    float layerHeights[5] = {
+    float layerHeights[9] = {
         
         0.0f,
         0.00001f,
+        0.05f,
+        0.08f,
         0.1f,
-        0.1f,
-        0.1f
+        0.2f,
+        0.3f,
+        0.4f,
+        0.5f
     };
     
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 9; i++) {
         if(!jsonRoot[layerNames[i]].empty()){
             layerColor = layerColors[i];
             FeatureCollectionNode* newLayer = parseFeatureCollectionNode(jsonRoot[layerNames[i]]);
@@ -85,7 +99,10 @@ FeatureNode* JsonLoader::loadNodeGraph() {
                 newLayer->layerColor = layerColor;
                 newLayer->layerName = layerNames[i];
                 layers.push_back(newLayer);
-                cout << layerNames[i] + " layer parsed with " + ofToString(newLayer->children.size()) + " children";
+                if(i == 7){
+                    cout << "pois";
+                }
+                cout << layerNames[i] << " layer parsed with " << ofToString(newLayer->children.size()) << " children" << endl;
             
             }
         }
@@ -205,6 +222,7 @@ FeatureNode* JsonLoader::parseFeatureNode(ofxJSONElement featureJson) {
     } else if (type.compare("Polygon") == 0) {
         
         newMesh.setMode(OF_PRIMITIVE_TRIANGLES);
+        
         parsePolygonGeometry(coords, props, &newMesh, &anchor, false);
         
         ofLog(OF_LOG_VERBOSE, "Polygon mesh with vertices: " + ofToString(newMesh.getVertices()));
@@ -218,6 +236,10 @@ FeatureNode* JsonLoader::parseFeatureNode(ofxJSONElement featureJson) {
              ofMesh subMesh = ofMesh();
              subMesh.setMode(OF_PRIMITIVE_TRIANGLES);
              parsePolygonGeometry(coords[i], props, &subMesh, &anchor, true);
+                
+                // Colores diferenciados
+                //layerColor = ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255));
+                //subMesh.setColorForIndices(0, subMesh.getNumIndices(), layerColor);
              newMesh.append(subMesh);
             }
         }
@@ -237,15 +259,21 @@ FeatureNode* JsonLoader::parseFeatureNode(ofxJSONElement featureJson) {
         
     }
      
-    
-
+    // COLORES DIFERENCIADOS
+    //layerColor = ofColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255));
     newMesh.setColorForIndices(0, newMesh.getNumIndices(), layerColor);
     
     FeatureLeafNode* newNode = new FeatureLeafNode(newMesh, type);
     newNode->idString = featureJson["id"].asString();
-   // newNode->setPosition(anchor);
-      newNode->anchor = anchor;
-      newNode->setPosition(0,0,0);
+    newNode->level = featureJson["properties"]["level"].asInt();
+    newNode->name = featureJson["properties"]["name"].asString();
+    
+    newNode->anchor = anchor;
+   // newNode->move(0, 0, newNode->level);
+    
+    // newNode->setPosition(0,0,newNode->level * -100);
+    
+  //  cout << "Level " << level << " : " << name << endl;
     
 
     ofLog(OF_LOG_VERBOSE, "Parsed geometry type: " + type + ", with centroid: " + ofToString(anchor));
@@ -257,21 +285,8 @@ FeatureNode* JsonLoader::parseFeatureNode(ofxJSONElement featureJson) {
 
 glm::vec3 JsonLoader::parsePointInProjectedCoords(ofxJSONElement pointJson) {
     
-    //double x = lon2x(pointJson[0].asFloat());
-    //double y = lat2y(pointJson[1].asFloat());
-    
-    //double x = getXX(pointJson[0].asFloat(),1024);
-    //double y = getYY(pointJson[1].asFloat(),768, 1024);
-    
-    //mercatortile::XY rxy = mercatortile::xy(pointJson[0].asDouble(), pointJson[1].asDouble());
-    
-    //double x = rxy.x * 0.0001;
-    //double y = rxy.y * 0.0001;
-    
-    //double a = -115.0;
-    //double b = 61.97;
-    //mercatortile::XY m = mercatortile::xy(b,a);
-    
+     
+     
     Coordinate coord;
     
     coord.longitude = pointJson[0].asDouble();
@@ -279,11 +294,8 @@ glm::vec3 JsonLoader::parsePointInProjectedCoords(ofxJSONElement pointJson) {
     
     
     ofPoint p  = projection->getProjection(coord);
-    //Coordinate d = projection->getCoordinate(p);
+     
     
-    
-    
-   // cout << "X " << m.x << ", Y " << m.y << " " << endl;
     
     return glm::vec3(p);
     
@@ -300,9 +312,18 @@ vector<glm::vec3> JsonLoader::parsePointArrayInProjectedCoords(ofxJSONElement po
     
     vector<glm::vec3> pts;
     
-    for (int i = 0; i < pointArrayJson.size(); i++) {
-        pts.push_back(parsePointInProjectedCoords(pointArrayJson[i]));
+    int size = pointArrayJson.size();
+    if(size == 1){
+        for (int i = 0; i < pointArrayJson[0].size(); i++) {
+            pts.push_back(parsePointInProjectedCoords(pointArrayJson[0][i]));
+        }
+    }else{
+        for (int i = 0; i < size; i++) {
+            pts.push_back(parsePointInProjectedCoords(pointArrayJson[i]));
+        }
     }
+    
+   
     
     return pts;
     
@@ -352,6 +373,8 @@ void JsonLoader::parsePolygonGeometry(ofxJSONElement polygonJson, ofxJSONElement
     
     int ps = polygonJson.size();
    
+    
+    
 
     for (int i = 0; i < ps; i++) {
         

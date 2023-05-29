@@ -11,6 +11,8 @@
 		1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 907C5B5E104864A2D3A25745 /* ofxToggle.cpp */; };
 		483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78D67A00EB899FAC09430597 /* ofxLabel.cpp */; };
 		5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5DA1C87211D4F6377DA719 /* tinyxmlparser.cpp */; };
+		5B16172B2A1AF74B0003E8D5 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B1617292A1AF74B0003E8D5 /* Sphere.cpp */; };
+		5B16172E2A1B1D3B0003E8D5 /* Tilec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B16172C2A1B1D3B0003E8D5 /* Tilec.cpp */; };
 		5B7BF0222A15CF410014050B /* ButtonManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF00F2A15CF400014050B /* ButtonManager.cpp */; };
 		5B7BF0232A15CF410014050B /* ListItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF0112A15CF410014050B /* ListItem.cpp */; };
 		5B7BF0242A15CF410014050B /* ColorPickerItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF0122A15CF410014050B /* ColorPickerItem.cpp */; };
@@ -28,13 +30,14 @@
 		5B7BF0452A15CF520014050B /* FeatureLeafNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF0392A15CF510014050B /* FeatureLeafNode.cpp */; };
 		5B7BF0462A15CF520014050B /* TileLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF03D2A15CF510014050B /* TileLoader.cpp */; };
 		5B7BF0472A15CF520014050B /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF03E2A15CF510014050B /* Map.cpp */; };
-		5B7BF04A2A16C6EB0014050B /* MercatorTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF0482A16C6EB0014050B /* MercatorTile.cpp */; };
+		5B7BF04A2A16C6EB0014050B /* TileFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF0482A16C6EB0014050B /* TileFunctions.cpp */; };
 		5B7BF0502A17C95D0014050B /* Projection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF04E2A17C95D0014050B /* Projection.cpp */; };
 		5B7BF10F2A17EDDA0014050B /* Ray2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF1082A17EDDA0014050B /* Ray2D.cpp */; };
 		5B7BF1102A17EDDA0014050B /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10A2A17EDDA0014050B /* Ray.cpp */; };
 		5B7BF1112A17EDDA0014050B /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10D2A17EDDA0014050B /* Plane.cpp */; };
 		5B7BF1122A17EDDA0014050B /* Mousepicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10E2A17EDDA0014050B /* Mousepicker.cpp */; };
 		5B7BF1172A1983960014050B /* Intersector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF1152A1983960014050B /* Intersector.cpp */; };
+		5BD4244C2A2270AD00477004 /* MVTLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4244A2A2270AD00477004 /* MVTLoader.cpp */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
 		63B57AC5BF4EF088491E0317 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50DF87D612C5AAE17AAFA6C0 /* ofxXmlSettings.cpp */; };
 		837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C6477A769C03A56D1401 /* ofxSlider.cpp */; };
@@ -108,6 +111,10 @@
 		5565E3718DB1D46F1214EBFC /* md2.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = md2.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/md2.h; sourceTree = SOURCE_ROOT; };
 		56DAF0A34EFCF5E2A5E60386 /* rand.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = rand.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/rand.h; sourceTree = SOURCE_ROOT; };
 		5749F2535EC575188CD8B7EA /* md5.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = md5.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/md5.h; sourceTree = SOURCE_ROOT; };
+		5B1617292A1AF74B0003E8D5 /* Sphere.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sphere.cpp; sourceTree = "<group>"; };
+		5B16172A2A1AF74B0003E8D5 /* Sphere.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sphere.hpp; sourceTree = "<group>"; };
+		5B16172C2A1B1D3B0003E8D5 /* Tilec.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tilec.cpp; sourceTree = "<group>"; };
+		5B16172D2A1B1D3B0003E8D5 /* Tilec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tilec.hpp; sourceTree = "<group>"; };
 		5B7BF00E2A15CF400014050B /* ofxButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxButtons.h; sourceTree = "<group>"; };
 		5B7BF00F2A15CF400014050B /* ButtonManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonManager.cpp; sourceTree = "<group>"; };
 		5B7BF0112A15CF410014050B /* ListItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ListItem.cpp; sourceTree = "<group>"; };
@@ -143,8 +150,8 @@
 		5B7BF03D2A15CF510014050B /* TileLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileLoader.cpp; sourceTree = "<group>"; };
 		5B7BF03E2A15CF510014050B /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		5B7BF03F2A15CF510014050B /* TileLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileLoader.h; sourceTree = "<group>"; };
-		5B7BF0482A16C6EB0014050B /* MercatorTile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MercatorTile.cpp; sourceTree = "<group>"; };
-		5B7BF0492A16C6EB0014050B /* MercatorTile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MercatorTile.hpp; sourceTree = "<group>"; };
+		5B7BF0482A16C6EB0014050B /* TileFunctions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TileFunctions.cpp; sourceTree = "<group>"; };
+		5B7BF0492A16C6EB0014050B /* TileFunctions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TileFunctions.hpp; sourceTree = "<group>"; };
 		5B7BF04E2A17C95D0014050B /* Projection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Projection.cpp; sourceTree = "<group>"; };
 		5B7BF04F2A17C95D0014050B /* Projection.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Projection.hpp; sourceTree = "<group>"; };
 		5B7BF1062A17EDDA0014050B /* Ray2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ray2D.h; sourceTree = "<group>"; };
@@ -158,6 +165,42 @@
 		5B7BF10E2A17EDDA0014050B /* Mousepicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mousepicker.cpp; sourceTree = "<group>"; };
 		5B7BF1152A1983960014050B /* Intersector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Intersector.cpp; sourceTree = "<group>"; };
 		5B7BF1162A1983960014050B /* Intersector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Intersector.hpp; sourceTree = "<group>"; };
+		5BD4244A2A2270AD00477004 /* MVTLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MVTLoader.cpp; sourceTree = "<group>"; };
+		5BD4244B2A2270AD00477004 /* MVTLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MVTLoader.hpp; sourceTree = "<group>"; };
+		5BD4244F2A2275F400477004 /* pbf_reader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pbf_reader.hpp; sourceTree = "<group>"; };
+		5BD424502A2275F400477004 /* pbf_message.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pbf_message.hpp; sourceTree = "<group>"; };
+		5BD424512A2275F400477004 /* varint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = varint.hpp; sourceTree = "<group>"; };
+		5BD424522A2275F400477004 /* pbf_writer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pbf_writer.hpp; sourceTree = "<group>"; };
+		5BD424532A2275F400477004 /* iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = iterators.hpp; sourceTree = "<group>"; };
+		5BD424542A2275F400477004 /* config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
+		5BD424552A2275F400477004 /* byteswap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = byteswap.hpp; sourceTree = "<group>"; };
+		5BD424562A2275F400477004 /* version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = version.hpp; sourceTree = "<group>"; };
+		5BD424572A2275F400477004 /* pbf_builder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pbf_builder.hpp; sourceTree = "<group>"; };
+		5BD424582A2275F400477004 /* types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = types.hpp; sourceTree = "<group>"; };
+		5BD424592A2275F400477004 /* exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = exception.hpp; sourceTree = "<group>"; };
+		5BD4245B2A2275F400477004 /* geometry_io.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = geometry_io.hpp; sourceTree = "<group>"; };
+		5BD4245C2A2275F400477004 /* feature.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = feature.hpp; sourceTree = "<group>"; };
+		5BD4245D2A2275F400477004 /* vector_tile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vector_tile.hpp; sourceTree = "<group>"; };
+		5BD4245E2A2275F400477004 /* variant_io.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = variant_io.hpp; sourceTree = "<group>"; };
+		5BD4245F2A2275F400477004 /* recursive_wrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = recursive_wrapper.hpp; sourceTree = "<group>"; };
+		5BD424612A2275F400477004 /* version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = version.hpp; sourceTree = "<group>"; };
+		5BD424622A2275F400477004 /* vector_tile_config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vector_tile_config.hpp; sourceTree = "<group>"; };
+		5BD424632A2275F400477004 /* variant.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = variant.hpp; sourceTree = "<group>"; };
+		5BD424642A2275F400477004 /* variant_visitor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = variant_visitor.hpp; sourceTree = "<group>"; };
+		5BD424652A2275F400477004 /* optional.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = optional.hpp; sourceTree = "<group>"; };
+		5BD424672A2275F400477004 /* line_string.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = line_string.hpp; sourceTree = "<group>"; };
+		5BD424682A2275F400477004 /* for_each_point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = for_each_point.hpp; sourceTree = "<group>"; };
+		5BD424692A2275F400477004 /* envelope.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = envelope.hpp; sourceTree = "<group>"; };
+		5BD4246A2A2275F400477004 /* multi_polygon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = multi_polygon.hpp; sourceTree = "<group>"; };
+		5BD4246B2A2275F400477004 /* empty.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = empty.hpp; sourceTree = "<group>"; };
+		5BD4246C2A2275F400477004 /* point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = point.hpp; sourceTree = "<group>"; };
+		5BD4246D2A2275F400477004 /* polygon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = polygon.hpp; sourceTree = "<group>"; };
+		5BD4246E2A2275F400477004 /* multi_point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = multi_point.hpp; sourceTree = "<group>"; };
+		5BD4246F2A2275F400477004 /* multi_line_string.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = multi_line_string.hpp; sourceTree = "<group>"; };
+		5BD424702A2275F400477004 /* point_arithmetic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = point_arithmetic.hpp; sourceTree = "<group>"; };
+		5BD424712A2275F400477004 /* geometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = geometry.hpp; sourceTree = "<group>"; };
+		5BD424722A2275F400477004 /* box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = box.hpp; sourceTree = "<group>"; };
+		5BD424732A2275F400477004 /* geometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = geometry.hpp; sourceTree = "<group>"; };
 		5CAABABC5D465FF3E4FDBAA0 /* ssl2.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ssl2.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/ssl2.h; sourceTree = SOURCE_ROOT; };
 		5D05C2B0CBAFC3F9F2F693AF /* tls1.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = tls1.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/tls1.h; sourceTree = SOURCE_ROOT; };
 		61313493CDB52744E22A604D /* json-forwards.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = "json-forwards.h"; path = "../../../addons/ofxJSON/libs/jsoncpp/include/json/json-forwards.h"; sourceTree = SOURCE_ROOT; };
@@ -490,6 +533,15 @@
 			name = json;
 			sourceTree = "<group>";
 		};
+		5B1617282A1AF7140003E8D5 /* sphere */ = {
+			isa = PBXGroup;
+			children = (
+				5B1617292A1AF74B0003E8D5 /* Sphere.cpp */,
+				5B16172A2A1AF74B0003E8D5 /* Sphere.hpp */,
+			);
+			path = sphere;
+			sourceTree = "<group>";
+		};
 		5B7BF00D2A15CF400014050B /* menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +579,7 @@
 		5B7BF02B2A15CF510014050B /* scenes */ = {
 			isa = PBXGroup;
 			children = (
+				5B1617282A1AF7140003E8D5 /* sphere */,
 				5B7BF1142A19836D0014050B /* intersectors */,
 				5B7BF02C2A15CF510014050B /* circle_xy */,
 				5B7BF02F2A15CF510014050B /* plane_xz */,
@@ -565,10 +618,14 @@
 				5B7BF0382A15CF510014050B /* JsonLoader.h */,
 				5B7BF0392A15CF510014050B /* FeatureLeafNode.cpp */,
 				5B7BF03A2A15CF510014050B /* FeatureLeafNode.h */,
-				5B7BF0482A16C6EB0014050B /* MercatorTile.cpp */,
-				5B7BF0492A16C6EB0014050B /* MercatorTile.hpp */,
+				5B7BF0482A16C6EB0014050B /* TileFunctions.cpp */,
+				5B7BF0492A16C6EB0014050B /* TileFunctions.hpp */,
 				5B7BF04E2A17C95D0014050B /* Projection.cpp */,
 				5B7BF04F2A17C95D0014050B /* Projection.hpp */,
+				5B16172C2A1B1D3B0003E8D5 /* Tilec.cpp */,
+				5B16172D2A1B1D3B0003E8D5 /* Tilec.hpp */,
+				5BD4244A2A2270AD00477004 /* MVTLoader.cpp */,
+				5BD4244B2A2270AD00477004 /* MVTLoader.hpp */,
 			);
 			path = vector_map;
 			sourceTree = "<group>";
@@ -608,6 +665,79 @@
 				5B7BF1162A1983960014050B /* Intersector.hpp */,
 			);
 			path = intersectors;
+			sourceTree = "<group>";
+		};
+		5BD4244D2A2275F400477004 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				5BD4244E2A2275F400477004 /* protozero */,
+				5BD4245A2A2275F400477004 /* mapbox */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		5BD4244E2A2275F400477004 /* protozero */ = {
+			isa = PBXGroup;
+			children = (
+				5BD4244F2A2275F400477004 /* pbf_reader.hpp */,
+				5BD424502A2275F400477004 /* pbf_message.hpp */,
+				5BD424512A2275F400477004 /* varint.hpp */,
+				5BD424522A2275F400477004 /* pbf_writer.hpp */,
+				5BD424532A2275F400477004 /* iterators.hpp */,
+				5BD424542A2275F400477004 /* config.hpp */,
+				5BD424552A2275F400477004 /* byteswap.hpp */,
+				5BD424562A2275F400477004 /* version.hpp */,
+				5BD424572A2275F400477004 /* pbf_builder.hpp */,
+				5BD424582A2275F400477004 /* types.hpp */,
+				5BD424592A2275F400477004 /* exception.hpp */,
+			);
+			path = protozero;
+			sourceTree = "<group>";
+		};
+		5BD4245A2A2275F400477004 /* mapbox */ = {
+			isa = PBXGroup;
+			children = (
+				5BD4245B2A2275F400477004 /* geometry_io.hpp */,
+				5BD4245C2A2275F400477004 /* feature.hpp */,
+				5BD4245D2A2275F400477004 /* vector_tile.hpp */,
+				5BD4245E2A2275F400477004 /* variant_io.hpp */,
+				5BD4245F2A2275F400477004 /* recursive_wrapper.hpp */,
+				5BD424602A2275F400477004 /* vector_tile */,
+				5BD424632A2275F400477004 /* variant.hpp */,
+				5BD424642A2275F400477004 /* variant_visitor.hpp */,
+				5BD424652A2275F400477004 /* optional.hpp */,
+				5BD424662A2275F400477004 /* geometry */,
+				5BD424732A2275F400477004 /* geometry.hpp */,
+			);
+			path = mapbox;
+			sourceTree = "<group>";
+		};
+		5BD424602A2275F400477004 /* vector_tile */ = {
+			isa = PBXGroup;
+			children = (
+				5BD424612A2275F400477004 /* version.hpp */,
+				5BD424622A2275F400477004 /* vector_tile_config.hpp */,
+			);
+			path = vector_tile;
+			sourceTree = "<group>";
+		};
+		5BD424662A2275F400477004 /* geometry */ = {
+			isa = PBXGroup;
+			children = (
+				5BD424672A2275F400477004 /* line_string.hpp */,
+				5BD424682A2275F400477004 /* for_each_point.hpp */,
+				5BD424692A2275F400477004 /* envelope.hpp */,
+				5BD4246A2A2275F400477004 /* multi_polygon.hpp */,
+				5BD4246B2A2275F400477004 /* empty.hpp */,
+				5BD4246C2A2275F400477004 /* point.hpp */,
+				5BD4246D2A2275F400477004 /* polygon.hpp */,
+				5BD4246E2A2275F400477004 /* multi_point.hpp */,
+				5BD4246F2A2275F400477004 /* multi_line_string.hpp */,
+				5BD424702A2275F400477004 /* point_arithmetic.hpp */,
+				5BD424712A2275F400477004 /* geometry.hpp */,
+				5BD424722A2275F400477004 /* box.hpp */,
+			);
+			path = geometry;
 			sourceTree = "<group>";
 		};
 		6948EE371B920CB800B5AC1A /* local_addons */ = {
@@ -1098,6 +1228,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5BD4244D2A2275F400477004 /* include */,
 				5B7BF02B2A15CF510014050B /* scenes */,
 				5B7BF00D2A15CF400014050B /* menu */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
@@ -1216,12 +1347,14 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
-				5B7BF04A2A16C6EB0014050B /* MercatorTile.cpp in Sources */,
+				5B7BF04A2A16C6EB0014050B /* TileFunctions.cpp in Sources */,
 				5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */,
 				853E0BA2F448076739446874 /* ofxColorPicker.cpp in Sources */,
+				5BD4244C2A2270AD00477004 /* MVTLoader.cpp in Sources */,
 				5B7BF0462A15CF520014050B /* TileLoader.cpp in Sources */,
 				5B7BF0222A15CF410014050B /* ButtonManager.cpp in Sources */,
 				B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */,
+				5B16172E2A1B1D3B0003E8D5 /* Tilec.cpp in Sources */,
 				5B7BF02A2A15CF410014050B /* SimpleButton.cpp in Sources */,
 				5B7BF1112A17EDDA0014050B /* Plane.cpp in Sources */,
 				5B7BF0432A15CF510014050B /* FeatureCollectionNode.cpp in Sources */,
@@ -1231,6 +1364,7 @@
 				5B7BF0412A15CF510014050B /* Plane_xz.cpp in Sources */,
 				5B7BF10F2A17EDDA0014050B /* Ray2D.cpp in Sources */,
 				5B7BF0292A15CF410014050B /* ToggleItem.cpp in Sources */,
+				5B16172B2A1AF74B0003E8D5 /* Sphere.cpp in Sources */,
 				5B7BF0242A15CF410014050B /* ColorPickerItem.cpp in Sources */,
 				5B7BF0282A15CF410014050B /* ButtonPanel.cpp in Sources */,
 				5B7BF0232A15CF410014050B /* ListItem.cpp in Sources */,
@@ -1300,6 +1434,7 @@
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
 					../../../addons/ofxRaycaster/src,
+					src/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
@@ -1396,6 +1531,7 @@
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
 					../../../addons/ofxRaycaster/src,
+					src/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1442,6 +1578,7 @@
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
 					../../../addons/ofxRaycaster/src,
+					src/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CODE_SIGN_FLAGS = "--deep";

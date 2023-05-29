@@ -33,10 +33,12 @@ FeatureCollectionNode::FeatureCollectionNode(ofMatrix4x4 newTransform) {
 
 void FeatureCollectionNode::customDraw() {
     
-    ofSetColor(255);
-    material.setDiffuseColor(layerColor); 
-
-    material.begin();
+    //ofSetColor(255);
+    //material.setDiffuseColor(layerColor);
+    //material.setDiffuseColor(ofFloatColor(ofRandom(255),ofRandom(100,255), ofRandom(255)));
+    
+    
+    //material.begin();
      //shader.begin();
        // shader.setUniform1f("time", ofGetElapsedTimef());
         
@@ -98,14 +100,18 @@ void FeatureCollectionNode::customDraw() {
     
     } else {
         for (int i = 0; i < children.size(); i++) {
-            
-            children[i]->draw();
+           // material.setDiffuseColor(layerColor);
+               
+               
+           // material.begin();
+                children[i]->draw();
+           // material.end();
         }
     }
 
    
     
-   material.end();
+  // material.end();
 
     if(layerName == "roads"){
       

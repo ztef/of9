@@ -23,6 +23,20 @@ struct Tile
     int x;
     int y;
     int z;
+    
+    bool operator < (const Tile &t) const
+       {
+           //cout << *this << " compared to " << c << endl;
+           return z < t.z || (z == t.z && x < t.x) || (z == t.z && x == t.x && y < t.y);
+       }
+    
+    bool operator == (const Tile &t) const
+    {
+        return t.x == x && t.y == y && t.z == z;
+    }
+    
+    
+    
 };
 
 // A longitude and latitude pair
