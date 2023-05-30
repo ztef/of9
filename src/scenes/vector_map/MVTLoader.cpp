@@ -84,7 +84,7 @@ FeatureNode* MVTLoader::getNodes() {
         
         0.0f,
         0.00001f,
-        100.1f,
+        10.1f,
         0.08f,
         0.1f,
         0.2f,
@@ -96,6 +96,7 @@ FeatureNode* MVTLoader::getNodes() {
     for (int i = 0; i < 9; i++) {
         if(tile.isLayer(layerNames[i])){
             layerColor = layerColors[i];
+            layerHeight = layerHeights[i];
             
             FeatureCollectionNode* newLayer = parseFeatureCollectionNode(tile.getLayer(layerNames[i]));
 
@@ -322,7 +323,14 @@ void MVTLoader::parseLineGeometry(mapbox::vector_tile::points_arrays_type geom, 
              if (i == 0) {
                  *anchor = getCentroidFromPoints(verts);
              }
-             meshToFill->addVertices(verts);
+             //meshToFill->addVertices(verts);
+             
+         for(auto const& vert : verts){
+             meshToFill->addColor(layerColor);
+             meshToFill->addVertex(vert);
+         }
+         
+         
             
          i++;
      }
@@ -350,14 +358,14 @@ glm::vec3 MVTLoader::parsePointInProjectedCoords(std::int16_t x, std::int16_t y)
     Coordinate coord;
     
     coord.longitude = x;
-    coord.latitude = y * (-1);
+    coord.latitude = y;
     
     
     ofPoint p  = projection->getProjection(coord);
      
     
     
-    return glm::vec3(p);
+    return glm::vec3(p.x,p.y,layerHeight);
     
 }
 
@@ -386,6 +394,12 @@ bool MVTLoader::open(const std::string& filename)
 
 bool MVTLoader::openRemote(const std::string& filename)
 {
+    
+    buffer = ofLoadURL(filename).data.getText();
+
+    tile.parse(buffer);
+    
+      
     return true;
 }
 

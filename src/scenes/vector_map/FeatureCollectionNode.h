@@ -32,6 +32,7 @@ public:
     ofFloatColor layerColor;
     ofMaterial material;
     string layerName;
+    ofShader  shader;
    
     
 private:

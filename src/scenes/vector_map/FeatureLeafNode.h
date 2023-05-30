@@ -15,6 +15,8 @@
 #include <string>
 #include "ofMain.h"
 #include "FeatureNode.h"
+#include "VShaders.hpp"
+ 
 
 #endif /* defined(__vectorTileExperiment__FeatureLeafNode__) */
 
@@ -26,6 +28,7 @@ public:
     string type;
     int level;
     string name;
+     
    
     
     FeatureLeafNode(ofMesh newGeometry, string nodetype);

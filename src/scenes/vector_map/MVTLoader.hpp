@@ -41,6 +41,7 @@ public:
     std::string buffer;
     mapbox::vector_tile::buffer tile;
     ofColor layerColor;
+    float layerHeight;
     
     
     ofTessellator tessellator;

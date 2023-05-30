@@ -8,16 +8,29 @@ Map::~Map(){
     tileLoader.stopThread();
 }
 
+//string Map::mapType;
+
 void Map::setup(double _width, double _height){
     
     projection.setMode(PROJ_SCREEN);
     //projection.setMode(PROJ_MERCATOR);
     //projection.setMode(PROJ_SPHERICAL);
     projection.setScale(1);
-    projection.setTranslate(0, 0);
+    projection.setTranslate(-4096,  4096); // Max extent / 2
     
     tileLoader.setProjection(&projection);
     
+    //fbo.allocate(1024, 768, GL_RGBA);
+    
+    VShaders::lineShader.setGeometryInputType(GL_LINES);
+    VShaders::lineShader.setGeometryOutputType(GL_TRIANGLE_STRIP);
+    VShaders::lineShader.setGeometryOutputCount(4);
+    VShaders::lineShader.load("shaders/vert.glsl", "shaders/frag.glsl", "shaders/geom.glsl");
+
+    cout << "Maximum number of output vertices support is: " << VShaders::lineShader.getGeometryMaxOutputCount() << endl;
+
+   // Map::mapType = "CONTENIDO ESTATICO";
+   // VShaders::shaderType = "SHADER";
     
      width = _width;
      height = _height;
@@ -29,9 +42,9 @@ void Map::setup(double _width, double _height){
      tileLoader.setCallBack(this);
      tileLoader.start();
     
-     mutex.lock();
-     testTile = mvtLoader.loadTile("/Users/esteban/of/apps/myApps/of9/bin/data/0.mvt", &projection);
-     mutex.unlock();
+    // mutex.lock();
+    // testTile = mvtLoader.loadTile("/Users/esteban/of/apps/myApps/of9/bin/data/0.mvt", &projection);
+    // mutex.unlock();
     
 }
 
@@ -95,11 +108,11 @@ void Map::update(float _zoom){
      https://tile.nextzen.org/tilezen/vector-tiles-prod/20171221/0/0/0.zip?api_key=HjxoLw7IQJWSTo4lgErmIQ
      */
     
-   
+    current_tile = {0,0,0};
     if(loadedtiles.count(current_tile) == 0){
         loadedtiles[current_tile] = nullptr;
         stringstream url;
-        url << "https://tile.nextzen.org/tilezen/vector/v1/all/" << current_tile.z << "/" << current_tile.x << "/" << current_tile.y << ".json?api_key=HjxoLw7IQJWSTo4lgErmIQ";
+        url << "https://tile.nextzen.org/tilezen/vector/v1/all/" << current_tile.z << "/" << current_tile.x << "/" << current_tile.y << ".mvt?api_key=HjxoLw7IQJWSTo4lgErmIQ";
         target_url = url.str();
         
         Load(target_url);
@@ -163,7 +176,9 @@ void Map::draw(){
     }
     */
     
-    testTile->draw();
+     
+        //testTile->draw();
+     
     
     map<tilefunctions::Tile, FeatureNode*>::iterator iter = loadedtiles.begin();
     map<tilefunctions::Tile, FeatureNode*>::iterator endIter = loadedtiles.end();
@@ -172,12 +187,12 @@ void Map::draw(){
         FeatureNode* node = iter->second;
         if (tile.z == tile_zoom ) {   // || (tile.z == 0)
             if(node != nullptr){
-                  //  node->draw();
+                    node->draw();
             } else {   // No ha sido cargado, dibuja el 0 (debe ser el anterior)
                 FeatureNode* node0;
                 node0 = loadedtiles[tilefunctions::Tile{0,0,0}];
                 if(node0 != nullptr){
-                  //  node0->draw();
+                    node0->draw();
                 }
             }
         }

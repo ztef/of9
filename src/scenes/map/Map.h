@@ -9,6 +9,7 @@
 #include "TileFunctions.hpp"
 #include "Tilec.hpp"
 #include "MVTLoader.hpp"
+#include "VShaders.hpp"
 
 #define TILE_SIZE 256.0
 
@@ -63,6 +64,10 @@ public:
      
     string target_url;
     MVTLoader mvtLoader;
+    
+    ofFbo fbo;
+    
+    //static string mapType;
     
 };
 

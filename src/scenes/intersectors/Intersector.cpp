@@ -51,7 +51,11 @@ bool Intersector::intersect(vector<FeatureNode*> * elements, unsigned int &index
 }
 
 void Intersector::mouseMoved(ofCamera* camera, int x, int y){
-    ofVec3f screenToWorld = camera->screenToWorld(ofVec3f(x,y,0.0));
+    ofVec3f cameraPosInWorld = (camera->getPosition());
+    ofVec3f mousePosInWorld = camera->screenToWorld(ofVec3f(x,y,0.1));
+    
+   
          
-    mousepicker.getRay().setup(camera->getPosition(),screenToWorld - camera->getPosition());
+    
+    mousepicker.getRay().setup(cameraPosInWorld, mousePosInWorld - cameraPosInWorld); //
 }

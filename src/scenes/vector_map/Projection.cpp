@@ -44,6 +44,10 @@ ofPoint Projection::getProjection (Coordinate _coordinate) {
 Coordinate Projection::getCoordinate(ofPoint projected_point){
     Coordinate coordinate;
     switch (mode) {
+            
+        case PROJ_SCREEN:
+            coordinate = this->screen_inverse(projected_point);
+            break;
       case PROJ_EQUIRECTANGULAR:
              
       case PROJ_MERCATOR:
@@ -74,9 +78,18 @@ ofPoint Projection::mercator(Coordinate _coordinate) {
 ofPoint Projection::screen(Coordinate _coordinate) {
     ofPoint position;
     position.x = _coordinate.longitude * scale + translateX;
-    position.y = _coordinate.latitude * scale - translateY;
+    position.y = (_coordinate.latitude * scale - translateY) * (-1);
     position.z = 0;
     return position;
+};
+
+Coordinate Projection::screen_inverse(ofPoint position) {
+    Coordinate coordinate;
+      
+    coordinate.longitude = ((position.x) / 4096 ) *  180.0;  //extent/2
+    //coordinate.latitude = position.y * 180.0 / 9192.0 ;
+    coordinate.latitude = pvDegrees((atan(exp(PI * (position.y) / 4096)) - PI/4) * 2);
+    return coordinate;
 };
 
 Coordinate Projection::mercator_inverse(ofPoint position) {

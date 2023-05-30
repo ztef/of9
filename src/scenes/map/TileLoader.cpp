@@ -37,7 +37,8 @@
             queueUrls.pop();
             mutex.unlock();
 
-            tile = jsonLoader.loadTile(url, projection);
+            //tile = jsonLoader.loadTile(url, projection);
+            tile = mvtLoader.loadTile(url, projection);
             //tile->setPosition(0, 0, 0);
             map->tileReady(tile);
             

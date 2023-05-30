@@ -19,6 +19,8 @@ void ofApp::setup(){
     escena_circulo.setup();
     escena_esfera.setup();
     mapa.setup(1024,768);
+    
+    //ofEnableAlphaBlending();
    
 
 
@@ -27,30 +29,22 @@ void ofApp::setup(){
     shader.load("myshader.vert", "myshader.frag"); 
 
 
-    m.rotate(90,0,0,1);
+    //m.rotate(90,0,0,1);
 
-    
-     
-    
-   //mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/0/0/0.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-   // mapa.Load("arcgis0.json");
-   // mapa.Load("mtx.json");
-   // mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/0/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-   // mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/2/1/1.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
-   
-    
     
     
     // General graphics setup
+    
+    ofSetVerticalSync(true);
    
     ofBackground(0, 0, 0);
     ofSetFrameRate(60);
-    ofEnableDepthTest();
+    //ofEnableDepthTest();
     
     
     camera.setNearClip(0.001);
     camera.setFarClip(100000);
-    camera.move(0, 0, 100);
+    camera.move(0, 0, 7000);
    
     
     once = false;
@@ -127,6 +121,7 @@ void ofApp::draw(){
         mapa.draw();
         
         // SELECTOR BEGIN
+        
         FeatureCollectionNode* currentWorld = (FeatureCollectionNode*) mapa.tiles[0];
         FeatureCollectionNode* layer = (FeatureCollectionNode*) currentWorld->children.at(0);
         vector<FeatureNode *> elements = layer->children;
@@ -138,13 +133,14 @@ void ofApp::draw(){
         if (intersector.intersect(&elements, pos, intersection, intersectedElement) ){
             ofPushStyle();
             ofSetColor(255);
-            ofDrawSphere(intersection, 0.01 * zoom);
+            ofDrawSphere(intersection, 0.03 * zoom);
             ofPopStyle();
             mouse_picker_pos = intersection;
             
             mapa.setmarker(intersection);
         }
         
+        intersector.mousepicker.getRay().draw();
          //SELECTOR END
         
       
@@ -275,7 +271,7 @@ void ofApp::keyPressed(int key){
 }
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-  // mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/3/3/2.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
+  // //mapa.Load("https://tile.nextzen.org/tilezen/vector/v1/all/3/3/2.json?api_key=HjxoLw7IQJWSTo4lgErmIQ");
 }
 
 //--------------------------------------------------------------

@@ -38,6 +38,7 @@ public:
     ofPoint mercator(Coordinate _coordinate);
     ofPoint screen(Coordinate _coordinate);
     Coordinate mercator_inverse(ofPoint projected_point);
+    Coordinate screen_inverse(ofPoint position);
     
 
     ofPoint equirectangular(Coordinate _coordinate);
@@ -48,7 +49,7 @@ public:
     void setTranslate(float _transelateX, float _transelateY);
 
 private:
-    const float E_R = 6378.137; // Earth radius
+    const float E_R = 6378.137; // Radio de la Tierra
     projection_mode mode;
     float scale;
     float translateX;

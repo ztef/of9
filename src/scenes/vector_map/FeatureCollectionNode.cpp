@@ -46,54 +46,24 @@ void FeatureCollectionNode::customDraw() {
        // shader.end();
        
      
-    if(layerName == "buildingxs"){
+    if(layerName == "boundaries"){
         
      
        for (int i = 0; i < children.size(); i++) {
            
-           //ofPushMatrix();
-           //ofMultMatrix(children[i]->getLocalTransformMatrix());
+           //shader.begin();
            
-           //children[i]->transformGL();
-                children[i]->draw();
-           //children[i]->restoreTransformGL();
-           // ofSetColor(ofColor::yellow);
-           // ofSetLineWidth(1);
-            //ofDrawCircle(children[i]->getPosition(), 4);
-           // ofDrawCylinder(children[i]->getPosition(), 0.0001,  0.01);
-           //ofDrawCylinder(children[i]->getPosition(), 0.001,  0.01);
-           //
-           
-           //ofPopMatrix();
             
-           
-           /*OK
-           ofPushMatrix();
-                
-                ofMultMatrix(children[i]->getGlobalTransformMatrix());
-             
-                
-           
-                ofSetColor(ofColor::cyan);//TOP
-           //ofDrawCylinder(children[i]->getY(),children[i]->getZ(),children[i]->getX(),0.0001,  0.01);
-                ofDrawBox(children[i]->getX(),children[i]->getY(),children[i]->getZ(),0.0001, 0.0001, 0.01);
-           ofPopMatrix();
-           */
-           
-           
-           //ofPushMatrix();
-           //ofMultMatrix(children[i]->getGlobalTransformMatrix());
-           
-           //ofSetColor(ofColor::cyan);
-           //ofRotateXDeg(90);
-           //ofRotateYDeg(90);
-           //ofScale(0.1);
-           // ofDrawCylinder(children[i]->getY(),children[i]->getZ(),children[i]->getX(),0.0001,  0.1);
-           //ofDrawCylinder(children[i]->getGlobalPosition(),0.0001,  0.1);
-           
-           
-           //ofPopMatrix();
+          // shader.setUniform1f("thickness", 100);
 
+            
+          // shader.setUniform3f("lightDir", sin(ofGetElapsedTimef()/10), cos(ofGetElapsedTimef()/10), 0);
+            
+           children[i]->draw();
+          
+           //shader.end();
+                
+          
        }
         
         

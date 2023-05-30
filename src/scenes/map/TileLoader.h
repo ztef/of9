@@ -6,8 +6,10 @@
 #include "FeatureLeafNode.h"
 #include "FeatureCollectionNode.h"
 #include "JsonLoader.h"
+#include "MVTLoader.hpp"
 #include "Poco/Condition.h"
 #include "Projection.hpp"
+ 
 
  
 class Map;
@@ -32,6 +34,7 @@ class TileLoader: public ofThread{
 
     FeatureNode* tile;
     JsonLoader jsonLoader;
+    MVTLoader mvtLoader;
 
     string path;
     bool loading;
