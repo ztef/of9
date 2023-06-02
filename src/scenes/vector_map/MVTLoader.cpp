@@ -7,8 +7,14 @@
 
 #include "MVTLoader.hpp"
 
+
+ 
+
+
 MVTLoader::MVTLoader(){
-    tessellator = ofTessellator();
+       
+    tessellator = new ofTessellator();
+    
 }
 
  std::string MVTLoader::open_tile(std::string const& path) {
@@ -143,30 +149,30 @@ FeatureCollectionNode* MVTLoader::parseFeatureCollectionNode(mapbox::vector_tile
 FeatureNode* MVTLoader::parseNode(mapbox::vector_tile::feature feature) {
     
    auto const& feature_id = feature.getID();
-      if (feature_id.is<uint64_t>()) {
-          std::cout << "    id: " << feature_id.get<uint64_t>() << "\n";
-      } else {
-          std::cout << "    id: (no id set)\n";
-      }
-      mapbox::vector_tile::GeomType nodeType = feature.getType();
-      std::cout << "    type: " << int(feature.getType()) << "\n";
+     // if (feature_id.is<uint64_t>()) {
+     //     std::cout << "    id: " << feature_id.get<uint64_t>() << "\n";
+     // } else {
+     //     std::cout << "    id: (no id set)\n";
+     // }
+    mapbox::vector_tile::GeomType nodeType = feature.getType();
+     // std::cout << "    type: " << int(feature.getType()) << "\n";
       
-      auto props = feature.getProperties();
-      std::cout << "    Properties:\n";
-      for (auto const& prop : props) {
-          print_value printvisitor;
-          std::string value = mapbox::util::apply_visitor(printvisitor, prop.second);
-          std::cout << "      " << prop.first  << ": " << value << "\n";
-      }
+    auto props = feature.getProperties();
+     // std::cout << "    Properties:\n";
+     // for (auto const& prop : props) {
+     //     print_value printvisitor;
+     //     std::string value = mapbox::util::apply_visitor(printvisitor, prop.second);
+     //     std::cout << "      " << prop.first  << ": " << value << "\n";
+     // }
     
-      std::cout << "    Geometrias:\n";
+     //  std::cout << "    Geometrias:\n";
       mapbox::vector_tile::points_arrays_type geom = feature.getGeometries<mapbox::vector_tile::points_arrays_type>(1.0);
     
-          for (auto const& point_array : geom) {
-                   for (auto const& point : point_array) {
-                       std::clog << point.x << "," << point.y;
-                   }
-          }
+     //     for (auto const& point_array : geom) {
+     //              for (auto const& point : point_array) {
+     //                  std::clog << point.x << "," << point.y;
+     //              }
+     //     }
           std::clog << "\n";
     
           return parseFeatureNode(feature);
@@ -259,6 +265,7 @@ void MVTLoader::parsePolygonGeometry(mapbox::vector_tile::points_arrays_type geo
     
     vector<ofPolyline> polyLines;
     
+     
       
      int i=0;
      for (auto const& point_array : geom) {
@@ -267,13 +274,12 @@ void MVTLoader::parsePolygonGeometry(mapbox::vector_tile::points_arrays_type geo
                  *anchor = getCentroidFromPoints(verts);
              }
             polyLines.push_back(verts);
-            
          i++;
      }
     
-        
-      // meshToFill->addVertices(verts);
-     tessellator.tessellateToMesh(polyLines, OF_POLY_WINDING_ODD, *meshToFill, false);
+       
+      
+     tessellator->tessellateToMesh(polyLines, OF_POLY_WINDING_ODD, *meshToFill, false);
       
     
     // Add normals for the top surface
@@ -357,8 +363,8 @@ glm::vec3 MVTLoader::parsePointInProjectedCoords(std::int16_t x, std::int16_t y)
     
     Coordinate coord;
     
-    coord.longitude = x;
-    coord.latitude = y;
+    coord.longitude = x*1;
+    coord.latitude = y*1;
     
     
     ofPoint p  = projection->getProjection(coord);
@@ -390,6 +396,11 @@ bool MVTLoader::open(const std::string& filename)
     {
         return openLocal(filename);
     }
+}
+
+void MVTLoader::clear(){
+   // buffer = "";
+    
 }
 
 bool MVTLoader::openRemote(const std::string& filename)

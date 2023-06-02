@@ -12,6 +12,9 @@
         map = mapx;
     }
  
+    void TileLoader::clear(){
+        mvtLoader.clear();
+    }
 
     void TileLoader::start(){
         startThread();
@@ -38,6 +41,7 @@
             mutex.unlock();
 
             //tile = jsonLoader.loadTile(url, projection);
+            
             tile = mvtLoader.loadTile(url, projection);
             //tile->setPosition(0, 0, 0);
             map->tileReady(tile);

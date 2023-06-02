@@ -281,12 +281,19 @@ public:
         const auto value = get_varint<uint32_t>();
         m_tag = pbf_tag_type(value >> 3);
 
+        if(m_tag == 0){  //EOO
+        return false;
+        }
+        
         // tags 0 and 19000 to 19999 are not allowed as per
         // https://developers.google.com/protocol-buffers/docs/proto
         protozero_assert(((m_tag >     0 && m_tag < 19000) ||
                           (m_tag > 19999 && m_tag <= ((1 << 29) - 1))) && "tag out of range");
 
         m_wire_type = pbf_wire_type(value & 0x07);
+        
+         
+        
         switch (m_wire_type) {
             case pbf_wire_type::varint:
             case pbf_wire_type::fixed64:
@@ -294,7 +301,8 @@ public:
             case pbf_wire_type::fixed32:
                 break;
             default:
-                throw unknown_pbf_wire_type_exception();
+                    return false; //EOO
+                //throw unknown_pbf_wire_type_exception();
         }
 
         return true;

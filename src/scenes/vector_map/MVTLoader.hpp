@@ -35,16 +35,17 @@ public:
     glm::vec3 parsePointInProjectedCoords(std::int16_t x, std::int16_t y);
     ofVec3f getCentroidFromPoints(vector<glm::vec3> pts);
     
+    void clear();
     FeatureNode* getNodes();
     FeatureCollectionNode* rootNode;
     Projection* projection;
-    std::string buffer;
+    std::string buffer = std::string(5000000, ' ');
     mapbox::vector_tile::buffer tile;
     ofColor layerColor;
     float layerHeight;
     
     
-    ofTessellator tessellator;
+     ofTessellator* tessellator;
 };
 
 class print_value {

@@ -62,6 +62,8 @@ void Map::tileReady(FeatureNode* tile){
     
             newTile = true;
     
+    tileLoader.clear();
+    
 
     mutex.unlock();
 }
@@ -108,7 +110,8 @@ void Map::update(float _zoom){
      https://tile.nextzen.org/tilezen/vector-tiles-prod/20171221/0/0/0.zip?api_key=HjxoLw7IQJWSTo4lgErmIQ
      */
     
-    current_tile = {0,0,0};
+   //current_tile = {1,1,1};
+    
     if(loadedtiles.count(current_tile) == 0){
         loadedtiles[current_tile] = nullptr;
         stringstream url;
@@ -123,28 +126,28 @@ void Map::update(float _zoom){
 }
 
 int Map::calcTileZoom(float z){
-    if(z > 0.63){
+    if(z > 2000){
         return 0;
     }
-    if(z > 0.28){
+    if(z > 1500){
         return 1;
     }
-    if(z > 0.2){
+    if(z > 1000){
         return 2;
     }
-    if(z > 0.08){
+    if(z > 500){
         return 3;
     }
-    if(z > 0.07){
+    if(z > 250){
         return 4;
     }
-    if(z > 0.06){
+    if(z > 100){
         return 5;
     }
-    if(z > 0.05){
+    if(z > 80){
         return 6;
     }
-    if(z > 0.04){
+    if(z > 50){
         return 7;
     }
     if(z > 0.03){
@@ -185,14 +188,14 @@ void Map::draw(){
     for (; iter != endIter;) {
         tilefunctions::Tile tile = iter->first;
         FeatureNode* node = iter->second;
-        if (tile.z == tile_zoom ) {   // || (tile.z == 0)
+        if (tile.z == tile_zoom  ) {   // || (tile.z == 0)
             if(node != nullptr){
                     node->draw();
             } else {   // No ha sido cargado, dibuja el 0 (debe ser el anterior)
                 FeatureNode* node0;
                 node0 = loadedtiles[tilefunctions::Tile{0,0,0}];
                 if(node0 != nullptr){
-                    node0->draw();
+                   // node0->draw();
                 }
             }
         }

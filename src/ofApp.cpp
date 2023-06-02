@@ -39,12 +39,12 @@ void ofApp::setup(){
    
     ofBackground(0, 0, 0);
     ofSetFrameRate(60);
-    //ofEnableDepthTest();
+    ofEnableDepthTest();
     
-    
-    camera.setNearClip(0.001);
-    camera.setFarClip(100000);
-    camera.move(0, 0, 7000);
+    //camera.enableOrtho();
+   // camera.setNearClip(0.001);
+   // camera.setFarClip(8000);
+    camera.move(0, 0, 6000);
    
     
     once = false;
@@ -121,7 +121,7 @@ void ofApp::draw(){
         mapa.draw();
         
         // SELECTOR BEGIN
-        
+        /*
         FeatureCollectionNode* currentWorld = (FeatureCollectionNode*) mapa.tiles[0];
         FeatureCollectionNode* layer = (FeatureCollectionNode*) currentWorld->children.at(0);
         vector<FeatureNode *> elements = layer->children;
@@ -130,7 +130,7 @@ void ofApp::draw(){
         glm::vec3 intersection;
         FeatureLeafNode* intersectedElement;
         
-        if (intersector.intersect(&elements, pos, intersection, intersectedElement) ){
+        if (intersector.intersectNode(&elements, pos, intersection, intersectedElement) ){
             ofPushStyle();
             ofSetColor(255);
             ofDrawSphere(intersection, 0.03 * zoom);
@@ -141,7 +141,30 @@ void ofApp::draw(){
         }
         
         intersector.mousepicker.getRay().draw();
+         */
          //SELECTOR END
+        
+         //SELECTOR PLANE BEGIN
+        
+         
+            intersector.mouseMoved(&camera, ofGetMouseX(), ofGetMouseY());
+            
+            ofxraycaster::Plane plano(glm::vec3(0,0,0), glm::vec3(0,0,1));
+        
+        
+        if (intersector.intersectPlane(plano, intersection) ){
+            ofPushStyle();
+            ofSetColor(255);
+            ofDrawSphere(intersection, 0.015 * zoom);
+            ofPopStyle();
+            mouse_picker_pos = intersection;
+            
+            mapa.setmarker(intersection);
+        }
+        
+        //intersector.mousepicker.getRay().draw();
+        
+        // SELECTOR PLANE END
         
       
     }
@@ -227,14 +250,6 @@ void ofApp::draw(){
     ofDrawBitmapString("ZOOM: " + ofToString(zoom), 20,80);
     ofDrawBitmapString("TILE ZOOM: " + ofToString(mapa.tile_zoom), 20,95);
     
-    
-    //glm::vec3 worldXYZ = camera.screenToWorld(glm::vec3(ofGetMouseX(),ofGetMouseY(),0));
-    
-    //ofDrawBitmapString("WORLD XYZ: " + ofToString(worldXYZ), 20,110);
-    
-    
-    //mercatortile::LngLat rlnglat = mercatortile::lnglat(worldXYZ.x ,worldXYZ.y);
-    
     ofDrawBitmapString("MOUSE X: " + ofToString(ofGetMouseX()), 20,110);
     ofDrawBitmapString("MOUSE Y: " + ofToString(ofGetMouseY()), 20,125);
     
@@ -249,6 +264,12 @@ void ofApp::draw(){
     
     ofDrawBitmapString("TILES LOADED : " + ofToString(mapa.loadedtiles.size()), 20,200);
   
+    ofVec3f stw = camera.screenToWorld(ofVec3f(ofGetMouseX(),ofGetMouseY(),0.0));
+    ofDrawBitmapString("MOUSE X-World: " + ofToString(stw.x), 20,215);
+    ofDrawBitmapString("MOUSE Y-World: " + ofToString(stw.y), 20,230);
+    ofDrawBitmapString("MOUSE Z-World: " + ofToString(stw.z), 20,245);
+    
+    
     /*
      ofSetColor(255);
     ofSetLineWidth(2);
@@ -266,7 +287,7 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
    //  cout << "FeatureLeafNode at: " + ofToString(getPosition()) << endl;
-  
+ 
    
 }
 //--------------------------------------------------------------
@@ -279,10 +300,8 @@ void ofApp::mouseMoved(int x, int y ){
      if(sceneSelect == ESCENA_MAPA_VECTORIAL){
             
          
-         intersector.mouseMoved(&camera, x, y);
-        // ofVec3f screenToWorld = camera.screenToWorld(ofVec3f(ofGetMouseX(),ofGetMouseY(),0.0));
-          
-        // mousepicker.getRay().setup(camera.getPosition(),screenToWorld - camera.getPosition());
+       
+         
      }
 }
 
@@ -293,7 +312,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+   
 }
 
 //--------------------------------------------------------------

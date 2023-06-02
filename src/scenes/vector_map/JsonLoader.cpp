@@ -12,7 +12,7 @@
 
 
 JsonLoader::JsonLoader() {
-    tessellator = ofTessellator();
+    //tessellator = ofTessellator();
     cout << "jsonLoader Creado";
 }
 
@@ -400,7 +400,7 @@ void JsonLoader::parsePolygonGeometry(ofxJSONElement polygonJson, ofxJSONElement
     
         
        
-      tessellator.tessellateToMesh(polyLines, OF_POLY_WINDING_ODD, *meshToFill, false);
+      //tessellator.tessellateToMesh(polyLines, OF_POLY_WINDING_ODD, *meshToFill, false);
       
     
     // Add normals for the top surface

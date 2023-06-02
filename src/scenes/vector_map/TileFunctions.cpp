@@ -125,6 +125,7 @@ Tile tile(const double &lng, const double &lat, const int &zoom)
 {
     Tile out_tile;
     out_tile.x = int(floor((lng + 180.0) / 360.0 * pow(2.0, zoom)));
+    if(out_tile.x<0){out_tile.x = 0;};
 
     double lat_ = M_PI * lat / 180;
     out_tile.y = int(floor(
@@ -132,7 +133,11 @@ Tile tile(const double &lng, const double &lat, const int &zoom)
                    tan(lat_) + (1.0 / cos(lat_))) /
                    M_PI) /
         2.0 * pow(2.0, zoom)));
+    if(out_tile.y<0){out_tile.y = 0;};
+    
     out_tile.z = zoom;
+    
+    
 
     return out_tile;
 };

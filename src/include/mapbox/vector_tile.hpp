@@ -398,7 +398,13 @@ inline bool buffer::isLayer(const std::string& name) const {
     if (layer_it == layers.end()) {
         return false;
     }
-    return true;
+    protozero::pbf_reader layer_pbf(layer_it->second);//if(layer_it->second.m)
+    if(layer_pbf.next()){
+        return true;
+    } else {
+        return false;
+    }
+    return false;
 }
 
 inline layer buffer::getLayer(const std::string& name) const {

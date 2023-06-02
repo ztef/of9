@@ -83,7 +83,7 @@ public:
     
     
 private:
-    ofTessellator tessellator;
+   // ofTessellator tessellator;
     ofColor layerColor;
     
     ofVec3f getCentroidFromPoints(vector<glm::vec3> pts);

@@ -16,7 +16,7 @@ Intersector::~Intersector(){
 }
 
 
-bool Intersector::intersect(vector<FeatureNode*> * elements, unsigned int &indexIntersectedPrimitive,glm::vec3 &intersection, FeatureLeafNode* intersectedElement){
+bool Intersector::intersectNode(vector<FeatureNode*> * elements, unsigned int &indexIntersectedPrimitive,glm::vec3 &intersection, FeatureLeafNode* intersectedElement){
     
     distanceToClosestIntersection = numeric_limits<float>::max();
     found = false;
@@ -50,12 +50,49 @@ bool Intersector::intersect(vector<FeatureNode*> * elements, unsigned int &index
     return found;
 }
 
+bool Intersector::intersectPlane(ofxraycaster::Plane  plane, glm::vec3 &intersection){
+    
+     
+              
+    bool intersects = mousepicker.getRay().intersectsPlane(plane, distance);
+       
+    
+    if (intersects) {
+       
+        intersection = mousepicker.getRay().getOrigin() +
+                            mousepicker.getRay().getDirection() *
+                            distance;
+        
+    }
+    
+    
+    
+    return intersects;
+}
+
 void Intersector::mouseMoved(ofCamera* camera, int x, int y){
-    ofVec3f cameraPosInWorld = (camera->getPosition());
-    ofVec3f mousePosInWorld = camera->screenToWorld(ofVec3f(x,y,0.1));
+    
+     glm::vec3 const camera_origin(0, 0, 7000);
+     glm::vec3 const delta_camera(camera->getPosition() - camera_origin);
+     glm::vec3 const camera_offset(delta_camera.x, delta_camera.y, 0.0f);
+     
+    float const zoom_factor_from_default = camera->getPosition().z / 7000;
+    
+    
+    glm::vec3 cp =camera->getPosition();
+     
+    
+    //camera->getImagePlaneDistance()
+    ofVec3f mouse = ofVec3f(x,y,0);
+   // mouse.x *= zoom_factor_from_default;
+   // mouse.y *= zoom_factor_from_default;
+    
+    //mouse += camera_offset;
+    ofVec3f screenToWorld = camera->screenToWorld(mouse);
+    mousepicker.getRay().setup(cp, screenToWorld - cp);
+
+    
+    
     
    
-         
-    
-    mousepicker.getRay().setup(cameraPosInWorld, mousePosInWorld - cameraPosInWorld); //
 }

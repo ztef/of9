@@ -22,7 +22,8 @@ class Intersector {
     void setup();
     void update();
     void draw();
-    bool intersect(vector<FeatureNode*> * elements, unsigned int &indexIntersectedPrimitive,glm::vec3 &intersection, FeatureLeafNode* intersectedElement);
+    bool intersectNode(vector<FeatureNode*> * elements, unsigned int &indexIntersectedPrimitive,glm::vec3 &intersection, FeatureLeafNode* intersectedElement);
+    bool intersectPlane(ofxraycaster::Plane  plane, glm::vec3 &intersection);
     
     void keyPressed(int key);
     void keyReleased(int key);

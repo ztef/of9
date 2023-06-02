@@ -29,11 +29,13 @@ class TileLoader: public ofThread{
     void setCallBack(Map* map);
     
     void load(string tilePath);
+    
+    void clear();
 
     void threadedFunction();
 
     FeatureNode* tile;
-    JsonLoader jsonLoader;
+    //JsonLoader jsonLoader;
     MVTLoader mvtLoader;
 
     string path;

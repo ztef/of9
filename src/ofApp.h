@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxButtons.h"
+#include "ofxGrabCam.hpp"
 
 //#include "FeatureNode.h"
 #include "FeatureLeafNode.h"
@@ -77,7 +78,7 @@ public:
     ofVec3f mouse_picker_pos;
     
     Intersector intersector;
-    
+    glm::vec3 intersection;
     
     
 };
