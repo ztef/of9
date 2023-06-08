@@ -5,14 +5,23 @@
 #include "ofMain.h"
 #include "FeatureLeafNode.h"
 #include "FeatureCollectionNode.h"
-#include "JsonLoader.h"
+
 #include "MVTLoader.hpp"
 #include "Poco/Condition.h"
 #include "Projection.hpp"
+#include "TileFunctions.hpp"
  
 
  
 class Map;
+
+struct tile2queue {
+  string url;
+  tilefunctions::Tile pos;
+};
+
+
+
 
 class TileLoader: public ofThread{
     
@@ -28,7 +37,7 @@ class TileLoader: public ofThread{
     
     void setCallBack(Map* map);
     
-    void load(string tilePath);
+    void load(string tilePath, tilefunctions::Tile pos);
     
     void clear();
 
@@ -42,11 +51,13 @@ class TileLoader: public ofThread{
     bool loading;
     bool loaded;
     
-    queue<string> queueUrls;
+    queue<tile2queue> queueUrls;
     Poco::Condition condition;
     
     ofMutex mutex;
     Map* map;
+    
+    
     
     Projection* projection;
        

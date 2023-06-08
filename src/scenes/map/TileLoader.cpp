@@ -13,19 +13,20 @@
     }
  
     void TileLoader::clear(){
-        mvtLoader.clear();
+        
     }
 
     void TileLoader::start(){
         startThread();
     }
 
-    void TileLoader::load(string url){
+    void TileLoader::load(string url, tilefunctions::Tile pos){
          mutex.lock();
-               queueUrls.push(url);
+        tile2queue tq = {url,pos};
+        queueUrls.push(tq);
                condition.signal();
          mutex.unlock();
-        cout << "Iniciando thread";
+       // cout << "Iniciando thread";
         
     }
 
@@ -36,16 +37,16 @@
             if (queueUrls.empty()){
                 condition.wait(mutex);
             }
-            string url = queueUrls.front();
+            tile2queue url = queueUrls.front();
             queueUrls.pop();
             mutex.unlock();
 
             //tile = jsonLoader.loadTile(url, projection);
             
-            tile = mvtLoader.loadTile(url, projection);
-            //tile->setPosition(0, 0, 0);
+            tile = mvtLoader.loadTile(url.url, projection, url.pos);
+            //tile->setPosition(0,0,0);
             map->tileReady(tile);
-            
+           
             
         }
         

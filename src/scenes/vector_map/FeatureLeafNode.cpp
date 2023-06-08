@@ -9,9 +9,10 @@
 #include "FeatureLeafNode.h"
 
 
-FeatureLeafNode::FeatureLeafNode(ofMesh newGeometry, string nodetype) {
+FeatureLeafNode::FeatureLeafNode(vector<ofPolyline> _verts,  string nodetype) {
     
-    geometry = newGeometry;
+    verts = _verts;
+    //geometry = newGeometry;
     material = ofMaterial();
     material.setDiffuseColor(ofColor(50, 0, 0));
     material.setSpecularColor(ofColor(255, 0, 0));
@@ -20,7 +21,7 @@ FeatureLeafNode::FeatureLeafNode(ofMesh newGeometry, string nodetype) {
 
     
 
-    setPosition(geometry.getCentroid());
+  //  setPosition(geometry.getCentroid());
     
 }
 
@@ -29,7 +30,7 @@ FeatureLeafNode::FeatureLeafNode(ofMatrix4x4 newTransform) {
     
 
     //setTransformMatrix(newTransform);
-    geometry = ofMesh();
+    //geometry = ofMesh();
     material = ofMaterial();
     idString = "";
     
@@ -40,7 +41,7 @@ void FeatureLeafNode::customDraw() {
     
    // string mt = Map::mapType;
     
-    
+
    // material.begin();
     if(type == "Point"){
       ofDrawBox(0.1, 0.1, 0.1);
@@ -48,27 +49,17 @@ void FeatureLeafNode::customDraw() {
         ofColor(255,0,0);
               ofTranslate(anchor);
               ofRotateXDeg(90);
-              ofDrawCylinder(10, 2000);
+              ofDrawCylinder(10 / (zoom+1), 100 / (zoom+1));
         ofPopMatrix();
+    } else {
+       
+        geometry.draw();
+       
     }
     
-    if(type == "Line"){
+    
         
-         
-             
-        //VShaders::lineShader.begin();
-        //ofColor(255,0,0);
-        //VShaders::lineShader.setUniform1f("thickness", 10);
-        //VShaders::lineShader.setUniform3f("lightDir", sin(ofGetElapsedTimef()/10), cos(ofGetElapsedTimef()/10), 0);
-        //ofDrawLine(0,0,0, 1000,1000,0);
-        geometry.draw();
-        //VShaders::lineShader.end();
-         
-        
-        
-    } else {
-        geometry.draw();
-    }
+    
         
     
      

@@ -16,7 +16,9 @@ void Projection::setMode(projection_mode _mode) {
     mode = _mode;
 };
 
-ofPoint Projection::getProjection (Coordinate _coordinate) {
+ofPoint Projection::getProjection (Coordinate _coordinate, tilefunctions::Tile tilepos) {
+  tile_position = tilepos;
+    
   ofPoint position;
   switch (mode) {
     case PROJ_SCREEN:
@@ -75,13 +77,41 @@ ofPoint Projection::mercator(Coordinate _coordinate) {
 };
 
 
+
 ofPoint Projection::screen(Coordinate _coordinate) {
     ofPoint position;
-    position.x = _coordinate.longitude * scale + translateX;
-    position.y = (_coordinate.latitude * scale - translateY) * (-1);
+    float localScale;
+    float localX;
+    float localY;
+    float localZ;
+    
+    localZ = tile_position.z;
+     
+    float factor;
+    
+    factor = pow(2,localZ);
+    
+    float extent = 8192;
+    float f = 1;
+    if(localZ >= 3){
+        f = 2;
+    }
+    
+    
+    
+    localScale = (scale / factor) * f;
+    localX = translateX  + tile_position.x * (extent/factor);
+    localY = translateY  - tile_position.y * (extent/factor);
+    
+    position.x = _coordinate.longitude * localScale + localX;
+    position.y = (_coordinate.latitude * localScale - localY) * (-1);
     position.z = 0;
     return position;
 };
+ 
+
+
+
 
 Coordinate Projection::screen_inverse(ofPoint position) {
     Coordinate coordinate;

@@ -17,8 +17,8 @@ void FeatureNode::customDraw() {
 }
 
 void FeatureNode::draw() {
-   // ofPushMatrix();
-   // ofMultMatrix(getLocalTransformMatrix());
+    //ofPushMatrix();
+    //ofMultMatrix(getLocalTransformMatrix());
     
     customDraw();
     

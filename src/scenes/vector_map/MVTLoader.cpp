@@ -28,8 +28,10 @@ MVTLoader::MVTLoader(){
      return message;
  }
 
-FeatureNode* MVTLoader::loadTile(std::string fileName, Projection* _p){
+FeatureNode* MVTLoader::loadTile(std::string fileName, Projection* _p, tilefunctions::Tile pos){
     projection = _p;
+    position = pos;
+    
     if(open(fileName)){
         // tile esta cargado con los datos.
         
@@ -100,15 +102,15 @@ FeatureNode* MVTLoader::getNodes() {
     };
     
     for (int i = 0; i < 9; i++) {
-        if(tile.isLayer(layerNames[i])){
+        if(tile->isLayer(layerNames[i])){
             layerColor = layerColors[i];
             layerHeight = layerHeights[i];
             
-            FeatureCollectionNode* newLayer = parseFeatureCollectionNode(tile.getLayer(layerNames[i]));
+            FeatureCollectionNode* newLayer = parseFeatureCollectionNode(tile->getLayer(layerNames[i]));
 
             if(newLayer->children.size()>0){
 
-                newLayer->move(0, 0, layerHeights[i]);
+                //newLayer->move(0, 0, layerHeights[i]);
                 newLayer->layerColor = layerColor;
                 newLayer->layerName = layerNames[i];
                 layers.push_back(newLayer);
@@ -119,23 +121,100 @@ FeatureNode* MVTLoader::getNodes() {
     
     rootNode = new FeatureCollectionNode(layers);
     
+    ofVec3f global_anchor;
+    int global_children = rootNode->children.size();
+    
+    for(FeatureNode* nodo:rootNode->children){
+        if(nodo->nodeType == "collection"){
+            FeatureCollectionNode* fcn = (FeatureCollectionNode*)nodo;
+            layerColor = fcn->layerColor;
+            ofVec3f anchor;
+            int childrenSize = fcn->children.size();
+            for(auto childx : fcn->children){
+                FeatureLeafNode* leaf = (FeatureLeafNode*)childx;
+                leaf->zoom = position.z; // debe estar en el padre
+                if(leaf->nodeType == "Point"){
+                    leaf->anchor = parsePointInProjectedCoords(leaf->verts.at(0).getVertices().at(0).x, leaf->verts.at(0).getVertices().at(0).y);
+                                 
+                                  leaf->geometry.addVertex(glm::vec3(0, 0, 0));
+                                  leaf->geometry.setMode(OF_PRIMITIVE_POINTS);
+                                  leaf->geometry.setupIndicesAuto();
+                    
+                } else if(leaf->nodeType == "Line"){
+                    
+                    leaf->geometry.setMode(OF_PRIMITIVE_LINE_STRIP);
+
+                    
+                         for(auto poly : leaf->verts){
+                             for(auto p: poly){
+                                 leaf->geometry.addColor(layerColor);
+                                 leaf->geometry.addVertex(p);
+                             }
+                         }
+                         
+                         leaf->geometry.setupIndicesAuto();
+                    
+                            for (int i = 0; i < leaf->geometry.getNumVertices(); i++) {
+                                leaf->geometry.addNormal(glm::vec3(0, 0, 1));
+                            }
+                        
+                         leaf->anchor = leaf->geometry.getCentroid();
+                }
+                 else if (leaf->nodeType == "Polygon"){
+                        leaf->geometry.setMode(OF_PRIMITIVE_TRIANGLES);
+                        ofMesh* m = new ofMesh();
+                        tessellator->tessellateToMesh(leaf->verts, OF_POLY_WINDING_ODD, *m, false);
+                        
+                    
+                    
+                        leaf->anchor = leaf->verts.at(0).getCentroid2D();
+                     
+                        leaf->geometry.append(*m);
+                       
+                       // Add normals for the top surface
+                     for (int i = 0; i < leaf->geometry.getNumVertices(); i++) {
+                         leaf->geometry.addNormal(ofVec3f(0, 0, 1));
+                       }
+                     
+                } else {
+                    cout << "error" <<endl;
+                }
+                leaf->geometry.setColorForIndices(0, leaf->geometry.getNumIndices(), layerColor);
+                leaf->setPosition(leaf->geometry.getCentroid());
+            
+                anchor += leaf->anchor / childrenSize;
+            }
+            nodo->anchor = anchor;
+            nodo->setPosition(nodo->anchor);
+            
+            global_anchor += nodo->anchor / global_children;
+        }
+    }
+    
+    rootNode->anchor = global_anchor;
+    rootNode->setGlobalPosition(rootNode->anchor);
+    
     return rootNode;
 }
 
 
 FeatureCollectionNode* MVTLoader::parseFeatureCollectionNode(mapbox::vector_tile::layer  layer) {
     
-    //ofxJSONElement features = collectionJson["features"];
+    
     std::size_t feature_count = layer.featureCount();
+    auto extent = layer.getExtent();
+    auto version = layer.getVersion();
     
     vector<FeatureNode*> featureNodes;
     
     for (int i = 0; i < feature_count; i++) {
         auto const feature = mapbox::vector_tile::feature(layer.getFeature(i), layer);
         featureNodes.push_back(parseNode(feature));
+        
     }
     
     FeatureCollectionNode* newFeatureCollection = new FeatureCollectionNode(featureNodes);
+    newFeatureCollection->nodeType = "collection";
     
     // aqui
     newFeatureCollection->layerColor =ofFloatColor::deepSkyBlue;
@@ -149,113 +228,73 @@ FeatureCollectionNode* MVTLoader::parseFeatureCollectionNode(mapbox::vector_tile
 FeatureNode* MVTLoader::parseNode(mapbox::vector_tile::feature feature) {
     
    auto const& feature_id = feature.getID();
-     // if (feature_id.is<uint64_t>()) {
-     //     std::cout << "    id: " << feature_id.get<uint64_t>() << "\n";
-     // } else {
-     //     std::cout << "    id: (no id set)\n";
-     // }
+    
     mapbox::vector_tile::GeomType nodeType = feature.getType();
-     // std::cout << "    type: " << int(feature.getType()) << "\n";
       
     auto props = feature.getProperties();
-     // std::cout << "    Properties:\n";
-     // for (auto const& prop : props) {
-     //     print_value printvisitor;
-     //     std::string value = mapbox::util::apply_visitor(printvisitor, prop.second);
-     //     std::cout << "      " << prop.first  << ": " << value << "\n";
-     // }
     
-     //  std::cout << "    Geometrias:\n";
-      mapbox::vector_tile::points_arrays_type geom = feature.getGeometries<mapbox::vector_tile::points_arrays_type>(1.0);
+    mapbox::vector_tile::points_arrays_type geom = feature.getGeometries<mapbox::vector_tile::points_arrays_type>(1.0);
     
-     //     for (auto const& point_array : geom) {
-     //              for (auto const& point : point_array) {
-     //                  std::clog << point.x << "," << point.y;
-     //              }
-     //     }
-          std::clog << "\n";
+    return parseFeatureNode(feature);
     
-          return parseFeatureNode(feature);
-    
-    /*
-    if(nodeType == mapbox::vector_tile::UNKNOWN) {
-           return parseFeatureNode(nodeJson);
-      } else if (nodeType == mapbox::vector_tile::UN) {
-          return parseFeatureCollectionNode(nodeJson);
-      } else {
-          ofLog(OF_LOG_WARNING, "Couldn't match Feature type; regresando nodo vacio");
-          return new FeatureNode();
-      }
-    */
     
 }
 
 FeatureNode* MVTLoader::parseFeatureNode(mapbox::vector_tile::feature feature) {
     
-    //ofxJSONElement coords = featureJson["geometry"]["coordinates"];
-    //ofxJSONElement props = featureJson["properties"];
-    
+   
     mapbox::vector_tile::points_arrays_type geom = feature.getGeometries<mapbox::vector_tile::points_arrays_type>(1.0);
     auto props = feature.getProperties();
     
     
-    
-    ofMesh newMesh = ofMesh();
+    vector<ofPolyline> verts;
+    ofMesh newMesh;
     
     glm::vec3 anchor;
     
-    //std::string type = featureJson["geometry"]["type"].asString();
+   
     mapbox::vector_tile::GeomType type = feature.getType();
     
     string typeString = "";
     
     if(type == mapbox::vector_tile::POINT) {
-        cout << "punto";
+        
         typeString = "Point";
-        
-            
-        
-        anchor = parsePointInProjectedCoords(geom[0][0].x,geom[0][0].y);
-              
-               newMesh.addVertex(glm::vec3(0, 0, 0));
-               newMesh.setMode(OF_PRIMITIVE_POINTS);
-               newMesh.setupIndicesAuto();
-        
-        
+        ofPolyline p;
+        p.addVertex(geom[0][0].x,geom[0][0].y,0);
+        verts.push_back(p);
         
     } else if (type == mapbox::vector_tile::LINESTRING){
-        cout << "linea";
+        
         typeString = "Line";
         
-        parseLineGeometry(geom, props, &newMesh, &anchor);
-        anchor = newMesh.getCentroid();
+        parseLineGeometry(geom, props, &verts, &newMesh, &anchor);
+       //anchor = newMesh.getCentroid();
         
         
     } else if (type == mapbox::vector_tile::POLYGON){
             typeString = "Polygon";
-            newMesh.setMode(OF_PRIMITIVE_TRIANGLES);
-            parsePolygonGeometry(geom, props, &newMesh, &anchor, false);
+          
+            parsePolygonGeometry(geom, props, &verts, &newMesh, &anchor, false);
         
     } else {
         
     }
     
-    newMesh.setColorForIndices(0, newMesh.getNumIndices(), layerColor);
+   
     
-    FeatureLeafNode* newNode = new FeatureLeafNode(newMesh, typeString);
-    /*
-    newNode->idString = featureJson["id"].asString();
-    newNode->level = featureJson["properties"]["level"].asInt();
-    newNode->name = featureJson["properties"]["name"].asString();
-    */
+    FeatureLeafNode* newNode = new FeatureLeafNode(verts,  typeString);
+    newNode->nodeType = typeString;
+    //AQUI
+    //newNode->anchor = anchor;
     
-     newNode->anchor = anchor;
+   
     
     return newNode;
     
 }
 
-void MVTLoader::parsePolygonGeometry(mapbox::vector_tile::points_arrays_type geom, mapbox::vector_tile::feature::properties_type props, ofMesh *meshToFill, glm::vec3 *anchor, bool multi) {
+void MVTLoader::parsePolygonGeometry(mapbox::vector_tile::points_arrays_type geom, mapbox::vector_tile::feature::properties_type props,vector<ofPolyline>* _polyLines, ofMesh *meshToFill, glm::vec3 *anchor, bool multi) {
     
     float height = 0;
     float minHeight = 0;
@@ -263,89 +302,81 @@ void MVTLoader::parsePolygonGeometry(mapbox::vector_tile::points_arrays_type geo
     string kind = "";
     
     
-    vector<ofPolyline> polyLines;
-    
-     
-      
      int i=0;
      for (auto const& point_array : geom) {
+          
+    
              vector<glm::vec3> verts = parsePointArrayInProjectedCoords(point_array);
-             if (i == 0) {
-                 *anchor = getCentroidFromPoints(verts);
-             }
-            polyLines.push_back(verts);
+           //  if (i == 0) {
+            //     *anchor = getCentroidFromPoints(verts);
+           //  }
+         
+        
+         _polyLines->push_back(verts);
+         
          i++;
      }
     
-       
+     // Manual essellate the shape
       
-     tessellator->tessellateToMesh(polyLines, OF_POLY_WINDING_ODD, *meshToFill, false);
-      
-    
-    // Add normals for the top surface
-    for (int i = 0; i < meshToFill->getNumVertices(); i++) {
-        meshToFill->addNormal(ofVec3f(0, 0, 1));
-    }
-    
-    if (height != 0) {
-        
-        
-        // Extrude outermost (first) polyLine down to minHeight
-        vector<glm::vec3> outlineVerts = polyLines[0].getVertices();
-        
-        for (int i = 0; i < outlineVerts.size() - 1; i++) {
-            
-            int nV = meshToFill->getNumVertices();
-            
-            //glm::vec3 norm = (meshToFill->getNormals()[i]).crossed(outlineVerts[i+1] - outlineVerts[i]);
-            glm::vec3 norm = glm::cross(meshToFill->getNormals()[i], outlineVerts[i+1] - outlineVerts[i]);
+     /*
+      for (const auto& polyline : polyLines) {
+         const vector<glm::vec3>& vertices = polyline.getVertices();
+         const int numVertices = vertices.size();
 
-            meshToFill->addVertex(outlineVerts[i]);
-            meshToFill->addNormal(norm);
-            meshToFill->addVertex(outlineVerts[i+1]);
-            meshToFill->addNormal(norm);
-            meshToFill->addVertex(ofVec3f(outlineVerts[i].x, outlineVerts[i].y, minHeight));
-            meshToFill->addNormal(norm);
-            meshToFill->addTriangle(nV, nV + 1, nV + 2);
-            meshToFill->addVertex(ofVec3f(outlineVerts[i+1].x, outlineVerts[i+1].y, minHeight));
-            meshToFill->addNormal(norm);
-            meshToFill->addTriangle(nV + 1, nV + 3, nV + 2);
-            
-        }
-
-    }
+         // Create triangles from the vertices
+         for (int i = 1; i < numVertices - 1; ++i) {
+             meshToFill->addVertex(vertices[0]);
+             meshToFill->addVertex(vertices[i]);
+             meshToFill->addVertex(vertices[i + 1]);
+             
+             meshToFill->addColor(ofColor(layerColor));
+             meshToFill->addColor(ofColor(layerColor));
+             meshToFill->addColor(ofColor(layerColor));
+         }
+     }
+      */
+     
+   
+   
 
 }
 
+ofPath MVTLoader::polysToPath(vector<ofPolyline> polylines) {
+  ofPath path;
+  for(int outline = 0; outline < polylines.size(); ++outline) {
+        for (int i = 0; i < polylines[outline].getVertices().size(); i++){
+            if ( i == 0 )
+                path.moveTo(polylines[outline].getVertices()[i].x,polylines[outline].getVertices()[i].y);
+            else
+                path.lineTo(polylines[outline].getVertices()[i].x,polylines[outline].getVertices()[i].y);
+        }
+        path.close();
+    }
+    return path;
+}
 
-void MVTLoader::parseLineGeometry(mapbox::vector_tile::points_arrays_type geom, mapbox::vector_tile::feature::properties_type props, ofMesh* meshToFill, glm::vec3* anchor) {
+void MVTLoader::parseLineGeometry(mapbox::vector_tile::points_arrays_type geom, mapbox::vector_tile::feature::properties_type props, vector<ofPolyline>* vertsToFill, ofMesh* meshToFill, glm::vec3* anchor) {
     
-   
-    meshToFill->setMode(OF_PRIMITIVE_LINE_STRIP);
 
      int i=0;
      for (auto const& point_array : geom) {
              vector<glm::vec3> verts = parsePointArrayInProjectedCoords(point_array);
-             if (i == 0) {
-                 *anchor = getCentroidFromPoints(verts);
-             }
-             //meshToFill->addVertices(verts);
+          //   if (i == 0) {
+          //       *anchor = getCentroidFromPoints(verts);
+          //   }
+            
              
          for(auto const& vert : verts){
-             meshToFill->addColor(layerColor);
-             meshToFill->addVertex(vert);
+             ofPolyline p;
+             p.addVertex(vert);
+             vertsToFill->push_back(p);
          }
          
          
             
          i++;
      }
-     
-    meshToFill->setupIndicesAuto();
-    
-    for (int i = 0; i < meshToFill->getNumVertices(); i++) {
-        meshToFill->addNormal(glm::vec3(0, 0, 1));
-    }
     
 }
 
@@ -367,7 +398,7 @@ glm::vec3 MVTLoader::parsePointInProjectedCoords(std::int16_t x, std::int16_t y)
     coord.latitude = y*1;
     
     
-    ofPoint p  = projection->getProjection(coord);
+    ofPoint p  = projection->getProjection(coord, position);
      
     
     
@@ -405,19 +436,20 @@ void MVTLoader::clear(){
 
 bool MVTLoader::openRemote(const std::string& filename)
 {
-    
+    tile = new mapbox::vector_tile::buffer();
     buffer = ofLoadURL(filename).data.getText();
-
-    tile.parse(buffer);
-    
+    tile->setBuffer(buffer);
+    tile->parse();
       
     return true;
 }
 
 bool MVTLoader::openLocal(const std::string& filename)
 {
+    tile = new mapbox::vector_tile::buffer();
     buffer = open_tile(filename);
-    tile.parse(buffer);
+    tile->setBuffer(buffer);
+    tile->parse();
 
     /*
     std::cout << "Decoding tile: \n";

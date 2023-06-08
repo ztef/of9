@@ -3,4 +3,5 @@ ofxJSON
 ofxPoco
 ofxXmlSettings
 ofxRaycaster
+ofxGrabCam
 

@@ -17,7 +17,7 @@ void Map::setup(double _width, double _height){
     //projection.setMode(PROJ_SPHERICAL);
     projection.setScale(1);
     projection.setTranslate(-4096,  4096); // Max extent / 2
-    
+     
     tileLoader.setProjection(&projection);
     
     //fbo.allocate(1024, 768, GL_RGBA);
@@ -49,8 +49,8 @@ void Map::setup(double _width, double _height){
 }
 
 
-void Map::Load(string url){
-    tileLoader.load(url);
+void Map::Load(string url,tilefunctions::Tile position){
+    tileLoader.load(url, position);
 }
 
 void Map::tileReady(FeatureNode* tile){
@@ -110,7 +110,7 @@ void Map::update(float _zoom){
      https://tile.nextzen.org/tilezen/vector-tiles-prod/20171221/0/0/0.zip?api_key=HjxoLw7IQJWSTo4lgErmIQ
      */
     
-   //current_tile = {1,1,1};
+    //current_tile = {0,0,0};
     
     if(loadedtiles.count(current_tile) == 0){
         loadedtiles[current_tile] = nullptr;
@@ -118,7 +118,7 @@ void Map::update(float _zoom){
         url << "https://tile.nextzen.org/tilezen/vector/v1/all/" << current_tile.z << "/" << current_tile.x << "/" << current_tile.y << ".mvt?api_key=HjxoLw7IQJWSTo4lgErmIQ";
         target_url = url.str();
         
-        Load(target_url);
+        Load(target_url,current_tile);
     }
     
    
@@ -132,6 +132,7 @@ int Map::calcTileZoom(float z){
     if(z > 1500){
         return 1;
     }
+    
     if(z > 1000){
         return 2;
     }
@@ -159,7 +160,8 @@ int Map::calcTileZoom(float z){
     if(z > 0.01){
         return 10;
     }
-    return 11;
+     
+    return 10;
 }
     
 
@@ -190,12 +192,13 @@ void Map::draw(){
         FeatureNode* node = iter->second;
         if (tile.z == tile_zoom  ) {   // || (tile.z == 0)
             if(node != nullptr){
+                
                     node->draw();
             } else {   // No ha sido cargado, dibuja el 0 (debe ser el anterior)
                 FeatureNode* node0;
                 node0 = loadedtiles[tilefunctions::Tile{0,0,0}];
                 if(node0 != nullptr){
-                   // node0->draw();
+                    node0->draw();
                 }
             }
         }

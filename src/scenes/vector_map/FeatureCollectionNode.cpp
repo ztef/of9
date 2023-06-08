@@ -10,18 +10,22 @@
 
 FeatureCollectionNode::FeatureCollectionNode(vector<FeatureNode*> newChildren) {
     
-    ofVec3f anchorx = getAnchorFromChildren(newChildren);
+    //ofVec3f anchorx = getAnchorFromChildren(newChildren);
 
     
-    setGlobalPosition(anchorx);
+    //setGlobalPosition(anchorx);
 
-    anchor = anchorx;
+   // anchor = anchorx;
     
     for (int i = 0; i < newChildren.size(); i++) {
         addChild(newChildren[i]);
     }
 
 }
+
+
+
+
 
 FeatureCollectionNode::FeatureCollectionNode(ofMatrix4x4 newTransform) {
     
@@ -69,6 +73,7 @@ void FeatureCollectionNode::customDraw() {
         
     
     } else {
+       
         for (int i = 0; i < children.size(); i++) {
            // material.setDiffuseColor(layerColor);
                
@@ -77,6 +82,7 @@ void FeatureCollectionNode::customDraw() {
                 children[i]->draw();
            // material.end();
         }
+       
     }
 
    

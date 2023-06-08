@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-#include "JsonLoader.h"
+
 #include "Plane_xz.hpp"
 #include "Circle_xy.hpp"
 #include "Sphere.hpp"

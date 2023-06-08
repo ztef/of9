@@ -19,7 +19,7 @@ public:
     Map();
     ~Map();
     
-    void Load(string url);
+    void Load(string url, tilefunctions::Tile pos);
     
     void tileReady(FeatureNode* tile);
     

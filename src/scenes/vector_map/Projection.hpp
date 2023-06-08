@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "ofMain.h"
+#include "TileFunctions.hpp"
 
 typedef struct Coordinate {
     float latitude;
@@ -32,7 +33,7 @@ class Projection  {
 public:
     
     Projection();
-    ofPoint getProjection(Coordinate _coordinate);
+    ofPoint getProjection(Coordinate _coordinate, tilefunctions::Tile tile_position);
     Coordinate getCoordinate(ofPoint projected_point);
     
     ofPoint mercator(Coordinate _coordinate);
@@ -44,6 +45,9 @@ public:
     ofPoint equirectangular(Coordinate _coordinate);
     ofPoint azimuthal(Coordinate _coordinate);
     ofPoint spherical(Coordinate _coordinate);
+    
+    
+    tilefunctions::Tile tile_position;
     void setMode(projection_mode _mode);
     void setScale(float scale);
     void setTranslate(float _transelateX, float _transelateY);

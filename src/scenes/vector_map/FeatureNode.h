@@ -20,6 +20,7 @@ public:
     virtual void printPosition(const string &prefix);
     ofShader shader;
     glm::vec3 anchor;
+    string nodeType;
 };
 
 #endif /* defined(__vectorTileExperiment__FeatureNode__) */

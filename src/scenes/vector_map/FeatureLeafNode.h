@@ -24,14 +24,16 @@ class FeatureLeafNode : public FeatureNode {
     
 public:
     ofMesh geometry;
+    vector<ofPolyline> verts;
     string idString;
     string type;
     int level;
+    int zoom;
     string name;
      
    
     
-    FeatureLeafNode(ofMesh newGeometry, string nodetype);
+    FeatureLeafNode(vector<ofPolyline> verts, string nodetype);
     FeatureLeafNode(ofMatrix4x4 newTransform);
     
     virtual void customDraw();

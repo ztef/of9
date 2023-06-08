@@ -98,6 +98,10 @@ private:
 class buffer {
 public:
     buffer();
+    std::string _buffer;
+    inline void setBuffer(std::string b);
+
+    inline void parse();
     void parse(std::string const& data);
     std::vector<std::string> layerNames() const;
     std::map<std::string, const protozero::data_view> getLayers() const { return layers; };
@@ -365,8 +369,17 @@ GeometryCollectionType feature::getGeometries(float scale) const {
 }
 
 inline buffer::buffer():layers(){};
+inline void buffer::setBuffer(std::string b){
+    _buffer = b;
+}
+
+inline void buffer::parse(){
+    parse(_buffer);
+}
+
 inline void buffer::parse(std::string const& data)
       {
+          
         protozero::pbf_reader data_reader(data);
         while (data_reader.next(TileType::LAYERS)) {
             const protozero::data_view layer_view = data_reader.get_view();

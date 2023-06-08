@@ -139,4 +139,5 @@ OF_ROOT = /Users/esteban/of
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
 # PROJECT_CXX = 
-# PROJECT_CC = 
+PROJECT_CC = clang -std=c++14
+ 

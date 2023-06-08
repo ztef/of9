@@ -17,30 +17,34 @@
 #include "Projection.hpp"
 #include "FeatureCollectionNode.h"
 #include "FeatureLeafNode.h"
+#include "TileFunctions.hpp"
 
 class MVTLoader {
 public:
     MVTLoader();
     std::string open_tile(std::string const& path);
-    FeatureNode* loadTile(std::string fileName, Projection* _p);
+    FeatureNode* loadTile(std::string fileName, Projection* _p, tilefunctions::Tile pos);
     bool open(const std::string& filename);
     bool openLocal(const std::string& filename);
     bool openRemote(const std::string& filename);
     FeatureCollectionNode* parseFeatureCollectionNode(mapbox::vector_tile::layer layer);
     FeatureNode* parseNode(mapbox::vector_tile::feature feature);
     FeatureNode* parseFeatureNode(mapbox::vector_tile::feature feature);
-    void parsePolygonGeometry(mapbox::vector_tile::points_arrays_type geom, mapbox::vector_tile::feature::properties_type props, ofMesh *meshToFill, glm::vec3 *anchor, bool multi);
-    void parseLineGeometry(mapbox::vector_tile::points_arrays_type geom, mapbox::vector_tile::feature::properties_type props, ofMesh* meshToFill, glm::vec3* anchor);
+    void parsePolygonGeometry(mapbox::vector_tile::points_arrays_type geom, mapbox::vector_tile::feature::properties_type props, vector<ofPolyline>* _verts,ofMesh *meshToFill, glm::vec3 *anchor, bool multi);
+    void parseLineGeometry(mapbox::vector_tile::points_arrays_type geom, mapbox::vector_tile::feature::properties_type props,vector<ofPolyline>* verts, ofMesh* meshToFill, glm::vec3* anchor);
     vector<glm::vec3> parsePointArrayInProjectedCoords(mapbox::vector_tile::points_array_type pointArray);
     glm::vec3 parsePointInProjectedCoords(std::int16_t x, std::int16_t y);
     ofVec3f getCentroidFromPoints(vector<glm::vec3> pts);
+    ofPath polysToPath(vector<ofPolyline> polylines);
     
     void clear();
     FeatureNode* getNodes();
     FeatureCollectionNode* rootNode;
     Projection* projection;
-    std::string buffer = std::string(5000000, ' ');
-    mapbox::vector_tile::buffer tile;
+    tilefunctions::Tile position;
+    std::string buffer;   // Alojado en el stack
+    // Alojado en el stack
+    mapbox::vector_tile::buffer* tile;
     ofColor layerColor;
     float layerHeight;
     
