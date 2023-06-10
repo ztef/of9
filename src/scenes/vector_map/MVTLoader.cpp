@@ -59,50 +59,90 @@ FeatureNode* MVTLoader::getNodes() {
     
     ofLog(OF_LOG_VERBOSE, "Loading Layers:");
     
-    std::string layerNames[9] = {
+    std::string layerNames[18] = {
          
         //"administrative",
         "earth",
         "water",
+        "waterway",
+        "boundary",
         "boundaries",
+        "globallandcover",
+        "park",
         "landuse",
+        "place",
         "places",
         "roads",
+        "transportation",
         "transit",
         "pois",
-        "buildings"
-         
+        "poi",
+        "buildings",
+        "building",
+        "housenumber"
+    };
+    ofColor layerColors[18] = {
+        ofFloatColor::lawnGreen,   // earth
+        ofFloatColor::deepSkyBlue,  //water
+        ofFloatColor::blueSteel,    //waterway
+        ofFloatColor::white,        //boundary
+        ofFloatColor::white,        //boundaries
+        ofFloatColor::lawnGreen,  //globallandcover
+        ofFloatColor::forestGreen,  //park
+        ofFloatColor::maroon,       //landuse
+        ofFloatColor::red,          //place
+        ofFloatColor::red,          //places
+        ofFloatColor::orange,       //roads
+        ofFloatColor::grey,          //transportation
+        ofFloatColor::red,          //transit
+         ofFloatColor::red,         //pois
+         ofFloatColor::red,         //poi
+         ofFloatColor::grey,        //buildings
+         ofFloatColor::grey,        //building
+         ofFloatColor::red         //housenumber
+    
     };
     
-    ofColor layerColors[9] = {
+    float layerHeights[18] = {
         
-        
-        ofFloatColor::lawnGreen,
-        ofFloatColor::deepSkyBlue,
-        ofFloatColor::white,
-        ofFloatColor::maroon,
-        ofFloatColor::red,
-        ofFloatColor::violet,
-        ofFloatColor::red,
-        ofFloatColor::red,
-        ofFloatColor::grey
-    };
-    
-    float layerHeights[9] = {
-        
-        0.0f,
-        0.00001f,
-        10.1f,
-        0.08f,
-        0.1f,
-        0.2f,
-        0.3f,
-        0.4f,
-        0.5f
+        0.00f,
+        0.03f,
+        0.06f,
+        0.09f,
+        0.12f,
+        0.15f,
+        0.18f,
+        0.20f,
+        0.22f,
+         0.24f,
+         0.26f,
+         0.28f,
+         0.30f,
+         1.33f,
+         1.35f,
+         1.39f,
+         1.42f,
+         1.47f
     };
     
     for (int i = 0; i < 9; i++) {
+        
         if(tile->isLayer(layerNames[i])){
+            if(i==8){
+                cout << "BUILDINGS";
+            }
+            
+            if((i == 0) && (position.z > 3)){
+             //   continue;
+            }
+            if((i == 1) && (position.z > 3)){
+             //   continue;
+            }
+            if(i == 2){
+                cout << "Landuse";
+            }
+
+            
             layerColor = layerColors[i];
             layerHeight = layerHeights[i];
             
@@ -205,6 +245,8 @@ FeatureCollectionNode* MVTLoader::parseFeatureCollectionNode(mapbox::vector_tile
     auto extent = layer.getExtent();
     auto version = layer.getVersion();
     
+    projection->setExtent(extent);
+    
     vector<FeatureNode*> featureNodes;
     
     for (int i = 0; i < feature_count; i++) {
@@ -232,6 +274,12 @@ FeatureNode* MVTLoader::parseNode(mapbox::vector_tile::feature feature) {
     mapbox::vector_tile::GeomType nodeType = feature.getType();
       
     auto props = feature.getProperties();
+   // string kind = props.
+    for (auto const& prop : props) {
+        print_value printvisitor;
+        std::string value = mapbox::util::apply_visitor(printvisitor, prop.second);
+        std::cout << "      " << prop.first  << ": " << value << "\n";
+    }
     
     mapbox::vector_tile::points_arrays_type geom = feature.getGeometries<mapbox::vector_tile::points_arrays_type>(1.0);
     

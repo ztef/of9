@@ -76,7 +76,9 @@ ofPoint Projection::mercator(Coordinate _coordinate) {
     return position;
 };
 
-
+void Projection::setExtent(std::uint32_t e){
+    extent = e;
+}
 
 ofPoint Projection::screen(Coordinate _coordinate) {
     ofPoint position;
@@ -91,17 +93,17 @@ ofPoint Projection::screen(Coordinate _coordinate) {
     
     factor = pow(2,localZ);
     
-    float extent = 8192;
+    float base_extent = 8192;
     float f = 1;
-    if(localZ >= 3){
-        f = 2;
-    }
+    //if(localZ >= 3){
+        f = base_extent / extent;                          // extent cambia
+    //}
     
     
     
     localScale = (scale / factor) * f;
-    localX = translateX  + tile_position.x * (extent/factor);
-    localY = translateY  - tile_position.y * (extent/factor);
+    localX = translateX  + tile_position.x * (base_extent/factor);
+    localY = translateY  - tile_position.y * (base_extent/factor);
     
     position.x = _coordinate.longitude * localScale + localX;
     position.y = (_coordinate.latitude * localScale - localY) * (-1);

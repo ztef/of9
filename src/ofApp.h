@@ -53,7 +53,7 @@ public:
     float zoom;
     bool once;
     
-    
+    int prevClickTime;
     float x;
     float y;
     ofVec3f pos;

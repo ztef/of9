@@ -51,6 +51,8 @@ public:
     void setMode(projection_mode _mode);
     void setScale(float scale);
     void setTranslate(float _transelateX, float _transelateY);
+    void setExtent(std::uint32_t extent);
+    std::uint32_t extent;
 
 private:
     const float E_R = 6378.137; // Radio de la Tierra

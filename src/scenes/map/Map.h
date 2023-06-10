@@ -20,8 +20,9 @@ public:
     ~Map();
     
     void Load(string url, tilefunctions::Tile pos);
+    bool requestTile( tilefunctions::Tile _tile);
     
-    void tileReady(FeatureNode* tile);
+    void tileReady(FeatureNode* tile, tilefunctions::Tile t);
     
     FeatureNode* testTile;
 

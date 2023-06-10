@@ -44,7 +44,15 @@ void ofApp::setup(){
     //camera.enableOrtho();
    // camera.setNearClip(0.001);
    // camera.setFarClip(8000);
+    
+    camera.removeAllInteractions();
+    camera.addInteraction(ofEasyCam::TRANSFORM_TRANSLATE_XY, OF_MOUSE_BUTTON_LEFT);
+   // camera.addInteraction(ofEasyCam::TRANSFORM_TRANSLATE_Z, OF_MOUSE_BUTTON_2);
+    camera.addInteraction(ofEasyCam::TRANSFORM_ROTATE, OF_MOUSE_BUTTON_RIGHT);
+    
+    
     camera.move(0, 0, 6000);
+    camera.lookAt(glm::vec3(0,0,0));
    
     
     once = false;
@@ -90,7 +98,15 @@ void ofApp::update(){
     escena_circulo.update();
     mapa.update(zoom);
 
-
+    
+    if(zoom < 150){
+        camera.setRotationSensitivity(0.2, 0.2, 0.2);
+        camera.setTranslationSensitivity(0.2, 0.2, 0.2);
+    } else {
+        camera.setRotationSensitivity(1, 1, 1);
+        camera.setTranslationSensitivity(1, 1, 1);
+    }
+    
 }
 
 //--------------------------------------------------------------
@@ -286,8 +302,30 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-   //  cout << "FeatureLeafNode at: " + ofToString(getPosition()) << endl;
- 
+   if ( key == 'l' ) {      //Landing
+       
+       camera.setGlobalPosition(camera.getGlobalPosition().x, camera.getGlobalPosition().y, 30);
+      // camera.rollDeg(90);
+      // camera.panDeg(90);
+       camera.tiltDeg(90);
+    }
+    if ( key == 'r' ) {      // Reset
+       
+        camera.setGlobalPosition(0, 0, 6000);
+        camera.lookAt(glm::vec3(0,0,0));
+    }
+    
+    
+    
+    if(key == 'o'){
+        //camera.orbit(0,0,45);
+        //camera.rollDeg(30);
+        //camera.rotateDeg(30, glm::vec3(1,0,0));
+        //camera.rollDeg(15); // roll vs eje Z
+        //camera.rotateDeg(5, 0, 0, 1);
+        ofVec3f stw = camera.worldToCamera(intersection);
+        camera.rotateAroundDeg(30, glm::vec3(0,0,1), intersection);
+    }
    
 }
 //--------------------------------------------------------------
@@ -312,7 +350,13 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-   
+    
+   if(ofGetElapsedTimeMillis()-prevClickTime<300){
+        camera.setGlobalPosition(intersection.x, intersection.y, zoom);
+        camera.lookAt(intersection);
+   }
+   prevClickTime = ofGetElapsedTimeMillis();
+    
 }
 
 //--------------------------------------------------------------

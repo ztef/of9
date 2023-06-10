@@ -95,6 +95,9 @@ Tile tile(const double &lng, const double &lat, const int &zoom);
 Tile parent(const Tile &tile);
 Tile parent(const Tile &tile, const int &zoom);
 
+
+std::vector<Tile> brothers(const Tile &tile, const int &zoom);
+
 // Get the child of a tile
 std::vector<Tile> children(const Tile &tile);
 std::vector<Tile> children(const Tile &tile, const int &zoom);

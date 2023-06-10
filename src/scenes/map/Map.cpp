@@ -53,12 +53,12 @@ void Map::Load(string url,tilefunctions::Tile position){
     tileLoader.load(url, position);
 }
 
-void Map::tileReady(FeatureNode* tile){
+void Map::tileReady(FeatureNode* tile, tilefunctions::Tile t){
     mutex.lock();
              
             tiles.push_back(tile);
              
-            loadedtiles[current_tile] = tile;
+            loadedtiles[t] = tile;
     
             newTile = true;
     
@@ -98,6 +98,9 @@ void Map::update(float _zoom){
     "https://vector.hereapi.com/v2/vectortiles/proto?apiKey=giC-ZDlq0kW_bCQoKne7_Un-oiUnQcyI63HqvfoiVjw" \
     -H "accept: application/json"
     
+    // https://vector.hereapi.com/v2/vectortiles/base/mc/12/2200/1343/omv?apikey=giC-ZDlq0kW_bCQoKne7_Un-oiUnQcyI63HqvfoiVjw
+    
+    //https://api.maptiler.com/tiles/v3/0/0/0.pbf?key=rnYxzTtjDTE0HOr9GI4b
     
     curl -X "GET" \
     "https://vector.hereapi.com/v2/vectortiles/proto/vector_tile.proto?apiKey=giC-ZDlq0kW_bCQoKne7_Un-oiUnQcyI63HqvfoiVjw" \
@@ -112,56 +115,98 @@ void Map::update(float _zoom){
     
     //current_tile = {0,0,0};
     
-    if(loadedtiles.count(current_tile) == 0){
-        loadedtiles[current_tile] = nullptr;
-        stringstream url;
-        url << "https://tile.nextzen.org/tilezen/vector/v1/all/" << current_tile.z << "/" << current_tile.x << "/" << current_tile.y << ".mvt?api_key=HjxoLw7IQJWSTo4lgErmIQ";
-        target_url = url.str();
-        
-        Load(target_url,current_tile);
+    
+    if ( requestTile(current_tile)){
+      /*
+       vector<tilefunctions::Tile> vecinos = tilefunctions::brothers(current_tile,0);
+           for(auto v: vecinos){
+              requestTile(v);
+          }
+       */
     }
     
+    // Borra Tiles fuera de SCOPE
+    /*
+    map<tilefunctions::Tile, FeatureNode*>::iterator iter = loadedtiles.begin();
+    map<tilefunctions::Tile, FeatureNode*>::iterator endIter = loadedtiles.end();
+    for (; iter != endIter;) {
+        tilefunctions::Tile tile = iter->first;
+        FeatureNode* node = iter->second;
+        if (tile.z > tile_zoom  ) {   // || (tile.z == 0)
+            if(node != nullptr){
+                    node->draw();
+            }
+        }
+        ++iter;
+    }
+     */
+    
+    // Vecinos :
    
+    
     
 }
 
+bool Map::requestTile(tilefunctions::Tile  _tile){
+    if(loadedtiles.count(_tile) == 0){
+           loadedtiles[_tile] = nullptr;
+           stringstream url;
+           //url << "https://tile.nextzen.org/tilezen/vector/v1/512/all/" << _tile.z << "/" << _tile.x << "/" << _tile.y << ".mvt?api_key=HjxoLw7IQJWSTo4lgErmIQ";
+        
+           //url << "https://vector.hereapi.com/v2/vectortiles/core/mc/" << _tile.z << "/" << _tile.x << "/" << _tile.y << "/omv?apikey=giC-ZDlq0kW_bCQoKne7_Un-oiUnQcyI63HqvfoiVjw";
+        
+        url << "https://api.maptiler.com/tiles/v3/" << _tile.z << "/" << _tile.x << "/" << _tile.y << ".pbf?key=rnYxzTtjDTE0HOr9GI4b";
+        
+           string target_url = url.str();
+           
+           Load(target_url,_tile);   // Solicita la carga del actual
+        return true;
+    }
+    return false;
+}
+
 int Map::calcTileZoom(float z){
-    if(z > 2000){
+    if(z > 3500){
         return 0;
     }
-    if(z > 1500){
+    if(z > 400){
         return 1;
     }
-    
-    if(z > 1000){
+    if(z > 100){
         return 2;
     }
-    if(z > 500){
+    if(z > 80){
         return 3;
     }
-    if(z > 250){
+    
+    if(z > 70){
         return 4;
     }
-    if(z > 100){
+    if(z > 60){
         return 5;
     }
-    if(z > 80){
+    if(z > 50){
         return 6;
     }
-    if(z > 50){
+    if(z > 25){
         return 7;
     }
-    if(z > 0.03){
+    if(z > 15){
         return 8;
     }
-    if(z > 0.02){
+    if(z > 12){
         return 9;
     }
-    if(z > 0.01){
+    if(z > 10){
         return 10;
     }
-     
-    return 10;
+    if(z > 8){
+         return 11;
+     }
+    if(z > 5){
+        return 12;
+    }
+    return 13;
 }
     
 
@@ -183,7 +228,9 @@ void Map::draw(){
     
      
         //testTile->draw();
-     
+   // ofSetColor(0, 255, 0);
+   // ofFill();
+   // ofDrawPlane(glm::vec3(0,0,-1), 8192, 8192);
     
     map<tilefunctions::Tile, FeatureNode*>::iterator iter = loadedtiles.begin();
     map<tilefunctions::Tile, FeatureNode*>::iterator endIter = loadedtiles.end();
@@ -195,16 +242,16 @@ void Map::draw(){
                 
                     node->draw();
             } else {   // No ha sido cargado, dibuja el 0 (debe ser el anterior)
-                FeatureNode* node0;
-                node0 = loadedtiles[tilefunctions::Tile{0,0,0}];
-                if(node0 != nullptr){
-                    node0->draw();
-                }
+                
+            }
+        } else {   // Resto del Mundo
+            FeatureNode* node0;
+            node0 = loadedtiles[tilefunctions::Tile{0,0,0}];
+            if(node0 != nullptr){
+        //        node0->draw();
             }
         }
-        
         ++iter;
-        
     }
     
     

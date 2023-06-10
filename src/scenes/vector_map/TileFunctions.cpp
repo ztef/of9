@@ -231,6 +231,32 @@ std::vector<Tile> children(const Tile &tile, const int &zoom)
     return return_vector_tiles;
 };
 
+// Explora el vecindario y excluye el tile actual (Solo regresa los vecinos)
+std::vector<Tile> brothers(const Tile &tile, const int &zoom)
+{
+
+    std::vector<Tile> return_tiles;
+    for(int x=-1; x < 2; x++)
+    {
+        for(int y=-1; y < 2; y++){
+            int tx = tile.x + x;
+            int ty = tile.y + y;
+            if((tx >= 0) && (ty >=0) && (tx < pow(2,tile.z)) && (ty < pow(2,tile.z))){
+                if(!((tx == tile.x) && (ty == tile.y)) ){
+                    return_tiles.push_back({tx,ty,tile.z});
+                }
+            }
+            
+        }
+    }
+  
+    return return_tiles;
+};
+
+
+
+
+
 std::vector<Tile> tiles(const LngLatBbox &llbbox, const int &zoom)
 {
     vector<LngLatBbox> bboxes;

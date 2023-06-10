@@ -7,31 +7,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "58728475-1CCB-4F24-B790-8D84C332FB03"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/scenes/vector_map/MVTLoader.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "MVTLoader::parseFeatureNode(feature)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "29D54D66-72C7-4FA3-9176-96F8029BA17D"
+            uuid = "0DDD88A9-4F74-496C-A8A7-00BA49A1D853"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/scenes/map/Map.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "Map::draw()"
             landmarkType = "7">
          </BreakpointContent>
@@ -39,15 +23,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "060CA2F9-E9FA-4F17-B0E8-938CAD91122B"
+            uuid = "98DAD1C7-59AF-49D4-87D2-F8AE112AC24D"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/scenes/vector_map/MVTLoader.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "MVTLoader::getNodes()"
             landmarkType = "7">
          </BreakpointContent>
@@ -55,15 +39,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "695319A2-C306-4A83-A5D5-94B5FC897243"
+            uuid = "E6F1C47D-1529-40FB-BCBE-D631DCAFD193"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/scenes/vector_map/MVTLoader.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "MVTLoader::getNodes()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3B46E631-171E-44F8-B8C8-69D109B69717"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "MVTLoader::getNodes()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F5F4F438-55D3-479F-A2D4-0B68AAB67871"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "MVTLoader::parseFeatureCollectionNode(layer)"
             landmarkType = "7">
          </BreakpointContent>
@@ -71,15 +87,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6249EE79-FF39-4B95-BA7D-3C65DA151292"
+            uuid = "6EC37AA5-81D2-43AF-97D5-AE92A0DCD6D7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/scenes/vector_map/MVTLoader.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "MVTLoader::parseNode(feature)"
             landmarkType = "7">
          </BreakpointContent>
@@ -87,15 +103,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7449C560-5C0D-44D7-A27C-D03E5F6455A7"
+            uuid = "8D82C964-DE9F-4AAA-8B22-DBA9156AEB31"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/scenes/vector_map/MVTLoader.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "MVTLoader::parseNode(feature)"
             landmarkType = "7">
          </BreakpointContent>
@@ -103,15 +119,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9FA43DD6-8842-487F-9B63-E07C6169DCE6"
+            uuid = "6E71C72B-F7B7-45C2-B8F9-E203C7D8C313"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/scenes/vector_map/MVTLoader.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "MVTLoader::parseNode(feature)"
             landmarkType = "7">
          </BreakpointContent>
@@ -119,15 +135,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8EA8CBC4-94A1-4CE6-86DB-A23A3123C0E0"
+            uuid = "6716226D-73FE-4C57-BF64-7F51F7989328"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/scenes/vector_map/MVTLoader.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "MVTLoader::parseFeatureCollectionNode(layer)"
             landmarkType = "7">
          </BreakpointContent>
@@ -135,32 +151,224 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C29F5170-70DF-4525-98C3-DC3289180263"
+            uuid = "325A16C1-834D-443D-8AFE-C7AD82AE9D97"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/scenes/vector_map/MVTLoader.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "MVTLoader::parseFeatureCollectionNode(layer)"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "MVTLoader::getNodes()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "17C133AF-333E-4A14-9C34-1045963C8448"
+            uuid = "FE455D03-52DA-4A6D-A260-D3DAFC007156"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/scenes/map/Map.cpp"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "Map::draw()"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "MVTLoader::getNodes()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4A3E7B63-D193-429A-AEA5-98ECFE98B75E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "MVTLoader::parseNode(feature)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "265D9DEA-428E-45D9-9BE9-BB29A33B71D6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
+            landmarkName = "MVTLoader::parseFeatureNode(feature)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "053B7F36-CAA3-486D-B652-E89AEAD4FBA5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
+            landmarkName = "MVTLoader::parsePolygonGeometry(geom, props, _polyLines, meshToFill, anchor, multi)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "29B8EB76-3A17-434F-9C84-095379DCF64E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "MVTLoader::parsePolygonGeometry(geom, props, _polyLines, meshToFill, anchor, multi)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "29B8EB76-3A17-434F-9C84-095379DCF64E - 9a283131c84faaa3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MVTLoader::parsePolygonGeometry(mapbox::vector_tile::points_arrays_type, std::__1::unordered_map&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, mapbox::feature::value, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::pair&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const, mapbox::feature::value&gt; &gt; &gt;, std::__1::vector&lt;ofPolyline_&lt;glm::vec&lt;3, float, (glm::qualifier)0&gt; &gt;, std::__1::allocator&lt;ofPolyline_&lt;glm::vec&lt;3, float, (glm::qualifier)0&gt; &gt; &gt; &gt;*, ofMesh_&lt;glm::vec&lt;3, float, (glm::qualifier)0&gt;, glm::vec&lt;3, float, (glm::qualifier)0&gt;, ofColor_&lt;float&gt;, glm::vec&lt;2, float, (glm::qualifier)0&gt; &gt;*, glm::vec&lt;3, float, (glm::qualifier)0&gt;*, bool)"
+                  moduleName = "of9Debug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/esteban/of/apps/myApps/of9/src/scenes/vector_map/MVTLoader.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "330"
+                  endingLineNumber = "330"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  uuid = "29B8EB76-3A17-434F-9C84-095379DCF64E - 9a283131c84faaa3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MVTLoader::parsePolygonGeometry(mapbox::vector_tile::points_arrays_type, std::__1::unordered_map&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, mapbox::feature::value, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::pair&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const, mapbox::feature::value&gt; &gt; &gt;, std::__1::vector&lt;ofPolyline_&lt;glm::vec&lt;3, float, (glm::qualifier)0&gt; &gt;, std::__1::allocator&lt;ofPolyline_&lt;glm::vec&lt;3, float, (glm::qualifier)0&gt; &gt; &gt; &gt;*, ofMesh_&lt;glm::vec&lt;3, float, (glm::qualifier)0&gt;, glm::vec&lt;3, float, (glm::qualifier)0&gt;, ofColor_&lt;float&gt;, glm::vec&lt;2, float, (glm::qualifier)0&gt; &gt;*, glm::vec&lt;3, float, (glm::qualifier)0&gt;*, bool)"
+                  moduleName = "of9Debug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/esteban/of/apps/myApps/of9/src/scenes/vector_map/MVTLoader.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "330"
+                  endingLineNumber = "330"
+                  offsetFromSymbolStart = "178">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "35228889-673D-427B-80A1-EB8149A407C4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "MVTLoader::getNodes()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7A9F09DA-25F2-422D-8CB4-C6E60E77C274"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "MVTLoader::parseNode(feature)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2E8E5E30-FB84-4ED9-BDD6-726AAB133733"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "MVTLoader::getNodes()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2E8E5E30-FB84-4ED9-BDD6-726AAB133733 - 3d8f4dbd18f8728b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MVTLoader::getNodes()"
+                  moduleName = "of9Debug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/esteban/of/apps/myApps/of9/src/scenes/vector_map/MVTLoader.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "1798">
+               </Location>
+               <Location
+                  uuid = "2E8E5E30-FB84-4ED9-BDD6-726AAB133733 - 3d8f4dbd18f8728b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MVTLoader::getNodes()"
+                  moduleName = "of9Debug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/esteban/of/apps/myApps/of9/src/scenes/vector_map/MVTLoader.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "1885">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "987CB0D1-4DC9-498C-9DB8-A167F2065A1B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/scenes/vector_map/MVTLoader.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "MVTLoader::parseFeatureNode(feature)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
