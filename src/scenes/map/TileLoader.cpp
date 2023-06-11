@@ -6,7 +6,10 @@
         loading = false;
     }
 
-
+    void TileLoader::setDB(TileDataBase &d){
+        db = &d;
+        mvtLoader.setDB(db);
+    }
 
     void TileLoader::setCallBack(Map* mapx){
         map = mapx;

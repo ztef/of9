@@ -18,15 +18,17 @@
 #include "FeatureCollectionNode.h"
 #include "FeatureLeafNode.h"
 #include "TileFunctions.hpp"
+#include "TileDataBase.hpp"
 
 class MVTLoader {
 public:
     MVTLoader();
     std::string open_tile(std::string const& path);
     FeatureNode* loadTile(std::string fileName, Projection* _p, tilefunctions::Tile pos);
-    bool open(const std::string& filename);
+    bool open(const std::string& filename, tilefunctions::Tile pos);
     bool openLocal(const std::string& filename);
     bool openRemote(const std::string& filename);
+    bool openfromDB(tilefunctions::Tile pos);
     FeatureCollectionNode* parseFeatureCollectionNode(mapbox::vector_tile::layer layer);
     FeatureNode* parseNode(mapbox::vector_tile::feature feature);
     FeatureNode* parseFeatureNode(mapbox::vector_tile::feature feature);
@@ -36,6 +38,8 @@ public:
     glm::vec3 parsePointInProjectedCoords(std::int16_t x, std::int16_t y);
     ofVec3f getCentroidFromPoints(vector<glm::vec3> pts);
     ofPath polysToPath(vector<ofPolyline> polylines);
+    
+    void setDB(TileDataBase* db);
     
     void clear();
     FeatureNode* getNodes();
@@ -47,6 +51,7 @@ public:
     mapbox::vector_tile::buffer* tile;
     ofColor layerColor;
     float layerHeight;
+    TileDataBase* db;
     
     
      ofTessellator* tessellator;

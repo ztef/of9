@@ -10,6 +10,7 @@
 #include "Tilec.hpp"
 #include "MVTLoader.hpp"
 #include "VShaders.hpp"
+#include "TileDataBase.hpp"
 
 #define TILE_SIZE 256.0
 
@@ -67,6 +68,8 @@ public:
     MVTLoader mvtLoader;
     
     ofFbo fbo;
+    
+    TileDataBase db;
     
     //static string mapType;
     

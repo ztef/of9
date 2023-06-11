@@ -36,6 +36,12 @@
 		5B7BF1112A17EDDA0014050B /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10D2A17EDDA0014050B /* Plane.cpp */; };
 		5B7BF1122A17EDDA0014050B /* Mousepicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF10E2A17EDDA0014050B /* Mousepicker.cpp */; };
 		5B7BF1172A1983960014050B /* Intersector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BF1152A1983960014050B /* Intersector.cpp */; };
+		5B840B5D2A3562A30059E17C /* TileDataBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B840B5B2A3562A30059E17C /* TileDataBase.cpp */; };
+		5B840B652A3566F30059E17C /* MBTileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B840B642A3566F30059E17C /* MBTileReader.cpp */; };
+		5B840B672A35688D0059E17C /* VectorTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B840B662A35688D0059E17C /* VectorTile.cpp */; };
+		5B840B692A35695E0059E17C /* vector_tile.pb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B840B682A35695E0059E17C /* vector_tile.pb.cpp */; };
+		5B840B782A356A710059E17C /* EncodeGzip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B840B6C2A356A710059E17C /* EncodeGzip.cpp */; };
+		5B840B7B2A356A710059E17C /* DecodeGzip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B840B742A356A710059E17C /* DecodeGzip.cpp */; };
 		5BD4244C2A2270AD00477004 /* MVTLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4244A2A2270AD00477004 /* MVTLoader.cpp */; };
 		5BD424762A25395600477004 /* VShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD424742A25395600477004 /* VShaders.cpp */; };
 		5BD4247A2A2861DD00477004 /* ofxGrabCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD424782A2861DD00477004 /* ofxGrabCam.cpp */; };
@@ -164,6 +170,22 @@
 		5B7BF10E2A17EDDA0014050B /* Mousepicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mousepicker.cpp; sourceTree = "<group>"; };
 		5B7BF1152A1983960014050B /* Intersector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Intersector.cpp; sourceTree = "<group>"; };
 		5B7BF1162A1983960014050B /* Intersector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Intersector.hpp; sourceTree = "<group>"; };
+		5B840B5B2A3562A30059E17C /* TileDataBase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TileDataBase.cpp; sourceTree = "<group>"; };
+		5B840B5C2A3562A30059E17C /* TileDataBase.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TileDataBase.hpp; sourceTree = "<group>"; };
+		5B840B602A35638F0059E17C /* vector_tile.pb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector_tile.pb.h; sourceTree = "<group>"; };
+		5B840B622A3564550059E17C /* MBTileReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBTileReader.h; sourceTree = "<group>"; };
+		5B840B632A35648B0059E17C /* VectorTile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VectorTile.h; sourceTree = "<group>"; };
+		5B840B642A3566F30059E17C /* MBTileReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MBTileReader.cpp; sourceTree = "<group>"; };
+		5B840B662A35688D0059E17C /* VectorTile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VectorTile.cpp; sourceTree = "<group>"; };
+		5B840B682A35695E0059E17C /* vector_tile.pb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vector_tile.pb.cpp; sourceTree = "<group>"; };
+		5B840B6C2A356A710059E17C /* EncodeGzip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EncodeGzip.cpp; sourceTree = "<group>"; };
+		5B840B6D2A356A710059E17C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		5B840B6F2A356A710059E17C /* EncodeGzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncodeGzip.h; sourceTree = "<group>"; };
+		5B840B702A356A710059E17C /* HandleDeflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandleDeflate.h; sourceTree = "<group>"; };
+		5B840B712A356A710059E17C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5B840B722A356A710059E17C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		5B840B742A356A710059E17C /* DecodeGzip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DecodeGzip.cpp; sourceTree = "<group>"; };
+		5B840B752A356A710059E17C /* DecodeGzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecodeGzip.h; sourceTree = "<group>"; };
 		5BD4244A2A2270AD00477004 /* MVTLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MVTLoader.cpp; sourceTree = "<group>"; };
 		5BD4244B2A2270AD00477004 /* MVTLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MVTLoader.hpp; sourceTree = "<group>"; };
 		5BD4244F2A2275F400477004 /* pbf_reader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pbf_reader.hpp; sourceTree = "<group>"; };
@@ -670,9 +692,56 @@
 			path = intersectors;
 			sourceTree = "<group>";
 		};
+		5B840B5A2A3562650059E17C /* TileDB */ = {
+			isa = PBXGroup;
+			children = (
+				5B840B5B2A3562A30059E17C /* TileDataBase.cpp */,
+				5B840B5C2A3562A30059E17C /* TileDataBase.hpp */,
+			);
+			path = TileDB;
+			sourceTree = "<group>";
+		};
+		5B840B5F2A3563650059E17C /* vector_tile21 */ = {
+			isa = PBXGroup;
+			children = (
+				5B840B602A35638F0059E17C /* vector_tile.pb.h */,
+				5B840B682A35695E0059E17C /* vector_tile.pb.cpp */,
+			);
+			path = vector_tile21;
+			sourceTree = "<group>";
+		};
+		5B840B6A2A356A710059E17C /* cppGzip */ = {
+			isa = PBXGroup;
+			children = (
+				5B840B6C2A356A710059E17C /* EncodeGzip.cpp */,
+				5B840B6D2A356A710059E17C /* LICENSE */,
+				5B840B6F2A356A710059E17C /* EncodeGzip.h */,
+				5B840B702A356A710059E17C /* HandleDeflate.h */,
+				5B840B712A356A710059E17C /* README.md */,
+				5B840B722A356A710059E17C /* .gitignore */,
+				5B840B742A356A710059E17C /* DecodeGzip.cpp */,
+				5B840B752A356A710059E17C /* DecodeGzip.h */,
+			);
+			path = cppGzip;
+			sourceTree = "<group>";
+		};
+		5B840B7C2A356ADE0059E17C /* MBTiles */ = {
+			isa = PBXGroup;
+			children = (
+				5B840B5F2A3563650059E17C /* vector_tile21 */,
+				5B840B662A35688D0059E17C /* VectorTile.cpp */,
+				5B840B632A35648B0059E17C /* VectorTile.h */,
+				5B840B642A3566F30059E17C /* MBTileReader.cpp */,
+				5B840B622A3564550059E17C /* MBTileReader.h */,
+			);
+			path = MBTiles;
+			sourceTree = "<group>";
+		};
 		5BD4244D2A2275F400477004 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				5B840B7C2A356ADE0059E17C /* MBTiles */,
+				5B840B6A2A356A710059E17C /* cppGzip */,
 				5BD424772A2861B700477004 /* ofxGrabCam */,
 				5BD4244E2A2275F400477004 /* protozero */,
 				5BD4245A2A2275F400477004 /* mapbox */,
@@ -1241,6 +1310,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5B840B5A2A3562650059E17C /* TileDB */,
 				5BD4244D2A2275F400477004 /* include */,
 				5B7BF02B2A15CF510014050B /* scenes */,
 				5B7BF00D2A15CF400014050B /* menu */,
@@ -1372,7 +1442,9 @@
 				5B7BF1112A17EDDA0014050B /* Plane.cpp in Sources */,
 				5B7BF0432A15CF510014050B /* FeatureCollectionNode.cpp in Sources */,
 				852E0891794923EE7583C621 /* ofxInputField.cpp in Sources */,
+				5B840B5D2A3562A30059E17C /* TileDataBase.cpp in Sources */,
 				5B7BF1102A17EDDA0014050B /* Ray.cpp in Sources */,
+				5B840B692A35695E0059E17C /* vector_tile.pb.cpp in Sources */,
 				5B7BF0252A15CF410014050B /* SelectionItem.cpp in Sources */,
 				5B7BF0412A15CF510014050B /* Plane_xz.cpp in Sources */,
 				5B7BF10F2A17EDDA0014050B /* Ray2D.cpp in Sources */,
@@ -1385,20 +1457,24 @@
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				5B7BF1172A1983960014050B /* Intersector.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
+				5B840B782A356A710059E17C /* EncodeGzip.cpp in Sources */,
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,
 				5B7BF1122A17EDDA0014050B /* Mousepicker.cpp in Sources */,
+				5B840B7B2A356A710059E17C /* DecodeGzip.cpp in Sources */,
 				5B7BF0502A17C95D0014050B /* Projection.cpp in Sources */,
 				1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */,
 				5B7BF0402A15CF510014050B /* Circle_xy.cpp in Sources */,
 				FB84AAF8D1B7A95266DB5C09 /* jsoncpp.cpp in Sources */,
 				5B7BF0442A15CF510014050B /* FeatureNode.cpp in Sources */,
+				5B840B652A3566F30059E17C /* MBTileReader.cpp in Sources */,
 				5B7BF0452A15CF520014050B /* FeatureLeafNode.cpp in Sources */,
 				5BD424762A25395600477004 /* VShaders.cpp in Sources */,
 				BEDFEE7400C58EA4E412B757 /* ofxJSONElement.cpp in Sources */,
 				1C36947250DCB09A8A375C0C /* ofxXmlPoco.cpp in Sources */,
 				5BD4247A2A2861DD00477004 /* ofxGrabCam.cpp in Sources */,
 				5B7BF0472A15CF520014050B /* Map.cpp in Sources */,
+				5B840B672A35688D0059E17C /* VectorTile.cpp in Sources */,
 				5B7BF0262A15CF410014050B /* FlashItem.cpp in Sources */,
 				933A2227713C720CEFF80FD9 /* tinyxml.cpp in Sources */,
 				9D44DC88EF9E7991B4A09951 /* tinyxmlerror.cpp in Sources */,
@@ -1449,7 +1525,8 @@
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
 					../../../addons/ofxRaycaster/src,
-					src/include,
+					"src/include/**",
+					/usr/local/include/google,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
@@ -1486,6 +1563,7 @@
 					../../../addons/ofxPoco/libs/openssl/include,
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
+					/usr/local/include,
 				);
 				ICON = "$(ICON_NAME_RELEASE)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
@@ -1505,6 +1583,8 @@
 					../../../addons/ofxPoco/libs/poco/lib/osx/PocoFoundation.a,
 					../../../addons/ofxPoco/libs/openssl/lib/osx/crypto.a,
 					../../../addons/ofxPoco/libs/openssl/lib/osx/ssl.a,
+					/usr/local/lib/libprotobuf.dylib,
+					/Users/esteban/of/apps/myApps/of9/libs/libsqlite3.tbd,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1549,7 +1629,8 @@
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
 					../../../addons/ofxRaycaster/src,
-					src/include,
+					"src/include/**",
+					/usr/local/include/google,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1597,7 +1678,8 @@
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
 					../../../addons/ofxRaycaster/src,
-					src/include,
+					"src/include/**",
+					/usr/local/include/google,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
@@ -1634,6 +1716,7 @@
 					../../../addons/ofxPoco/libs/openssl/include,
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
+					/usr/local/include,
 				);
 				ICON = "$(ICON_NAME_DEBUG)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
@@ -1653,6 +1736,24 @@
 					../../../addons/ofxPoco/libs/poco/lib/osx/PocoFoundation.a,
 					../../../addons/ofxPoco/libs/openssl/lib/osx/crypto.a,
 					../../../addons/ofxPoco/libs/openssl/lib/osx/ssl.a,
+					/usr/local/lib/libprotobuf.dylib,
+					/Users/esteban/of/apps/myApps/of9/libs/libsqlite3.tbd,
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"$(OF_CORE_LIBS)",
+					"$(OF_CORE_FRAMEWORKS)",
+					"$(LIB_OF_DEBUG)",
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoNetSSL.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoNet.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoCrypto.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoUtil.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoJSON.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoXML.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoFoundation.a,
+					../../../addons/ofxPoco/libs/openssl/lib/osx/crypto.a,
+					../../../addons/ofxPoco/libs/openssl/lib/osx/ssl.a,
+					/usr/local/lib/libprotobuf.dylib,
+					/Users/esteban/of/apps/myApps/of9/libs/libsqlite3.tbd,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
@@ -1686,6 +1787,7 @@
 					../../../addons/ofxPoco/libs/openssl/include,
 					../../../addons/ofxXmlSettings/libs,
 					../../../addons/ofxXmlSettings/src,
+					/usr/local/include,
 				);
 				ICON = "$(ICON_NAME_RELEASE)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
@@ -1705,6 +1807,23 @@
 					../../../addons/ofxPoco/libs/poco/lib/osx/PocoFoundation.a,
 					../../../addons/ofxPoco/libs/openssl/lib/osx/crypto.a,
 					../../../addons/ofxPoco/libs/openssl/lib/osx/ssl.a,
+					/usr/local/lib/libprotobuf.dylib,
+					/Users/esteban/of/apps/myApps/of9/libs/libsqlite3.tbd,
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"$(OF_CORE_LIBS)",
+					"$(OF_CORE_FRAMEWORKS)",
+					"$(LIB_OF)",
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoNetSSL.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoNet.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoCrypto.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoUtil.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoJSON.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoXML.a,
+					../../../addons/ofxPoco/libs/poco/lib/osx/PocoFoundation.a,
+					../../../addons/ofxPoco/libs/openssl/lib/osx/crypto.a,
+					../../../addons/ofxPoco/libs/openssl/lib/osx/ssl.a,
+					/Users/esteban/of/apps/myApps/of9/libs/libsqlite3.tbd,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

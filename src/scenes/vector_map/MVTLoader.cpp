@@ -32,7 +32,7 @@ FeatureNode* MVTLoader::loadTile(std::string fileName, Projection* _p, tilefunct
     projection = _p;
     position = pos;
     
-    if(open(fileName)){
+    if(open(fileName, pos)){
         // tile esta cargado con los datos.
         
         
@@ -59,17 +59,18 @@ FeatureNode* MVTLoader::getNodes() {
     
     ofLog(OF_LOG_VERBOSE, "Loading Layers:");
     
-    std::string layerNames[18] = {
+    std::string layerNames[19] = {
          
-        //"administrative",
+        "admin",
         "earth",
+        "globallandcover",
         "water",
-        "waterway",
+        "waterway",   //river
         "boundary",
         "boundaries",
-        "globallandcover",
+        
         "park",
-        "landuse",
+        "landuse", //urban
         "place",
         "places",
         "roads",
@@ -81,15 +82,17 @@ FeatureNode* MVTLoader::getNodes() {
         "building",
         "housenumber"
     };
-    ofColor layerColors[18] = {
+    ofColor layerColors[19] = {
+        ofFloatColor::white,    //admin
         ofFloatColor::lawnGreen,   // earth
+        ofFloatColor::lawnGreen,  //globallandcover
         ofFloatColor::deepSkyBlue,  //water
         ofFloatColor::blueSteel,    //waterway
         ofFloatColor::white,        //boundary
         ofFloatColor::white,        //boundaries
-        ofFloatColor::lawnGreen,  //globallandcover
+        
         ofFloatColor::forestGreen,  //park
-        ofFloatColor::maroon,       //landuse
+        ofFloatColor::sandyBrown,   //landuse
         ofFloatColor::red,          //place
         ofFloatColor::red,          //places
         ofFloatColor::orange,       //roads
@@ -103,7 +106,7 @@ FeatureNode* MVTLoader::getNodes() {
     
     };
     
-    float layerHeights[18] = {
+    float layerHeights[19] = {
         
         0.00f,
         0.03f,
@@ -122,10 +125,11 @@ FeatureNode* MVTLoader::getNodes() {
          1.35f,
          1.39f,
          1.42f,
-         1.47f
+         1.47f,
+         1.48f
     };
     
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 19; i++) {
         
         if(tile->isLayer(layerNames[i])){
             if(i==8){
@@ -465,13 +469,15 @@ ofVec3f MVTLoader::getCentroidFromPoints(vector<glm::vec3> pts) {
 }
 
 
-bool MVTLoader::open(const std::string& filename)
+bool MVTLoader::open(const std::string& filename, tilefunctions::Tile pos)
 {
     if (filename.find("http://") == 0 || filename.find("https://") == 0)
     {
         return openRemote(filename);
     }
-    else
+    else if(filename == "db"){
+        return openfromDB(pos);
+    } else
     {
         return openLocal(filename);
     }
@@ -481,6 +487,52 @@ void MVTLoader::clear(){
    // buffer = "";
     
 }
+
+void MVTLoader::setDB(TileDataBase* d){
+    db = d;
+}
+
+bool MVTLoader::openfromDB(tilefunctions::Tile pos)
+{
+    
+    // Lee de la base de datos
+    string blob;
+    unsigned int tileZoom = pos.z;
+    unsigned int tileColumn = pos.x;
+    unsigned int tileRow = pow(2,pos.z)-pos.y-1;
+    
+    if(pos.z == 0){
+        tileRow = 0;
+    }
+    
+     
+    db->reader.GetTile(tileZoom, tileColumn, tileRow, blob);
+    
+    // Decodifica
+    std::stringbuf buff;
+    buff.sputn(blob.c_str(), blob.size());
+    DecodeGzip dec(buff);
+
+    buffer = "";
+
+    // Mueve a string
+    char tmp[1024];
+    while (dec.in_avail())
+    {
+        streamsize bytes = dec.sgetn(tmp, 1024);
+        buffer.append(tmp, bytes);
+    }
+    
+    
+    // Parsea el buffer
+    tile = new mapbox::vector_tile::buffer();
+    tile->setBuffer(buffer);
+    tile->parse();
+      
+    return true;
+}
+
+
 
 bool MVTLoader::openRemote(const std::string& filename)
 {

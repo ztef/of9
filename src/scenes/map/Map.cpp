@@ -12,6 +12,10 @@ Map::~Map(){
 
 void Map::setup(double _width, double _height){
     
+    db.reader.setDB("/Users/esteban/of/apps/myApps/of9/bin/data/naturalearth.mbtiles");
+    tileLoader.setDB(db);
+    db.getInfo();
+    
     projection.setMode(PROJ_SCREEN);
     //projection.setMode(PROJ_MERCATOR);
     //projection.setMode(PROJ_SPHERICAL);
@@ -155,7 +159,11 @@ bool Map::requestTile(tilefunctions::Tile  _tile){
         
            //url << "https://vector.hereapi.com/v2/vectortiles/core/mc/" << _tile.z << "/" << _tile.x << "/" << _tile.y << "/omv?apikey=giC-ZDlq0kW_bCQoKne7_Un-oiUnQcyI63HqvfoiVjw";
         
-        url << "https://api.maptiler.com/tiles/v3/" << _tile.z << "/" << _tile.x << "/" << _tile.y << ".pbf?key=rnYxzTtjDTE0HOr9GI4b";
+          url << "https://api.maptiler.com/tiles/v3/" << _tile.z << "/" << _tile.x << "/" << _tile.y << ".pbf?key=rnYxzTtjDTE0HOr9GI4b";
+        
+         //  url << "/Users/esteban/of/apps/myApps/of9/bin/data/ne0.pbf";
+        
+          // url << "db";
         
            string target_url = url.str();
            
@@ -169,17 +177,17 @@ int Map::calcTileZoom(float z){
     if(z > 3500){
         return 0;
     }
-    if(z > 400){
+    if(z > 1000){
         return 1;
     }
-    if(z > 100){
+    if(z > 500){
         return 2;
     }
-    if(z > 80){
+    if(z > 200){
         return 3;
     }
     
-    if(z > 70){
+    if(z > 100){
         return 4;
     }
     if(z > 60){
@@ -228,9 +236,9 @@ void Map::draw(){
     
      
         //testTile->draw();
-   // ofSetColor(0, 255, 0);
-   // ofFill();
-   // ofDrawPlane(glm::vec3(0,0,-1), 8192, 8192);
+    ofSetColor(0, 255, 0);
+    ofFill();
+    ofDrawPlane(glm::vec3(0,0,-1), 8192, 8192);
     
     map<tilefunctions::Tile, FeatureNode*>::iterator iter = loadedtiles.begin();
     map<tilefunctions::Tile, FeatureNode*>::iterator endIter = loadedtiles.end();

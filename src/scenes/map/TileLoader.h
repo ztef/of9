@@ -10,6 +10,7 @@
 #include "Poco/Condition.h"
 #include "Projection.hpp"
 #include "TileFunctions.hpp"
+#include "TileDataBase.hpp"
  
 
  
@@ -40,6 +41,8 @@ class TileLoader: public ofThread{
     void load(string tilePath, tilefunctions::Tile pos);
     
     void clear();
+    
+    void setDB(TileDataBase &db);
 
     void threadedFunction();
 
@@ -57,7 +60,7 @@ class TileLoader: public ofThread{
     ofMutex mutex;
     Map* map;
     
-    
+    TileDataBase* db;
     
     Projection* projection;
        
